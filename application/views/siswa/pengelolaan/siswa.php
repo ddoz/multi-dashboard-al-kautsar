@@ -41,6 +41,7 @@
                         <div class="basic-tb-hd">
                             <h2>Data Siswa <?=$listApp->app?></h2>
                             <p>Berikut merupakan data siswa keseluruhan.</p>
+                            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModalseven"><i class="fa fa-plus"></i> Tambah Data</button>
                         </div>
                         <div class="table-responsive">
                             <table id="datatable-<?=$listApp->app_id?>" class="table table-striped">
@@ -86,3 +87,21 @@
     <!-- Data Table area End-->
     <?php }?>
 
+
+    <div class="modal animated shake" id="myModalseven" role="dialog">
+        <div class="modal-dialog modals-default">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h2>Form Tambah Kelas</h2>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Save changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>

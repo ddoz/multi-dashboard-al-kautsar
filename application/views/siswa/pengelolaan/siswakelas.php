@@ -48,6 +48,7 @@
                                     <tr>
                                         <th>NISN</th>
                                         <th>Nama</th>
+                                        <th>Kelas</th>
                                         <th>Status</th>
                                         <th></th>
                                     </tr>

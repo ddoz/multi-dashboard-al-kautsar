@@ -30,43 +30,93 @@
 <!-- Breadcomb area End-->
 
 <!-- Start Status area -->
-<div class="notika-status-area">
+    <div class="form-element-area">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
-                        <div class="website-traffic-ctn">
-                            <h2><span class="counter">50,000</span></h2>
-                            <p>Total Website Traffics</p>
+        <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-element-list">
+                        <div class="basic-tb-hd">
+                            <h2>Pencarian Umum</h2>
+                            <p>Anda dapat memasukkan NISN, Nama atau identitas yang lainnya.</p>
                         </div>
-                        <div class="sparkline-bar-stats1">9,4,8,6,5,6,4,8,3,5,9,5</div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group ic-cmp-int form-elet-mg">
+                                    <div class="nk-int-st">
+                                        <input type="text" class="form-control" placeholder="Masukkan Kata Kunci">
+                                    </div>
+                                    <div class="form-ic-cmp">
+                                        <button class="btn btn-warning btn-sm">Cari</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
-                        <div class="website-traffic-ctn">
-                            <h2><span class="counter">90,000</span>k</h2>
-                            <p>Website Impressions</p>
+            </div>
+        </div>
+    </div>
+    <!-- End Status area-->
+
+    <!-- Start Status area -->
+    <div class="form-element-area" style="margin-top:10px">
+        <div class="container">
+        <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-element-list">
+                        <div class="basic-tb-hd">
+                            <h2>Pencarian Lebih Spesifik</h2>
+                            <p>Anda dapat memilih pilihan yang sudah di sediakan.</p>
                         </div>
-                        <div class="sparkline-bar-stats2">1,4,8,3,5,6,4,8,3,3,9,5</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
-                        <div class="website-traffic-ctn">
-                            <h2>$<span class="counter">40,000</span></h2>
-                            <p>Total Online Sales</p>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="nk-int-mk sl-dp-mn">
+                                    <h2>Tahun Akademik</h2>
+                                </div>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                    <select class="selectpicker" data-live-search="true">
+                                        <option value="">Pilih</option>
+                                        <?php foreach($ta as $li) { foreach($li as $l) { ?>
+                                        <option value="<?=$l->id?>"><?=$l->tahun_akademik?> - <?=$l->app?></option>
+                                        <?php }}?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="nk-int-mk sl-dp-mn sm-res-mg-t-10">
+                                    <h2>Kelas</h2>
+                                </div>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                <select class="selectpicker" data-live-search="true">
+                                        <option value="">Pilih</option>
+                                        <?php foreach($kelas as $li) { foreach($li as $l) { ?>
+                                        <option value="<?=$l->id?>"><?=$l->nama_kelas?> - <?=$l->app?></option>
+                                        <?php }}?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="nk-int-mk sl-dp-mn sm-res-mg-t-10">
+                                    <h2>Jenis Siswa</h2>
+                                </div>
+                                <div class="bootstrap-select fm-cmp-mg">
+                                <select class="selectpicker" data-live-search="true">
+                                        <option value="">Pilih</option>
+                                        <?php foreach($app as $li) {  ?>
+                                        <option value="<?=$l->id?>"><?=$l->app?></option>
+                                        <?php }?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="nk-int-mk sl-dp-mn sm-res-mg-t-10">
+                                    
+                                </div>
+                                <div class="nk-int-mk">
+                                    <button class="btn btn-primary">Filter</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="sparkline-bar-stats3">4,2,8,2,5,6,3,8,3,5,9,5</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
-                        <div class="website-traffic-ctn">
-                            <h2><span class="counter">1,000</span></h2>
-                            <p>Total Support Tickets</p>
-                        </div>
-                        <div class="sparkline-bar-stats4">2,4,8,4,5,7,4,7,3,5,7,5</div>
                     </div>
                 </div>
             </div>

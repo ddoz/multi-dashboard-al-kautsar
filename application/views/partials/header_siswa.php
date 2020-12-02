@@ -52,6 +52,18 @@
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="<?=base_url()?>assets/style.css">
+    <!-- bootstrap select CSS
+		============================================ -->
+    <link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap-select/bootstrap-select.css">
+    <!-- datapicker CSS
+		============================================ -->
+    <link rel="stylesheet" href="<?=base_url()?>assets/css/datapicker/datepicker3.css">
+    <!-- Color Picker CSS
+		============================================ -->
+    <link rel="stylesheet" href="<?=base_url()?>assets/css/color-picker/farbtastic.css">
+    <!-- main CSS
+		============================================ -->
+    <link rel="stylesheet" href="<?=base_url()?>assets/css/chosen/chosen.css">
     <!-- notification CSS
 		============================================ -->
     <link rel="stylesheet" href="<?=base_url()?>assets/css/notification/notification.css">

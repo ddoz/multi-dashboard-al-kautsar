@@ -22,6 +22,7 @@
                                     <ul id="democrou" class="collapse dropdown-header-top">
                                         <li><a href="<?=base_url()?>siswa/pengelolaansiswa">Siswa</a></li>
                                         <li><a href="<?=base_url()?>siswa/pengelolaankelas">Kelas</a></li>
+                                        <li><a href="<?=base_url()?>siswa/pengelolaansiswakelas">Siswa Kelas</a></li>
                                         <li><a href="<?=base_url()?>siswa/pengelolaanta">Tahun Akademik</a></li>
                                     </ul>
                                 </li>

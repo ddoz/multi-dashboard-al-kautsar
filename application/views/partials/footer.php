@@ -79,6 +79,17 @@
 		============================================ -->
     <script src="<?=base_url()?>assets/js/data-table/jquery.dataTables.min.js"></script>
     <script src="<?=base_url()?>assets/js/data-table/data-table-act.js"></script>
+     <!-- datapicker JS
+		============================================ -->
+    <script src="<?=base_url()?>assets/js/datapicker/bootstrap-datepicker.js"></script>
+    <script src="<?=base_url()?>assets/js/datapicker/datepicker-active.js"></script>
+    <!-- bootstrap select JS
+		============================================ -->
+    <script src="<?=base_url()?>assets/js/bootstrap-select/bootstrap-select.js"></script>
+    <!--  color-picker JS
+		============================================ -->
+    <script src="<?=base_url()?>assets/js/color-picker/farbtastic.min.js"></script>
+    <script src="<?=base_url()?>assets/js/color-picker/color-picker.js"></script>
     <!--  notification JS
 		============================================ -->
     <script src="<?=base_url()?>assets/js/notification/bootstrap-growl.min.js"></script>

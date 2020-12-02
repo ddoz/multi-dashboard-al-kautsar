@@ -34,6 +34,8 @@
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="<?=base_url()?>siswa/pengelolaansiswa">Siswa</a>
                                 </li>
+                                <li><a href="<?=base_url()?>siswa/pengelolaansiswakelas">Siswa Kelas</a>
+                                </li>
                                 <li><a href="<?=base_url()?>siswa/pengelolaankelas">Kelas</a>
                                 </li>
                                 <li><a href="<?=base_url()?>siswa/pengelolaanta">Tahun Akademik</a>
