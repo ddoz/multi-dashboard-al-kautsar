@@ -71,7 +71,7 @@
 	function notifyOK(message){
 		$.growl({
 			icon: 'fa fa-bell',
-			title: ' Informasi ',
+			title: ' Informasi : ',
 			message: message,
 			url: ''
 		},{

@@ -43,9 +43,9 @@
     <script src="<?=base_url()?>assets/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
     <!-- jvectormap JS
 		============================================ -->
-    <script src="<?=base_url()?>assets/js/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <!-- <script src="<?=base_url()?>assets/js/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="<?=base_url()?>assets/js/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="<?=base_url()?>assets/js/jvectormap/jvectormap-active.js"></script>
+    <script src="<?=base_url()?>assets/js/jvectormap/jvectormap-active.js"></script> -->
     <!-- sparkline JS
 		============================================ -->
     <script src="<?=base_url()?>assets/js/sparkline/jquery.sparkline.min.js"></script>
@@ -79,6 +79,8 @@
 		============================================ -->
     <script src="<?=base_url()?>assets/js/data-table/jquery.dataTables.min.js"></script>
     <script src="<?=base_url()?>assets/js/data-table/data-table-act.js"></script>
+    <script src="https://cdn.datatables.net/rowreorder/1.2.7/js/dataTables.rowReorder.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
      <!-- datapicker JS
 		============================================ -->
     <script src="<?=base_url()?>assets/js/datapicker/bootstrap-datepicker.js"></script>
