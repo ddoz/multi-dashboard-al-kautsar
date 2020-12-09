@@ -74,8 +74,9 @@
                 </div>
                 <form id="formTa" action="<?=base_url()?>siswa/pengelolaanta/simpan">
                 <div class="modal-body">
-                    <h2>Form Tambah Tahun Akademik</h2>
+                    <h2>Form Tahun Akademik</h2>
                     <input type="hidden" name="app_id" id="app_id_input">
+                    <input type="hidden" name="id" id="id_input">
                     <div class="form-group">
                         <label for="">Nama Tahun Akademik</label>
                         <input type="text" name="tahun_akademik" id="tahun_akademik_input" class="form-control" required>
@@ -107,7 +108,7 @@
                 <form id="formHapus" action="<?=base_url()?>siswa/pengelolaanta/hapus">
                 <div class="modal-body">
                     <h2>Hapus data ini?</h2>
-                    <input type="hidden" name="id" id="id_input">
+                    <input type="hidden" name="id" id="id_input_hapus">
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-danger">Ya Hapus Data</button>

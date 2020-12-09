@@ -24,11 +24,54 @@ class Pengelolaankelas extends CI_Controller {
         $this->datatables->from('kelas');
         $this->datatables->where('kelas.app_id',$appid);
         $this->datatables->add_column('action',function($row){
-            return "<a class='text text-warning' href='".base_url()."siswa/pengelolaankelas/edit/".$row['id']."'><i class='fa fa-edit'></i></a>";
+            $button = "<button type='button' class='btn btn-warning btn-xs' onclick='edit(".json_encode($row).")'><i class='fa fa-edit'></i></button>|";
+            $button .= "<button type='button' class='btn btn-danger btn-xs btnHapus' onclick='hapus(".$row['id'].",".$row['app_id'].")'><i class='fa fa-trash'></i></button>";
+            return $button;
         });
         echo $this->datatables->generate();
 	}
 
+
+    public function simpan() {
+        $dataInsert = array(
+            "app_id" => $this->input->post("app_id",true),
+            "nama_kelas" => $this->input->post("nama_kelas",true)
+        );
+        $simpan = $this->db->insert("kelas",$dataInsert);
+        if($simpan) {
+            echo json_encode(array("msg"=>"ok"));
+            exit();
+        }
+        echo json_encode(array("msg"=>"no"));
+        exit();
+    }
+
+    public function ubah() {
+        $id = $this->input->post("id");
+        $update = array(
+            "nama_kelas" => $this->input->post("nama_kelas")
+        );
+        $this->db->where("id",$id);
+        $update = $this->db->update("kelas",$update);
+        if($update) {
+            echo json_encode(array("msg"=>"ok"));
+            exit();
+        }
+        echo json_encode(array("msg"=>"no"));
+        exit();
+    }
+
+    public function hapus() {
+        //butuh helper untuk cek apakah ta digunakan atau tidak
+        $this->db->where("id",$this->input->post("id",true));
+        $hapus = $this->db->delete("kelas");
+        if($hapus) {
+            echo json_encode(array("msg"=>"ok"));
+            exit();
+        }
+        echo json_encode(array("msg"=>"no"));
+        exit();
+    }
 
 
 }

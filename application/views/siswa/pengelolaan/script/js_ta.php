@@ -9,14 +9,6 @@ $(document).ready(function() {
         $("#app_id_input").val(appId);
         $("#formTa").attr("action","<?=base_url()?>siswa/pengelolaanta/simpan");
     });
-    $(".btnEdit").click(function(e) {
-        e.preventDefault();
-        $("#modalFormTa").modal({ backdrop: 'static', keyboard: false });
-        appId = $(this).attr("app-id");
-        $("#app_id_input").val(appId);
-        // $("#tahun_akademik_input") = 
-        $("#formTa").attr("action","<?=base_url()?>siswa/pengelolaanta/ubah");
-    });
     $("#formHapus").submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -57,11 +49,20 @@ $(document).ready(function() {
 
 
 function hapus(id,appid){
-    console.log(appid);
     $("#modalHapus").modal({ backdrop: 'static', keyboard: false });
     dataId = id;
     appId = appid;
-    $("#id_input").val(dataId);
+    $("#id_input_hapus").val(dataId);
+}
+
+function edit(data) {
+    appId = data.app_id;
+    $("#modalFormTa").modal({ backdrop: 'static', keyboard: false });
+    $("#app_id_input").val(appId);
+    $("#tahun_akademik_input").val(data.tahun_akademik);
+    $("#id_input").val(data.id);
+    $("#status_input option[value='"+data.status+"'").attr('selected','selected');
+    $("#formTa").attr("action","<?=base_url()?>siswa/pengelolaanta/ubah");
 }
 
 <?php foreach($app as $listApp) { ?>

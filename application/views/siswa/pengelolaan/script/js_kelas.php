@@ -1,4 +1,72 @@
 <script type="text/javascript">
+
+
+var appId = 0;
+var dataId = 0;
+$(document).ready(function() {
+    $(".modalKelas").click(function(e) {
+        e.preventDefault();
+        $("#modalForm").modal({ backdrop: 'static', keyboard: false });
+        appId = $(this).attr("app-id");
+        $("#app_id_input").val(appId);
+        $("#form").attr("action","<?=base_url()?>siswa/pengelolaankelas/simpan");
+    });
+    $("#formHapus").submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: $("#formHapus").attr("action"),
+            type: "POST",
+            data: $(this).serialize(),
+            success: function(response) {
+                $("#formHapus")[0].reset();
+                $('#modalHapus').modal('hide');
+                notifyOK("Berhasil Hapus Data");
+                $('#datatable-'+appId).DataTable().ajax.reload(null, false);
+            },
+            error: function(error) {
+                $('#modalHapus').modal('hide');
+                notifyNO("Gagal Hapus Data, silahkan coba kembali");
+            }
+        })
+    })
+    $("#form").submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: $("#form").attr("action"),
+            type: "POST",
+            data: $(this).serialize(),
+            success: function(response) {
+                $("#form")[0].reset();
+                $('#modalForm').modal('hide');
+                notifyOK("Berhasil Simpan Data");
+                $('#datatable-'+appId).DataTable().ajax.reload(null, false);
+            },
+            error: function(error) {
+                $('#modalForm').modal('hide');
+                notifyNO("Gagal Simpan Data, silahkan coba kembali");
+            }
+        })
+    })
+})
+
+
+function hapus(id,appid){
+    console.log(id);
+    $("#modalHapus").modal({ backdrop: 'static', keyboard: false });
+    dataId = id;
+    appId = appid;
+    $("#id_input_hapus").val(dataId);
+}
+
+function edit(data) {
+    appId = data.app_id;
+    $("#modalForm").modal({ backdrop: 'static', keyboard: false });
+    $("#app_id_input").val(appId);
+    $("#nama_kelas_input").val(data.nama_kelas);
+    $("#id_input").val(data.id);
+    $("#form").attr("action","<?=base_url()?>siswa/pengelolaankelas/ubah");
+}
+
 <?php foreach($app as $listApp) { ?>
    var t =	$('#datatable-<?=$listApp->app_id?>').DataTable({
         initComplete: function() {
