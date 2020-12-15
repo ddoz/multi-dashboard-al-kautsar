@@ -1,6 +1,5 @@
 <script type="text/javascript">
 
-
 var appId = 0;
 var dataId = 0;
 $(document).ready(function() {

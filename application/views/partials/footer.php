@@ -96,6 +96,9 @@
 		============================================ -->
     <script src="<?=base_url()?>assets/js/notification/bootstrap-growl.min.js"></script>
     <script src="<?=base_url()?>assets/js/notification/notification-active.js"></script>
+    <!-- XLSX -->
+    <script src="<?=base_url()?>assets/js/xlsx.full.min.js"></script>
+
     <!-- main JS
 		============================================ -->
     <script src="<?=base_url()?>assets/js/main.js"></script>

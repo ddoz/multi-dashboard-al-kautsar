@@ -28,3 +28,44 @@ if(!function_exists('getAppList')) {
         return $ci->db->get()->result();
     }
 }
+
+
+if(!function_exists('buildForm')) {
+    function buildForm($data = array()) {
+        $buildTag = "";
+        if(count($data) > 0) {
+    
+            foreach($data as $val) {
+                $buildTag .= "<div class='form-group'>";
+                $buildTag .= "<label>".$val['label']."</label>";
+                if($val['type'] == "input") {
+                    $buildTag .= "<input class='form-control' id='".$val['name']."_input' type='text' name='".$val['name']."' required>";
+                }
+                if($val['type'] == "textarea") {
+                    $buildTag .= "<textarea class='form-control' id='".$val['name']."_input' name='".$val['name']."' required></textarea>";
+                }
+                if($val['type'] == "datepicker") {
+                    $buildTag .= "<input class='form-control datepicker' id='".$val['name']."_input' type='text' name='".$val['name']."' required>";
+                }
+                if($val['type'] == "timepicker") {
+                    $buildTag .= "<input class='form-control timepicker' id='".$val['name']."_input' type='text' name='".$val['name']."' required>";
+                }
+                if($val['type'] == "select") {
+                    $select = "<select class='form-control' id='".$val['name']."_input' name='".$val['name']."'>";
+                    if(array_key_exists('option',$val)) {
+                        $select .= "<option value=''>Pilih</option>";
+                        foreach($val['option'] as $key => $item) {
+                            $select .= "<option value='".$key."'>".$item."</option>";
+                        }
+                    }
+                    $select .= "</select>";
+                    $buildTag .= $select;
+                }
+                $buildTag .= "</div>";
+    
+            }
+    
+        }
+        echo $buildTag;
+    }
+}

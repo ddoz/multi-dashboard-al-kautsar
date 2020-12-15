@@ -183,7 +183,7 @@
                     console.log('sukses');
                     var response = JSON.parse(res);
                     if(response.status == "OK") {
-                        notifyOK();
+                        notifyOK("Selamat Datang, tunggu sebentar");
                         setTimeout(function() {
                             location.href='<?=base_url()?>welcome/app';
                         },3000);
