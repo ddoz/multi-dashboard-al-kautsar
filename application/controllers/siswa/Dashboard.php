@@ -61,6 +61,21 @@ class Dashboard extends CI_Controller {
         $this->load->view('partials/wrapper_siswa',$data);
     }
 
+    public function carispesifik() {
+        $key = $this->input->get('kelas');
+        $data['content'] = 'siswa/home/dashboard_cari';
+        $data['menu'] = 'home';
+        $data['script'] = 'siswa/home/script/js_dashboard';
+        $this->db->select('siswa.*,kelas.nama_kelas,siswa_kelas.status as status_kelas');
+        $this->db->from('siswa');
+        $this->db->join('siswa_kelas','siswa_kelas.siswa_id=siswa.id');
+        $this->db->join('kelas','kelas.id=siswa_kelas.kelas_id');
+        $this->db->where('kelas.id', $key);
+        $qdata = $this->db->get()->result();
+        $data['siswa'] = $qdata;
+        $this->load->view('partials/wrapper_siswa',$data);
+    }
+
     public function detail() {
         $key = $this->uri->segment(4);
         $data['content'] = 'siswa/home/dashboard_detail';
