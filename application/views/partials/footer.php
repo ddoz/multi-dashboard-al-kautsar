@@ -97,6 +97,8 @@
     <script src="<?=base_url()?>assets/js/notification/bootstrap-growl.min.js"></script>
     <script src="<?=base_url()?>assets/js/notification/notification-active.js"></script>
     <!-- XLSX -->
+    <!-- chosen -->
+    <script src="<?=base_url()?>assets/js/chosen/chosen.jquery.js"></script>
     <script src="<?=base_url()?>assets/js/xlsx.full.min.js"></script>
 
     <!-- main JS

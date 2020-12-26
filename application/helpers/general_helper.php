@@ -29,6 +29,15 @@ if(!function_exists('getAppList')) {
     }
 }
 
+if(!function_exists('showStatusMessage')) {
+    function showStatusMessage() {
+        $ci =& get_instance();
+        if($ci->session->flashdata('status')!=null) {
+            return $ci->session->flashdata('status');
+        }
+    }
+}
+
 
 if(!function_exists('buildForm')) {
     function buildForm($data = array()) {

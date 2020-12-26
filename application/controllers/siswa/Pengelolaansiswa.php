@@ -6,6 +6,7 @@ class Pengelolaansiswa extends CI_Controller {
     function __construct() {
         parent::__construct();
         isAuthenticated();
+        $this->load->model("Model_form");
     }
 
 	public function index()
@@ -14,8 +15,20 @@ class Pengelolaansiswa extends CI_Controller {
         $data['menu'] = 'pengelolaan';
         $data['script'] = 'siswa/pengelolaan/script/js_siswa';
         $data['app'] = getAppList();
-
+        
 		$data['form'] = array(
+            array(
+                "type" => "select",
+                "label" => "Tahun Akademik",
+                "name" => "tahun_akademik",
+                "option" => $this->Model_form->optionTahunAkademik()
+              ),
+            array(
+                "type" => "select",
+                "label" => "Kelas",
+                "name" => "kelas",
+                "option" => $this->Model_form->optionKelas()
+              ),
 			array(
 			  "type" => "input",
 			  "label" => "Nama Lengkap",
@@ -205,7 +218,7 @@ class Pengelolaansiswa extends CI_Controller {
             "ibu_penghasilan"	 => $this->input->post("ibu_penghasilan"),
             "ibu_hp"	 => $this->input->post("ibu_hp"),
             "sekolah_asal" => $this->input->post("sekolah_asal"),
-            "created_at" => date("H:i:s"),
+            "created_at" => date("Y-m-d H:i:s"),
             "created_by" => $this->session->userdata("id"),
         );
 
@@ -242,6 +255,19 @@ class Pengelolaansiswa extends CI_Controller {
             "created_by" => $this->session->userdata("id"),
         );
         $simpan = $this->db->insert("siswa_app",$dataInsertSiswaApp);
+
+        $insertSiswaKelas = array(
+            "siswa_id" => $dataInsertSiswaApp['siswa_id'],
+            "kelas_id" => $this->input->post('kelas'),
+            "tahun_akademik_id" => $this->input->post('tahun_akademik'),
+            "app_id" => $this->input->post("app_id",true),
+            "status" => "1",
+            "created_at" => date("Y-m-d H:i:s"),
+            "created_by" => $this->session->userdata("id")
+        );
+
+        $this->db->insert("siswa_kelas",$insertSiswaKelas);
+
         if($this->db->trans_status()!==FALSE) {
             $this->db->trans_commit();
             echo json_encode(array("msg"=>$message));
@@ -300,6 +326,32 @@ class Pengelolaansiswa extends CI_Controller {
                     "created_by" => $this->session->userdata("id"),
                 );
                 $this->db->insert("siswa_app",$dataInsertSiswaApp);
+
+                $qtahun_akademik = $this->db->get_where('tahun_akademik',array("tahun_akademik"=>trim(@$val->tahun_akademik)));
+                $tahun_akademik = 0;
+                if($qtahun_akademik->num_rows() > 0) {
+                    $tahun_akademik = $qtahun_akademik->row()->id;
+                }
+
+                $qkelas = $this->db->get_where('kelas',array("nama_kelas"=>trim(@$val->kelas)));
+                $kelas = 0;
+                if($qkelas->num_rows() > 0) {
+                    $kelas = $qkelas->row()->id;
+                }
+
+                if($kelas != 0 && $tahun_akademik != 0) {
+                    $insertSiswaKelas = array(
+                        "siswa_id" => $dataInsertSiswaApp['siswa_id'],
+                        "kelas_id" => $kelas,
+                        "tahun_akademik_id" => $tahun_akademik,
+                        "app_id" => $this->input->post("app_id",true),
+                        "status" => "1",
+                        "created_at" => date("Y-m-d H:i:s"),
+                        "created_by" => $this->session->userdata("id")
+                    );
+                    $this->db->insert("siswa_kelas",$insertSiswaKelas);
+                }
+        
             }
         }else {
             echo json_encode(array("msg"=>"Data Kosong"));
@@ -348,7 +400,7 @@ class Pengelolaansiswa extends CI_Controller {
             "ibu_penghasilan"	 => $this->input->post("ibu_penghasilan"),
             "ibu_hp"	 => $this->input->post("ibu_hp"),
             "sekolah_asal" => $this->input->post("sekolah_asal"),
-            "created_at" => date("H:i:s"),
+            "created_at" => date("Y-m-d H:i:s"),
             "created_by" => $this->session->userdata("id"),
         );
         $message = "";

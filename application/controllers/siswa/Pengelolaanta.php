@@ -75,5 +75,15 @@ class Pengelolaanta extends CI_Controller {
         exit();
     }
 
+    public function optiondata() {
+        $output = array();
+        $id = $this->input->post('id');
+        $data = $this->db->get_where('tahun_akademik',array('app_id'=>$id))->result();
+        if(!empty($data)) {
+            $output = $data;
+        }
+        echo json_encode($output);
+        exit();
+    }
 
 }

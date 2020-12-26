@@ -73,5 +73,16 @@ class Pengelolaankelas extends CI_Controller {
         exit();
     }
 
+    public function optiondata() {
+        $output = array();
+        $id = $this->input->post('id');
+        $data = $this->db->get_where('kelas',array('app_id'=>$id))->result();
+        if(!empty($data)) {
+            $output = $data;
+        }
+        echo json_encode($output);
+        exit();
+    }
+
 
 }

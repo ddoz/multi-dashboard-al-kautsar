@@ -37,17 +37,14 @@
                     <div class="form-element-list">
                         <div class="basic-tb-hd">
                             <h2>Pencarian Umum</h2>
-                            <p>Anda dapat memasukkan NISN, Nama atau identitas yang lainnya.</p>
+                            <p>Anda dapat memasukkan NISN atau Nama.</p>
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group ic-cmp-int form-elet-mg">
-                                    <div class="nk-int-st">
-                                        <input type="text" class="form-control" placeholder="Masukkan Kata Kunci">
-                                    </div>
-                                    <div class="form-ic-cmp">
-                                        <button class="btn btn-warning btn-sm">Cari</button>
-                                    </div>
+                                <form method="get" action="<?=base_url()?>siswa/dashboard/cari">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Masukkan Kata Kunci" name="key">
+                                    <button type="submit" class="btn btn-warning btn-sm">Cari</button>
                                 </div>
                             </div>
                         </div>
@@ -73,8 +70,8 @@
                                 <div class="nk-int-mk sl-dp-mn">
                                     <h2>Tahun Akademik</h2>
                                 </div>
-                                <div class="bootstrap-select fm-cmp-mg">
-                                    <select class="selectpicker" data-live-search="true">
+                                <div class="form-group">
+                                    <select class="chosen" data-placeholder="Choose a Country...">
                                         <option value="">Pilih</option>
                                         <?php foreach($ta as $li) { foreach($li as $l) { ?>
                                         <option value="<?=$l->id?>"><?=$l->tahun_akademik?> - <?=$l->app?></option>
@@ -86,8 +83,8 @@
                                 <div class="nk-int-mk sl-dp-mn sm-res-mg-t-10">
                                     <h2>Kelas</h2>
                                 </div>
-                                <div class="bootstrap-select fm-cmp-mg">
-                                <select class="selectpicker" data-live-search="true">
+                                <div class="form-group">
+                                    <select class="chosen" data-placeholder="Choose a Country...">
                                         <option value="">Pilih</option>
                                         <?php foreach($kelas as $li) { foreach($li as $l) { ?>
                                         <option value="<?=$l->id?>"><?=$l->nama_kelas?> - <?=$l->app?></option>
@@ -99,11 +96,11 @@
                                 <div class="nk-int-mk sl-dp-mn sm-res-mg-t-10">
                                     <h2>Jenis Siswa</h2>
                                 </div>
-                                <div class="bootstrap-select fm-cmp-mg">
-                                <select class="selectpicker" data-live-search="true">
+                                <div class="form-group">
+                                <select class="chosen" data-placeholder="Choose a Country...">
                                         <option value="">Pilih</option>
                                         <?php foreach($app as $li) {  ?>
-                                        <option value="<?=$l->id?>"><?=$l->app?></option>
+                                        <option value="<?=$li->id?>"><?=$li->app?></option>
                                         <?php }?>
                                     </select>
                                 </div>
