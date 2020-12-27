@@ -15,8 +15,6 @@
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="<?=base_url()?>siswa/dashboard">Pencarian Data</a>
                                 </li>
-                                <li><a href="<?=base_url()?>siswa/semua">Semua Siswa</a>
-                                </li>
                                 
                             </ul>
                         </div>

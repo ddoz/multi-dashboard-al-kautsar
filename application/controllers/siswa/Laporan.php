@@ -44,6 +44,13 @@ class Laporan extends CI_Controller {
         $data['ta'] = $ta;
         $data['kelas'] = $kelas;
         $data['app'] = $appList;
+        $this->db->select('siswa.*,kelas.nama_kelas,siswa_kelas.status as status_kelas');
+        $this->db->from('siswa');
+        $this->db->join('siswa_kelas','siswa_kelas.siswa_id=siswa.id');
+        $this->db->join('kelas','kelas.id=siswa_kelas.kelas_id');
+        $this->db->where('siswa_kelas.status', '1');
+        $qdata = $this->db->get()->result();
+        $data['siswa'] = $qdata;
         // echo "<pre>";
         // print_r($kelas);die();
 		$this->load->view('partials/wrapper_siswa',$data);

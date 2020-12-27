@@ -46,6 +46,7 @@
                                     <input type="text" class="form-control" placeholder="Masukkan Kata Kunci" name="key">
                                     <button type="submit" class="btn btn-warning btn-sm">Cari</button>
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -65,13 +66,14 @@
                             <h2>Pencarian Lebih Spesifik</h2>
                             <p>Anda dapat memilih pilihan yang sudah di sediakan.</p>
                         </div>
+                        <form method="get" action="<?=base_url()?>siswa/dashboard/carispesifik">
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                 <div class="nk-int-mk sl-dp-mn">
                                     <h2>Tahun Akademik</h2>
                                 </div>
                                 <div class="form-group">
-                                    <select class="chosen" data-placeholder="Choose a Country...">
+                                    <select name="ta" required class="chosen" data-placeholder="Pilih data">
                                         <option value="">Pilih</option>
                                         <?php foreach($ta as $li) { foreach($li as $l) { ?>
                                         <option value="<?=$l->id?>"><?=$l->tahun_akademik?> - <?=$l->app?></option>
@@ -84,7 +86,7 @@
                                     <h2>Kelas</h2>
                                 </div>
                                 <div class="form-group">
-                                    <select class="chosen" data-placeholder="Choose a Country...">
+                                    <select name="kelas" required class="chosen" data-placeholder="Pilih data">
                                         <option value="">Pilih</option>
                                         <?php foreach($kelas as $li) { foreach($li as $l) { ?>
                                         <option value="<?=$l->id?>"><?=$l->nama_kelas?> - <?=$l->app?></option>
@@ -97,7 +99,7 @@
                                     <h2>Jenis Siswa</h2>
                                 </div>
                                 <div class="form-group">
-                                <select class="chosen" data-placeholder="Choose a Country...">
+                                <select name="jenis" required class="chosen" data-placeholder="Pilih data">
                                         <option value="">Pilih</option>
                                         <?php foreach($app as $li) {  ?>
                                         <option value="<?=$li->id?>"><?=$li->app?></option>
@@ -110,10 +112,11 @@
                                     
                                 </div>
                                 <div class="nk-int-mk">
-                                    <button class="btn btn-primary">Filter</button>
+                                    <button type="submit" class="btn btn-primary">Filter</button>
                                 </div>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>

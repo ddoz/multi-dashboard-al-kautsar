@@ -7,9 +7,7 @@
                             <ul class="mobile-menu-nav">
                                 <li><a data-toggle="collapse" data-target="#Charts" href="#">Home</a>
                                     <ul class="collapse dropdown-header-top">
-                                        <li><a href="<?=base_url()?>siswa/dashboard">Pencarian Data</a></li>
-                                        <li><a href="<?=base_url()?>siswa/semua">Semua Siswa</a></li>
-                                    </ul>
+                                        <li><a href="<?=base_url()?>siswa/dashboard">Pencarian Data</a></li>                                    </ul>
                                 </li>
                                 <li><a data-toggle="collapse" data-target="#demoevent" href="#">Laporan</a>
                                     <ul id="demoevent" class="collapse dropdown-header-top">

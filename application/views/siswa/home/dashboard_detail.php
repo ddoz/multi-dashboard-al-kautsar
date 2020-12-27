@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
                             <div class="breadcomb-report">
-                                <a href="<?=base_url()?>siswa/dashboard" data-toggle="tooltip" data-placement="left" title="Kembali" class="btn"><i class="notika-icon notika-left-arrow"></i></a>
+                                <a href="javascript:history.back();" data-toggle="tooltip" data-placement="left" title="Kembali" class="btn"><i class="notika-icon notika-left-arrow"></i></a>
                             </div>
                         </div>
                     </div>
