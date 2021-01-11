@@ -42,7 +42,7 @@ class Dashboard extends CI_Controller {
         $data['app'] = $appList;
         // echo "<pre>";
         // print_r($kelas);die();
-		$this->load->view('partials/wrapper_siswa',$data);
+		$this->load->view('layout/wrapper_siswa',$data);
 	}
 
     public function cari() {

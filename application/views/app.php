@@ -97,7 +97,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="animated flipInX">
-                        <i class="fa fa-building main-app" style="color:#4CAF50;"></i>
+                    <a href="<?=base_url()?>dma/dashboard"><i class="fa fa-building main-app" style="color:#4CAF50;"></i></a>
                         <div class="spacer"></div>
                         <h4>MONITORING DMA</h4>
                     </div>
