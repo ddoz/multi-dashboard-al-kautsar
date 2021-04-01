@@ -51,7 +51,7 @@
                                     <img class="card-img-top" src="<?=$image?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center" style="margin-top:10px"><?=$s->nama?></h5>
-                                        <p>Kelas : <?=$s->nama_kelas?><br>Status Kelas : <?=$s->status_kelas?></p>
+                                        <p>Kelas : <?=$s->nama_kelas?><br>Status Kelas : <?=($s->status_kelas)?'Aktif':'Tidak Aktif'?></p>
                                         <a href="<?=base_url()?>siswa/dashboard/detail/<?=$s->id?>" data-toggle="tooltip" data-placement="bottom" title="Detail Data Siswa" class="btn btn-info btn-block"><i class="notika-icon notika-search"></i></a>
                                     </div>
                                 </div>

@@ -29,6 +29,23 @@ class Pengelolaansiswa extends CI_Controller {
                 "name" => "kelas",
                 "option" => $this->Model_form->optionKelas()
               ),
+            array(
+                "type" => "input",
+                "label" => "Tahun Masuk",
+                "name" => "tahun_masuk",
+              ),
+
+            array(
+                "type" => "input",
+                "label" => "NIS",
+                "name" => "nis",
+              ),
+
+            array(
+                "type" => "input",
+                "label" => "Nomor VA",
+                "name" => "nomor_va",
+              ),
 			array(
 			  "type" => "input",
 			  "label" => "Nama Lengkap",
@@ -106,6 +123,11 @@ class Pengelolaansiswa extends CI_Controller {
 			  "label" => "Kode Pos",
               "name" => "kode_pos",
 			),
+			array(
+			  "type" => "textarea",
+			  "label" => "Alamat Tempat Tinggal Sekolah",
+			  "name" => "alamat_tempat_tinggal"
+            ),
             array(
 			  "type" => "input",
 			  "label" => "Telepon",
@@ -178,10 +200,19 @@ class Pengelolaansiswa extends CI_Controller {
         $this->datatables->join('siswa_app','siswa_app.siswa_id=siswa.id');
         $this->datatables->where('siswa_app.app_id',$appid);
         $this->datatables->add_column('image',function($row){
-            return "<img src='".base_url()."uploads/".$row['avatar']."' style='width:100px;height:100px'>";
+            if($row['avatar']!="") {
+                return "<img src='".base_url()."uploads/".$row['avatar']."' style='width:100px;height:100px'>";
+            }return 'Belum diupload';
+        });
+        $this->datatables->add_column('status',function($row){
+            $st = "Tidak Aktif";
+            if($row['status']) {
+                $st = "Aktif";
+            }
+            return $st;
         });
         $this->datatables->add_column('action',function($row){
-            $button = "<button type='button' class='btn btn-warning btn-xs' onclick='edit(".json_encode($row).")'><i class='fa fa-edit'></i></button>|";
+            $button = "<button type='button' class='btn btn-warning btn-xs' onclick='edit(".json_encode($row).")'><i class='fa fa-edit'></i></button>";
             $button .= "<button type='button' class='btn btn-danger btn-xs btnHapus' onclick='hapus(".$row['id'].",".$row['app_id'].")'><i class='fa fa-trash'></i></button>";
             return $button;
         });
@@ -218,6 +249,12 @@ class Pengelolaansiswa extends CI_Controller {
             "ibu_penghasilan"	 => $this->input->post("ibu_penghasilan"),
             "ibu_hp"	 => $this->input->post("ibu_hp"),
             "sekolah_asal" => $this->input->post("sekolah_asal"),
+
+            "alamat_tempat_tinggal" => $this->input->post("alamat_tempat_tinggal"),
+            "nis" => $this->input->post("nis"),
+            "tahun_masuk" => $this->input->post("tahun_masuk"),
+            "nomor_va" => $this->input->post("nomor_va"),
+
             "created_at" => date("Y-m-d H:i:s"),
             "created_by" => $this->session->userdata("id"),
         );
@@ -313,6 +350,10 @@ class Pengelolaansiswa extends CI_Controller {
                     "ibu_penghasilan"	 => @$val->ibu_penghasilan,
                     "ibu_hp"	 => @$val->ibu_hp,
                     "sekolah_asal" => @$val->sekolah_asal,
+                    "alamat_tempat_tinggal" => @$val->alamat_tempat_tinggal,
+                    "nis" => @$val->nis,
+                    "tahun_masuk" => @$val->tahun_masuk,
+                    "nomor_va" => @$val->nomor_va,
                     "created_at" => date("Y-m-d H:i:s"),
                     "created_by" => $this->session->userdata("id"),
                 );
@@ -400,6 +441,10 @@ class Pengelolaansiswa extends CI_Controller {
             "ibu_penghasilan"	 => $this->input->post("ibu_penghasilan"),
             "ibu_hp"	 => $this->input->post("ibu_hp"),
             "sekolah_asal" => $this->input->post("sekolah_asal"),
+            "alamat_tempat_tinggal" => $this->input->post("alamat_tempat_tinggal"),
+            "nis" => $this->input->post("nis"),
+            "tahun_masuk" => $this->input->post("tahun_masuk"),
+            "nomor_va" => $this->input->post("nomor_va"),
             "created_at" => date("Y-m-d H:i:s"),
             "created_by" => $this->session->userdata("id"),
         );

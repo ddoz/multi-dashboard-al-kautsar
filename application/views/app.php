@@ -70,7 +70,7 @@
         <div class="spacer"></div>
         <div class="row">
             <div class="col-lg-12 animated bounce">
-                <img src="<?=base_url()?>assets/img/alkautsar.jpeg" width="100" alt="">
+                <img src="<?=base_url()?>assets/img/alkautsar.png" width="100" alt="">
                 <div class="spacer"></div>
                 <h4>MULTI DASHBOARD MONITORING AND MANAGEMENT</h4>
                 <div class="spacer"></div>
@@ -85,12 +85,12 @@
                     <div class="animated flipInX">
                         <a href="<?=base_url()?>siswa/dashboard"><i class="fa fa-users main-app" style="color:#FF9800;"></i></a>
                         <div class="spacer"></div>
-                        <h4>MONITORING SISWA</h4>
+                        <h4>SIMSIAK</h4>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="animated flipInX">
-                        <i class="fa fa-black-tie main-app" style="color:#F44336;"></i>
+                    <a href="<?=base_url()?>staff/dashboard"><i class="fa fa-black-tie main-app" style="color:#F44336;"></i></a>
                         <div class="spacer"></div>
                         <h4>MONITORING STAFF</h4>
                     </div>

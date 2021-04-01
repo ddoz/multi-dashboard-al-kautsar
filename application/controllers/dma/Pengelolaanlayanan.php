@@ -32,9 +32,11 @@ class Pengelolaanlayanan extends CI_Controller {
         $this->datatables->select('*');
         $this->datatables->from('dma_layanan');
         $this->datatables->add_column('action',function($row){
-            $button = "<button type='button' class='btn btn-warning btn-xs' onclick='edit(".json_encode($row).")'><i class='fa fa-edit'></i></button>|";
-            $button .= "<button type='button' class='btn btn-danger btn-xs btnHapus' onclick='hapus(".$row['id'].")'><i class='fa fa-trash'></i></button>";
-            return $button;
+            if(isSuper()) { 
+                $button = "<button type='button' class='btn btn-warning btn-xs' onclick='edit(".json_encode($row).")'><i class='fa fa-edit'></i></button>|";
+                $button .= "<button type='button' class='btn btn-danger btn-xs btnHapus' onclick='hapus(".$row['id'].")'><i class='fa fa-trash'></i></button>";
+                return $button;
+            }
         });
         echo $this->datatables->generate();
 	}

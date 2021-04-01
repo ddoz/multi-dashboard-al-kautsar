@@ -28,14 +28,19 @@ $(document).ready(function() {
     })
     $("#form").submit(function(e) {
         e.preventDefault();
+        var formData = new FormData(this);
         $.ajax({
-            url: $("#form").attr("action"),
+            url: $(this).attr("action"),
             type: "POST",
-            data: $(this).serialize(),
+            data: formData,
+            cache:false,
+            contentType: false,
+            processData: false,
             success: function(response) {
+                var res = JSON.parse(response);
                 $("#form")[0].reset();
                 $('#modalForm').modal('hide');
-                notifyOK("Berhasil Simpan Data");
+                notifyOK(res.msg);
                 $('#datatable').DataTable().ajax.reload(null, false);
             },
             error: function(error) {
@@ -44,8 +49,76 @@ $(document).ready(function() {
             }
         })
     })
-})
+});
 
+$('#form_proses_perbaikan').submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: "<?=base_url()?>dma/pengelolaanperbaikan/proses_perbaikan",
+        type: "POST",
+        data: $(this).serialize(),
+        success: function(response) {
+            notifyOK("Berhasil Simpan Data");
+            setTimeout(function() {
+                location.reload();
+            },1000);
+        },
+        error: function(response) {
+            notifyNO("Gagal Simpan Data, silahkan coba kembali");
+        }
+    })
+});
+
+$('#btnSelesai').click(function(e) {
+    e.preventDefault();
+    $("#modalForm").modal();
+    var id = $(this).attr("data-id");
+    $("#id_input").val(id);
+});
+
+$('.btnTambahKeTable').click(function(e) {
+    var idBarang = $("#idBarang").val();
+    var barang = $("#idBarang").find(":selected").text();
+    var jumlah = $("#jumlahPemakaian").val();
+    if(idBarang != "" && jumlah != "") {
+        var markup = "<tr><td><input type='checkbox' name='record'><input type='hidden' name='jumlah[]' value='"+jumlah+"'><input type='hidden' name='id_barang[]' value='"+idBarang+"'></td><td>" + barang + "</td><td>" + jumlah + "</td></tr>";
+        $("#tableBarangPenyelesaian tbody").append(markup);
+    }
+});
+
+$("#delete-row").click(function(){
+    $("#tableBarangPenyelesaian tbody").find('input[name="record"]').each(function(){
+        if($(this).is(":checked")){
+            $(this).parents("tr").remove();
+        }
+    });
+});
+
+$("#formSelesai").submit(function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    $.ajax({
+        url: $(this).attr("action"),
+        type: "POST",
+        data: formData,
+        cache:false,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            var res = JSON.parse(response);
+            $("#formSelesai")[0].reset();
+            $('#modalForm').modal('hide');
+            notifyOK(res.msg);
+            setTimeout(() => {
+                location.reload();
+            }, 500);
+        },
+        error: function(error) {
+            $('#modalForm').modal('hide');
+            notifyNO("Gagal Simpan Data, silahkan coba kembali");
+        }
+    })
+});
 
 function hapus(id){
     $("#modalHapus").modal({ backdrop: 'static', keyboard: false });
@@ -81,9 +154,10 @@ function edit(data) {
 				type 		: "POST"
 			},
 			columns 		:[
-                {data: 'user_lapor'},
+                {data: 'nama'},
+                {data: 'nama_layanan'},
+                {data: 'nama_gedung'},
                 {data: 'keterangan_laporan'},
-                {data: 'status_laporan'},
                 {data: 'created_at'},
                 {data: 'start_at'},
                 {data: 'done_at'},

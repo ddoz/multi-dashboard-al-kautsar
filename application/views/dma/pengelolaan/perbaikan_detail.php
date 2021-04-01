@@ -1,47 +1,170 @@
-<!-- Breadcomb area Start-->
-<div class="breadcomb-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="breadcomb-list">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="breadcomb-wp">
-                                <div class="breadcomb-icon">
-                                    <i class="notika-icon notika-settings"></i>
-                                </div>
-                                <div class="breadcomb-ctn">
-                                    <h2>Pengelolaan Perbaikan</h2>
-                                    <p>Selamat datang, <span class="bread-ntd">ini halaman pengelolaan data perbaikan</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-                            <div class="breadcomb-report">
-                                <button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="notika-icon notika-sent"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Breadcomb area End-->
-    
+
     
     <!-- Data Table area Start-->
     <div class="data-table-area" style="margin-bottom:25px">
-         <div class="container">
+         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
-                            <h2>Data Pelaporan</h2>
-                            <p>Berikut merupakan data laporan masuk keseluruhan.</p>
+                            
+                            <h2><button onclick="location.href='<?=base_url()?>dma/pengelolaanperbaikan'" data-toggle="tooltip" data-placement="left" title="Kembali" class="btn"><i class="notika-icon notika-left-arrow"></i></button> &nbsp;Data Pelaporan</h2>
+                            <p>Berikut merupakan data detail pelaporan.</p>
                             <!-- <button class="btn btn-primary btn-xs btnmodalForm"><i class="fa fa-plus"></i> Tambah Data</button> -->
                         </div>
-                        <h5>Detail</h5>
+                        <h5>Detail Laporan</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>Pelapor</th>
+                                        <td>: <?=$header->nama?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Jenis Layanan</th>
+                                        <td>: <?=$header->nama_layanan?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Lokasi</th>
+                                        <td>: <?=$header->nama_gedung?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Keterangan Laporan</th>
+                                        <td>: <?=$header->keterangan_laporan?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Waktu Laporan</th>
+                                        <td>: <?=date("d M Y H:i:s",strtotime($header->created_at));?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Gambar</th>
+                                        <td>: 
+
+                                            <?php if($header->gambar_laporan!=""){?>
+                                                <img width="200" src="<?=base_url()?>uploads/dma/<?=$header->gambar_laporan?>">
+                                            <?php }?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Status Pengerjaan</th>
+                                        <td>: 
+
+                                            <?php if($item!=null){?>
+                                                <span class="label label-info" style="font-size:1em"><?=returnLaporanPerbaikan($header->status_laporan)?></span>
+                                            <?php } else { ?>
+                                                <span class="label label-danger" style="font-size:1em">Belum Dikerjakan</span>
+                                            <?php }?>
+                                        </td>
+                                    </tr>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <hr>
+
+                        <?php if($item!=null){?>
+                                <div class="col-md-6">
+                                    <h5>Detail Pengerjaan</h5>
+                                    <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Teknisi</th>
+                                            <td>
+                                                <ol>
+                                                <?php 
+                                                    foreach($list_teknisi as $tk) {
+                                                        echo "<li>$tk->nama_teknisi</li>";
+                                                    }
+                                                ?>
+                                                </ol>    
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Waktu Mulai Pengerjaan</th>
+                                            <td><?=date("d M Y H:i:s",strtotime($header->start_at));?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Selisih Waktu Laporan dan Mulai Pengerjaan</th>
+                                            <td> <?php
+                                                $order = new DateTime($header->created_at);
+                                                $start = new DateTime($header->start_at);
+                                                $interval = $order->diff($start);
+                                                echo $interval->format("%d hari %h jam %i menit");
+                                            ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Waktu Selesai</th>
+                                            <td> <?=($header->done_at!=null)?date("d M Y H:i:s",strtotime($header->done_at)):"-";?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Lama Pengerjaan</th>
+                                            <td> <?php
+                                                if($header->done_at!=null) {
+                                                    $order = new DateTime($header->created_at);
+                                                    $finish = new DateTime($header->done_at);
+                                                    $interval = $order->diff($finish);
+                                                echo $interval->format("%d hari %h jam %i menit");
+                                                }else {
+                                                    echo "-";
+                                                }
+                                            ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Gambar Penyelesaian</th>
+                                            <td> <?php if($item->hasil_foto!=""){?>
+                                                <img width="200" src="<?=base_url()?>uploads/dma/<?=$item->hasil_foto?>">
+                                            <?php }?></td>
+                                        </tr>
+                                        <?php if($perbaikan_barang!=null) {
+                                            ?>
+                                            <tr>
+                                                <td colspan="2">Kebutuhan Barang</td>
+                                            </tr>
+                                            <?php
+                                            foreach($perbaikan_barang as $pb) {
+                                                ?>
+                                                <tr>
+                                                    <td><?=$pb->nama_barang?></td>
+                                                    <td><?=$pb->jumlah?></td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        }?>
+                                        <?php if(isSuper() && $header->done_at==null) { ?>
+                                        <tr>
+                                            <td><button type="button" id="btnSelesai" data-id="<?=$header->id?>,<?=$item->id?>" class="btn btn-success"><i class="notika-icon notika-checked"></i>&nbsp;SELESAIKAN PEKERJAAN</button></td>
+                                            <td></td>
+                                        </tr>
+                                        <?php }?>
+                                    </table>
+                                        </div>
+                                </div>
+                        <?php }else { if(isSuper()) {?>
+                            <form id="form_proses_perbaikan" class="col-md-6">
+                                <input type="hidden" name="id" value="<?=$header->id?>">
+                                <div class="form-group">
+                                    <label>Teknisi</label>
+                                    <select name="user_teknisi[]" required class="chosen" multiple>
+                                        <?php foreach($teknisi as $tk) { ?>
+                                            <option value="<?=$tk->id?>"><?=$tk->nama_teknisi?></option>
+                                        <?php }?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Keterangan Proses</label>
+                                    <textarea class="form-control" required name="keterangan_proses"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label></label>
+                                    <button class="btn btn-primary" type="submit"><i class="notika-icon notika-sent"></i>&nbsp;Proses Pengerjaan</button>
+                                </div>
+                            </form>
+                        <?php }}?>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -51,17 +174,62 @@
     <!-- Data Table area End-->
     <div class="modal" id="modalForm" role="dialog">
         <div class="modal-dialog modals-default">
-            <div class="modal-content">
+            <div class="modal-content modal-lg">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form id="form" action="<?=base_url()?>dma/pengelolaangedung/simpan" enctype="multipart/form-data">
+                <form id="formSelesai" action="<?=base_url()?>dma/pengelolaanperbaikan/selesai" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <h2>Form Barang</h2>
+                    <h2>Form Penyelesaian Laporan</h2>
                     <input type="hidden" name="id" id="id_input">
-                    <?=buildForm($form)?>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <select class="form-control" id="idBarang">
+                                <option value="">Pilih Barang</option>
+                                <?php foreach($barang as $br) { ?>
+                                <option value="<?=$br->id?>"><?=$br->nama_barang?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="col-md-4"><input class="form-control" id="jumlahPemakaian" placeholder="Jumlah Pemakaian"></div>
+                        <div class="col-md-4">
+                        <button class="btn btn-primary btn-sm btnTambahKeTable" type="button">Tambah</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="table-responsive">
+                        <table class="table" id="tableBarangPenyelesaian">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Barang</th>
+                                <th>Jumlah Pemakaian</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <button type="button" class="btn btn-danger btn-sm" id="delete-row">Delete Row</button>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Gambar Bukti Penyelesaian</label>
+                            <input type="file" class="form-control" required name="file">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Keterangan Proses</label>
+                            <textarea class="form-control" required name="keterangan_proses"></textarea>
+                        </div>
+                    </div>
+                        
+
                 </div>
                 <div class="modal-footer">
+                    <br>
                     <button type="submit" class="btn btn-default">Save changes</button>
                     </form>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -15,5 +15,15 @@ class Welcome extends CI_Controller {
 
 	public function app() {
 		$this->load->view('app');
+		// $data = array(
+		// 	'content' => 'dashboard',
+		// 	'breadcumb' => buildBreadcumb(array('App','Dashboard'))
+		// );
+		// buildPage($data);
+	}
+
+	public function logout() {
+		$this->session->sess_destroy();
+		redirect(base_url());
 	}
 }

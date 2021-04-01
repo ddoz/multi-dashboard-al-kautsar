@@ -1,37 +1,7 @@
-<!-- Breadcomb area Start-->
-<div class="breadcomb-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="breadcomb-list">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="breadcomb-wp">
-                                <div class="breadcomb-icon">
-                                    <i class="notika-icon notika-checked"></i>
-                                </div>
-                                <div class="breadcomb-ctn">
-                                    <h2>Detail Data</h2>
-                                    <p>Ok, <span class="bread-ntd">ini halaman detail siswa</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-                            <div class="breadcomb-report">
-                                <a href="javascript:history.back();" data-toggle="tooltip" data-placement="left" title="Kembali" class="btn"><i class="notika-icon notika-left-arrow"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Breadcomb area End-->
 
 <!-- Start Status area -->
     <div class="form-element-area">
-        <div class="container">
+        <div class="container-fluid">
         <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="form-element-list">
@@ -300,6 +270,16 @@
                                                             : <?=$siswa->nama_kelas?>
                                                         </div>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            Riwayat Kelas 
+                                                            <ul>
+                                                            <?php foreach(getRiwayat($siswa->id)->result() as $key => $riwayatpdk) { ?>
+                                                                <li><?=$key+1?>. <?=$riwayatpdk->nama_kelas?></li>
+                                                            <?php }?>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -313,7 +293,24 @@
                                             </div>
                                             <div id="accordionRed-three" class="collapse" role="tabpanel">
                                                 <div class="panel-body">
-                                                    <p>Belum Diketahui</p>
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            Nomor VA
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            : <?=$siswa->nomor_va?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            Riwayat Keuangan
+                                                            <ul>
+                                                            <?php foreach(getRiwayatKeuangan($siswa->id)->result() as $key => $riwayatpdk) { ?>
+                                                                <li><?=$key+1?>. <?=$riwayatpdk->jenis_keuangan?> - <?=number_format($riwayatpdk->jumlah_bayar)?> - <?=$riwayatpdk->tanggal_bayar?></li>
+                                                            <?php }?>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

@@ -18,7 +18,7 @@ $(document).ready(function() {
             success: function(response) {
                 $("#formHapus")[0].reset();
                 $('#modalHapus').modal('hide');
-                notifyOK("Berhasil Hapus Data");
+                $.notify("Berhasil hapus data", "success");
                 $('#datatable-'+appId).DataTable().ajax.reload(null, false);
             },
             error: function(error) {
@@ -36,12 +36,12 @@ $(document).ready(function() {
             success: function(response) {
                 $("#formTa")[0].reset();
                 $('#modalFormTa').modal('hide');
-                notifyOK("Berhasil Simpan Data");
+                $.notify("Berhasil simpan data", "success");
                 $('#datatable-'+appId).DataTable().ajax.reload(null, false);
             },
             error: function(error) {
                 $('#modalFormTa').modal('hide');
-                notifyNO("Gagal Simpan Data, silahkan coba kembali");
+                $.notify("Gagal Simpan Data, silahkan coba kembali", "error");
             }
         })
     })
@@ -86,7 +86,7 @@ function edit(data) {
             processing: true,
             serverSide 		: true,
 			ajax:{
-				url 		: "<?=base_url()?>siswa/pengelolaanta/datatableTa/<?=$listApp->app_id?>",
+				url 		: "<?=base_url()?>siswa/kelolatahunakademik/datatableTa/<?=$listApp->app_id?>",
 				type 		: "POST"
 			},
 			columns 		:[

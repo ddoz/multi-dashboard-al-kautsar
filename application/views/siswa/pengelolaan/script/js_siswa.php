@@ -157,7 +157,7 @@ function edit(data) {
               oLanguage: {
               sProcessing: "loading..."
           },
-            responsive: true,
+            // responsive: true,
             processing: true,
             serverSide 		: true,
 			ajax:{
@@ -166,7 +166,6 @@ function edit(data) {
 			},
 			columns 		:[
                 {data: 'nisn'},
-                {data: 'image', orderable:false, searchable:false},
                 {data: 'nama'},
                 {data: 'jenis_kelamin'},
                 {data: 'tempat_lahir'},

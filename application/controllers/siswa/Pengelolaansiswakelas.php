@@ -149,8 +149,15 @@ class Pengelolaansiswakelas extends CI_Controller {
         $this->datatables->join('siswa_kelas','siswa_kelas.siswa_id=siswa.id');
         $this->datatables->join('kelas','kelas.id=siswa_kelas.kelas_id');
         $this->datatables->where('siswa_app.app_id',$appid);
+        $this->datatables->add_column('status',function($row){
+            $st = "Tidak Aktif";
+            if($row['status']) {
+                $st = "Aktif";
+            }
+            return $st;
+        });
         $this->datatables->add_column('action',function($row){
-            $button = "<button type='button' class='btn btn-warning btn-xs' onclick='edit(".json_encode($row).")'><i class='fa fa-edit'></i></button>|";
+            $button = "<button type='button' class='btn btn-warning btn-xs' onclick='edit(".json_encode($row).")'><i class='fa fa-edit'></i></button>";
             $button .= "<button type='button' class='btn btn-danger btn-xs btnHapus' onclick='hapus(".$row['siswa_kelas_id'].",".$row['app_id'].")'><i class='fa fa-trash'></i></button>";
             return $button;
         });

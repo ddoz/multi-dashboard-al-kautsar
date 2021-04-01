@@ -520,7 +520,7 @@ of your controller methods, don’t set the output until the end.</p>
         <span class="o">-&gt;</span><span class="na">set_output</span><span class="p">(</span><span class="nb">json_encode</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bar&#39;</span><span class="p">)));</span>
 
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">output</span>
-        <span class="o">-&gt;</span><span class="na">set_content_type</span><span class="p">(</span><span class="s1">&#39;jpeg&#39;</span><span class="p">)</span> <span class="c1">// You could also use &quot;.jpeg&quot; which will have the full stop removed before looking in config/mimes.php</span>
+        <span class="o">-&gt;</span><span class="na">set_content_type</span><span class="p">(</span><span class="s1">&#39;jpeg&#39;</span><span class="p">)</span> <span class="c1">// You could also use &quot;.png&quot; which will have the full stop removed before looking in config/mimes.php</span>
         <span class="o">-&gt;</span><span class="na">set_output</span><span class="p">(</span><span class="nb">file_get_contents</span><span class="p">(</span><span class="s1">&#39;files/something.jpg&#39;</span><span class="p">));</span>
 </pre></div>
 </div>

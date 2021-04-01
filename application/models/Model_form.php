@@ -31,4 +31,15 @@ class Model_form extends CI_Model {
         }
         return $output;
     }
+
+    function optionUnit() {
+        $this->db->select("unit.*");
+        $this->db->from('unit');
+        $result = $this->db->get()->result();
+        $output = array();
+        foreach($result as $r) {
+            $output[$r->id] = $r->nama_unit;
+        }
+        return $output;
+    }
 }

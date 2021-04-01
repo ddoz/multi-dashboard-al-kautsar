@@ -1,5 +1,5 @@
 <div class="main-menu-area mg-tb-40">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
@@ -20,12 +20,11 @@
                         </div>
                         <div id="laporan" class="tab-pane <?=($menu=='laporan')?'in active':''?> notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="<?=base_url()?>siswa/laporan/aktif">Siswa Aktif</a>
+                                    <li><a href="<?=base_url()?>siswa/laporan/aktif">Siswa Aktif</a></li>
+                                    <li><a href="<?=base_url()?>siswa/laporan/keluargasekolah">Keluarga Siswa Sekolah</a></li>
+                                    <!-- <li><a href="<?=base_url()?>siswa/laporan/grafik">Grafik</a></li> -->
                                 </li>
-                                <li><a href="<?=base_url()?>siswa/laporan/alumni">Alumni</a>
-                                </li>
-                                <li><a href="<?=base_url()?>siswa/laporan/grafik">Grafik</a>
-                                </li>
+                               
                             </ul>
                         </div>
                         <div id="Pengelolaan" class="tab-pane <?=($menu=='pengelolaan')?'in active':''?> notika-tab-menu-bg animated flipInX">
@@ -37,6 +36,8 @@
                                 <li><a href="<?=base_url()?>siswa/pengelolaankelas">Kelas</a>
                                 </li>
                                 <li><a href="<?=base_url()?>siswa/pengelolaanta">Tahun Akademik</a>
+                                </li>
+                                <li><a href="<?=base_url()?>siswa/pengelolaankeuangan">Keuangan</a>
                                 </li>
                             </ul>
                         </div>

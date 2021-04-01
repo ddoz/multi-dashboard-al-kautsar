@@ -1,5 +1,5 @@
 <!-- Start Footer area-->
-<div class="footer-copyright-area">
+<!-- <div class="footer-copyright-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- End Footer area-->
     <!-- jquery
 		============================================ -->
@@ -103,7 +103,6 @@
 
     <!-- main JS
 		============================================ -->
-    <script src="<?=base_url()?>assets/js/main.js"></script>
 
     <?php if($script!=null) { $this->load->view($script); }?>
 

@@ -1,53 +1,23 @@
-<!-- Breadcomb area Start-->
-<div class="breadcomb-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="breadcomb-list">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="breadcomb-wp">
-                                <div class="breadcomb-icon">
-                                    <i class="notika-icon notika-settings"></i>
-                                </div>
-                                <div class="breadcomb-ctn">
-                                    <h2>Pengelolaan Perbaikan</h2>
-                                    <p>Selamat datang, <span class="bread-ntd">ini halaman pengelolaan data perbaikan</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-                            <div class="breadcomb-report">
-                                <button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="notika-icon notika-sent"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Breadcomb area End-->
-    
     
     <!-- Data Table area Start-->
     <div class="data-table-area" style="margin-bottom:25px">
-         <div class="container">
+         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
                             <h2>Data Pelaporan</h2>
                             <p>Berikut merupakan data laporan masuk keseluruhan.</p>
-                            <!-- <button class="btn btn-primary btn-xs btnmodalForm"><i class="fa fa-plus"></i> Tambah Data</button> -->
+                            <button class="btn btn-primary btn-xs btnmodalForm"><i class="fa fa-plus"></i> Tambah Data</button>
                         </div>
                         <div class="table-responsive">
                             <table id="datatable" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>Pelapor</th>
+                                        <th>Layanan</th>
+                                        <th>Gedung</th>
                                         <th>Keterangan</th>
-                                        <th>Status Laporan</th>
                                         <th>Tanggal Lapor</th>
                                         <th>Dikerjakan Pada Tanggal</th>
                                         <th>Selesai Pada Tanggal</th>
@@ -69,11 +39,36 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form id="form" action="<?=base_url()?>dma/pengelolaangedung/simpan" enctype="multipart/form-data">
+                <form id="form" action="<?=base_url()?>dma/pengelolaanperbaikan/simpan" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <h2>Form Barang</h2>
+                    <h2>Form Pelaporan</h2>
                     <input type="hidden" name="id" id="id_input">
-                    <?=buildForm($form)?>
+                    <div class="form-group">
+                        <label>Pilih Lokasi</label>
+                        <select class="form-control" name="id_gedung" required>
+                            <option value="">Pilih</option>
+                            <?php foreach($gedung as $g) { ?>
+                            <option value="<?=$g->id?>"><?=$g->nama_gedung?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Pilih Layanan</label>
+                        <select class="form-control" name="id_layanan" required>
+                            <option value="">Pilih</option>
+                            <?php foreach($layanan as $g) { ?>
+                            <option value="<?=$g->id?>"><?=$g->nama_layanan?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Keterangan</label>
+                        <textarea name="keterangan_laporan" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Gambar</label>
+                        <input type="file" name="gambar_laporan" class="form-control" required>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-default">Save changes</button>
@@ -91,7 +86,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form id="formHapus" action="<?=base_url()?>dma/pengelolaanlayanan/hapus">
+                <form id="formHapus" action="<?=base_url()?>dma/pengelolaanperbaikan/hapus">
                 <div class="modal-body">
                     <h2>Hapus data ini?</h2>
                     <input type="hidden" name="id" id="id_input_hapus">

@@ -400,7 +400,7 @@ class CI_Image_lib {
 		 * @see	https://github.com/bcit-ci/CodeIgniter/issues/4967
 		 * @see	https://bugs.php.net/bug.php?id=72404
 		 */
-		ini_set('gd.jpeg_ignore_warning', 1);
+		ini_set('gd.png_ignore_warning', 1);
 
 		log_message('info', 'Image Lib Class Initialized');
 	}

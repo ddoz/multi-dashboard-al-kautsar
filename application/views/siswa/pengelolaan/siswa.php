@@ -1,34 +1,4 @@
-<!-- Breadcomb area Start-->
-<div class="breadcomb-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="breadcomb-list">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="breadcomb-wp">
-                                <div class="breadcomb-icon">
-                                    <i class="notika-icon notika-settings"></i>
-                                </div>
-                                <div class="breadcomb-ctn">
-                                    <h2>Pengelolaan Siswa</h2>
-                                    <p>Selamat datang, <span class="bread-ntd">ini halaman pengelolaan data siswa</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-                            <div class="breadcomb-report">
-                                <button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="notika-icon notika-sent"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Breadcomb area End-->
-    
+
     
 <?php foreach($app as $listApp) { ?>
     
@@ -49,7 +19,6 @@
                                 <thead>
                                     <tr>
                                         <th>NISN</th>
-                                        <th>Foto</th>
                                         <th>Nama</th>
                                         <th>Jenis Kelamin</th>
                                         <th>Tempat Lahir</th>
@@ -127,7 +96,7 @@
                     <input type="hidden" name="app_id" id="app_id_import_input">
                     <a href="<?=base_url()?>assets/Template_import_siswa.xlsx">Download Template</a>
                     <div class="form-group">
-                        <label for="">Foto</label>
+                        <label for="">File</label>
                         <input type="file" name="file_import" id="file_import">
                         <textarea name="data" class="form-control" readonly id="data" cols="30" rows="10"></textarea>
                     </div>

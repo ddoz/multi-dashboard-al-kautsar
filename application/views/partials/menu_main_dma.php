@@ -1,5 +1,5 @@
 <div class="main-menu-area mg-tb-40">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
@@ -19,9 +19,9 @@
                         </div>
                         <div id="laporan" class="tab-pane <?=($menu=='laporan')?'in active':''?> notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="<?=base_url()?>dma/laporan/aktif">Barang</a>
+                                <li><a href="<?=base_url()?>dma/laporan/barang">Barang</a>
                                 </li>
-                                <li><a href="<?=base_url()?>dma/laporan/alumni">Perbaikan</a>
+                                <li><a href="<?=base_url()?>dma/laporan/perbaikan">Perbaikan</a>
                                 </li>
                             </ul>
                         </div>
@@ -29,12 +29,14 @@
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="<?=base_url()?>dma/pengelolaanbarang">Barang</a>
                                 </li>
-                                <li><a href="<?=base_url()?>dma/pengelolaangedung">Gedung</a>
+                                <li><a href="<?=base_url()?>dma/pengelolaangedung">Gedung &amp; Ruangan</a>
                                 </li>
                                 <li><a href="<?=base_url()?>dma/pengelolaanlayanan">Layanan</a>
                                 </li>
                                 <li><a href="<?=base_url()?>dma/pengelolaanperbaikan">Perbaikan</a>
                                 </li>
+                                <li><a href="<?=base_url()?>dma/pengelolaanunitkerja">Unit Kerja</a></li>
+                                <li><a href="<?=base_url()?>dma/pengelolaanteknisi">Teknisi</a></li>
                             </ul>
                         </div>
                     </div>

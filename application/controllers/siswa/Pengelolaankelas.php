@@ -24,7 +24,7 @@ class Pengelolaankelas extends CI_Controller {
         $this->datatables->from('kelas');
         $this->datatables->where('kelas.app_id',$appid);
         $this->datatables->add_column('action',function($row){
-            $button = "<button type='button' class='btn btn-warning btn-xs' onclick='edit(".json_encode($row).")'><i class='fa fa-edit'></i></button>|";
+            $button = "<button type='button' class='btn btn-warning btn-xs' onclick='edit(".json_encode($row).")'><i class='fa fa-edit'></i></button>";
             $button .= "<button type='button' class='btn btn-danger btn-xs btnHapus' onclick='hapus(".$row['id'].",".$row['app_id'].")'><i class='fa fa-trash'></i></button>";
             return $button;
         });

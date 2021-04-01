@@ -42,7 +42,7 @@ class Dashboard extends CI_Controller {
         $data['app'] = $appList;
         // echo "<pre>";
         // print_r($kelas);die();
-		$this->load->view('layout/wrapper_siswa',$data);
+		$this->load->view('partials/wrapper_siswa',$data);
 	}
 
     public function cari() {
@@ -54,6 +54,7 @@ class Dashboard extends CI_Controller {
         $this->db->from('siswa');
         $this->db->join('siswa_kelas','siswa_kelas.siswa_id=siswa.id');
         $this->db->join('kelas','kelas.id=siswa_kelas.kelas_id');
+        $this->db->where('siswa_kelas.status','1');
         $this->db->like('nama', $key);
         $this->db->or_like('nisn', $key);
         $qdata = $this->db->get()->result();
