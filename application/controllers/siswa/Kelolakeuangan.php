@@ -11,11 +11,39 @@ class Kelolakeuangan extends CI_Controller {
 
 	public function index()
 	{   
+        $ta = [];
+        $siswa = [];
+        foreach(getAppList() as $lit) {
+            //get tahun akademik
+            $this->db->select('tahun_akademik.*,app.app');
+            $this->db->from('tahun_akademik');
+            $this->db->join('app','app.id=tahun_akademik.app_id');
+            $this->db->where('tahun_akademik.app_id',$lit->app_id);
+            $getTa = $this->db->get();
+            if($getTa->num_rows() > 0) {
+                array_push($ta,$getTa->result());
+            }
+
+            $this->db->select('siswa.*,kelas.nama_kelas,siswa_kelas.status as status_kelas');
+            $this->db->from('siswa');
+            $this->db->join('siswa_kelas','siswa_kelas.siswa_id=siswa.id');
+            $this->db->join('kelas','kelas.id=siswa_kelas.kelas_id');
+            $this->db->where('siswa_kelas.status','1');
+            $this->db->where('siswa_kelas.app_id',$lit->app_id);
+            $getSiswa = $this->db->get();
+            if($getSiswa->num_rows() > 0) {
+                array_push($siswa,$getSiswa->result());
+            }
+        }
+        
         $data = array(
-            'script' => 'siswa/pengelolaan/script/js_keuangan',
+            'siswa' => $siswa,
+            'ta' => $ta,
+            'keuangan' => $this->db->get('keuangan')->result(),
+            'script' => 'siswa/pengelolaan/script/js_keuangan_index',
             'app' => getAppList(),
             'content' => 'siswa/pengelolaan/keuangan_index',
-            'breadcumb' => buildBreadcumb(array('App','SIMSIAK','Pengelolaan Siswa'))
+            'breadcumb' => buildBreadcumb(array('App','SIMSIAK','Pengelolaan Keuangan'))
         );
         buildPage($data);
     }
@@ -24,19 +52,17 @@ class Kelolakeuangan extends CI_Controller {
         $appid = $this->uri->segment(4);
         $num = 1;
         $this->load->library('datatables');
-        $this->datatables->select('*');
+        $this->datatables->select('keuangan_siswa.*,siswa.nama,tahun_akademik.tahun_akademik,keuangan.jenis_keuangan');
         $this->datatables->from('keuangan_siswa');
-        $this->datatables->where('tahun_akademik.app_id',$appid);
-        $this->datatables->add_column('status',function($row){
-            $st = "Tidak Aktif";
-            if($row['status']) {
-                $st = "Aktif";
-            }
-            return $st;
+        $this->datatables->join('keuangan','keuangan.id=keuangan_siswa.keuangan_id');
+        $this->datatables->join('siswa','siswa.id=keuangan_siswa.siswa_id');
+        $this->datatables->join('tahun_akademik','tahun_akademik.id=keuangan_siswa.tahun_akademik_id');
+        $this->datatables->where('keuangan_siswa.app_id',$appid);
+        $this->datatables->add_column('jumlah_bayar',function($row){
+            return number_format($row['jumlah_bayar']);
         });
         $this->datatables->add_column('action',function($row){
-            $button = "<button type='button' class='btn btn-warning btn-xs' onclick='edit(".json_encode($row).")'>ubah</button>";
-            $button .= "<button type='button' class='btn btn-danger btn-xs btnHapus' onclick='hapus(".$row['id'].",".$row['app_id'].")'>hapus</button>";
+            $button = "<button type='button' class='btn btn-danger btn-xs btnHapus' onclick='hapus(".$row['id'].",".$row['app_id'].")'>hapus</button>";
             return $button;
         });
         echo $this->datatables->generate();
@@ -45,10 +71,13 @@ class Kelolakeuangan extends CI_Controller {
     public function simpan() {
         $dataInsert = array(
             "app_id" => $this->input->post("app_id",true),
-            "tahun_akademik" => $this->input->post("tahun_akademik",true),
-            "status" => $this->input->post("status",true)
+            "tahun_akademik_id" => $this->input->post("tahun_akademik_id",true),
+            "siswa_id" => $this->input->post("siswa_id",true),
+            "keuangan_id" => $this->input->post("keuangan_id",true),
+            "jumlah_bayar" => $this->input->post("jumlah_bayar",true),
+            "tanggal_bayar" => date('Y-m-d')
         );
-        $simpan = $this->db->insert("tahun_akademik",$dataInsert);
+        $simpan = $this->db->insert("keuangan_siswa",$dataInsert);
         if($simpan) {
             echo json_encode(array("msg"=>"ok"));
             exit();
@@ -76,7 +105,7 @@ class Kelolakeuangan extends CI_Controller {
     public function hapus() {
         //butuh helper untuk cek apakah ta digunakan atau tidak
         $this->db->where("id",$this->input->post("id",true));
-        $hapus = $this->db->delete("tahun_akademik");
+        $hapus = $this->db->delete("keuangan_siswa");
         if($hapus) {
             echo json_encode(array("msg"=>"ok"));
             exit();
@@ -85,10 +114,26 @@ class Kelolakeuangan extends CI_Controller {
         exit();
     }
 
-    public function optiondata() {
+    public function optiondata_ta() {
         $output = array();
         $id = $this->input->post('id');
         $data = $this->db->get_where('tahun_akademik',array('app_id'=>$id))->result();
+        if(!empty($data)) {
+            $output = $data;
+        }
+        echo json_encode($output);
+        exit();
+    }
+
+    public function optiondata_siswa() {
+        $output = array();
+        $id = $this->input->post('id');
+        $this->db->select('siswa.*,siswa_app.app_id,siswa_app.status,siswa_kelas.status as status_kelas,kelas.nama_kelas');
+        $this->db->from('siswa');
+        $this->db->join('siswa_app','siswa_app.siswa_id=siswa.id');
+        $this->db->join('siswa_kelas','siswa_kelas.siswa_id=siswa.id');
+        $this->db->join('kelas','siswa_kelas.kelas_id=kelas.id');
+        $data = $this->db->where(array('siswa_app.app_id'=>$id,'siswa_app.status'=>'1','siswa_kelas.status'=>'1'))->get()->result();
         if(!empty($data)) {
             $output = $data;
         }

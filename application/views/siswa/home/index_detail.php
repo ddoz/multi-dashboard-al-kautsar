@@ -348,8 +348,8 @@
                                                         <div class="col-md-12">
                                                             Riwayat Keuangan
                                                             <ul>
-                                                            <?php foreach(getRiwayat($siswa->id)->result() as $riwayatpdk) { ?>
-                                                                <li><?=$riwayatpdk->nama_kelas?></li>
+                                                            <?php foreach(getRiwayatKeuangan($siswa->id)->result() as $key => $riwayatpdk) { ?>
+                                                                <li><?=$key+1?>. <?=$riwayatpdk->jenis_keuangan?> - <?=number_format($riwayatpdk->jumlah_bayar)?> - <?=$riwayatpdk->tanggal_bayar?></li>
                                                             <?php }?>
                                                             </ul>
                                                         </div>

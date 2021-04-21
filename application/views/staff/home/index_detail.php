@@ -6,15 +6,15 @@
                         <div class="card-header">
                             <svg class="c-icon">
                                 <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-list"></use>
-                            </svg>&nbsp;Detail Siswa
-                            <a href="<?=base_url()?>siswa/homesiswa" class="float-right" style="color:red"><svg class="c-icon">
+                            </svg>&nbsp;Detail Staff
+                            <a href="<?=base_url()?>staff/homestaff" class="float-right" style="color:red"><svg class="c-icon">
                                 <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-arrow-left"></use>
                             </svg>&nbsp;</a>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="c-callout c-callout-info"><small class="text-muted">Detail Data Siswa <i><b><?=$this->input->get("key")?></b></i></small>
+                                    <div class="c-callout c-callout-info"><small class="text-muted">Detail Data Staff <i><b><?=$this->input->get("key")?></b></i></small>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -22,8 +22,8 @@
                                 <div class="row">
                             <?php 
                                     $image = base_url()."assets/img/user.svg";
-                                    if($siswa->avatar!='') {
-                                        $image = base_url()."uploads/".$siswa->avatar;
+                                    if($staff->foto!='') {
+                                        $image = base_url()."uploads/".$staff->foto;
                                     }
                                 ?>
                             <div class="col-md-2">
@@ -39,20 +39,20 @@
                                         <!-- Data Diri -->
                                         <div class="card mb-0">
                                             <div class="card-header" id="headingOne" role="tab">
-                                                <h5 class="mb-0">
+                                                <h6 class="mb-0">
                                                     <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 														Data Diri
 													</a>
-                                                </h5>
+                                                </h6>
                                             </div>
                                             <div class="collapse show" id="collapseOne" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                                 <div class="card-body">
-                                                    <div class="row">
+                                                <div class="row">
                                                         <div class="col-md-2">
-                                                            NISN
+                                                            Email
                                                         </div>
                                                         <div class="col-md-10">
-                                                            : <?=$siswa->nisn?>
+                                                            : <?=$staff->email?>
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -60,7 +60,7 @@
                                                             Nama Lengkap
                                                         </div>
                                                         <div class="col-md-10">
-                                                            : <?=$siswa->nama?>
+                                                            : <?=$staff->nama?>
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -68,7 +68,7 @@
                                                             Jenis Kelamin
                                                         </div>
                                                         <div class="col-md-10">
-                                                            : <?=$siswa->jenis_kelamin?>
+                                                            : <?=$staff->jenis_kelamin?>
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -76,7 +76,7 @@
                                                             Tempat Tanggal Lahir
                                                         </div>
                                                         <div class="col-md-10">
-                                                            : <?=$siswa->tempat_lahir?>/<?=$siswa->tanggal_lahir?>
+                                                            : <?=$staff->tempat_lahir?>/<?=$staff->tanggal_lahir?>
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -84,15 +84,7 @@
                                                             NIK
                                                         </div>
                                                         <div class="col-md-10">
-                                                            : <?=$siswa->nik?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            Nomor KK
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->no_kk?>
+                                                            : <?=$staff->nik?>
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -100,7 +92,7 @@
                                                             Agama
                                                         </div>
                                                         <div class="col-md-10">
-                                                            : <?=$siswa->agama?>
+                                                            : <?=$staff->agama?>
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -108,55 +100,7 @@
                                                             Alamat
                                                         </div>
                                                         <div class="col-md-10">
-                                                            : <?=$siswa->alamat?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            RT/RW
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->rt?>/<?=$siswa->rw?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            Dusun
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->dusun?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            Kelurahan
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->kelurahan?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            Kecamatan
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->kecamatan?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            Kode POS
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->kode_pos?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            Telpon
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->telepon?>
+                                                            : <?=$staff->alamat?>
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -164,200 +108,268 @@
                                                             No HP
                                                         </div>
                                                         <div class="col-md-10">
-                                                            : <?=$siswa->no_hp?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            SKHUN
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->skhun?>
+                                                            : <?=$staff->no_hp?>
                                                         </div>
                                                     </div>
                                                     
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Data Orang Tua -->
                                         <div class="card mb-0">
                                             <div class="card-header" id="headingOne" role="tab">
-                                                <h5 class="mb-0">
+                                                <h6 class="mb-0">
                                                     <a data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-														Data Orang Tua
+														Data Kepegawaian
 													</a>
-                                                </h5>
+                                                </h6>
                                             </div>
                                             <div class="collapse" id="collapseTwo" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                                 <div class="card-body">
-                                                <div class="row">
-                                                        <div class="col-md-2">
-                                                            Ayah
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->ayah_nama?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            Pekerjaan Ayah
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->ayah_pekerjaan?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            Penghasilan Ayah
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->ayah_penghasilan?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            No Hp Ayah
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->ayah_hp?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            Ibu
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->ibu_nama?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            Pekerjaan Ibu
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->ibu_pekerjaan?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            Penghasilan Ibu
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->ibu_penghasilan?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            No Hp Ibu
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->ibu_hp?>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Data Pendidikan -->
-                                        <div class="card mb-0">
-                                            <div class="card-header" id="headingOne" role="tab">
-                                                <h5 class="mb-0">
-                                                    <a data-toggle="collapse" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-														Data Pendidikan
-													</a>
-                                                </h5>
-                                            </div>
-                                            <div class="collapse" id="collapseThree" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-                                                <div class="card-body">
-                                                <div class="row">
-                                                        <div class="col-md-2">
-                                                            Sekolah Asal
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->sekolah_asal?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            NIS
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->nis?>
-                                                        </div>
+                                                    <!-- RIWAYAT PENDIDIKAN -->
+                                                    <div class="table-responsive">
+                                                        <h6>Riwayat Pendidikan</h6>
+                                                        <table class="table table-striped">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Tingkat Pendidikan</th>
+                                                                <th>Nama Sekolah/Universitas</th>
+                                                                <th>Jurusan/Program Study</th>
+                                                                <th>Tahun Masuk</th>
+                                                                <th>Tahun Lulus</th>
+                                                            </tr>
+                                                            <?php foreach($riwayat_pendidikan as $key => $rp) { ?>
+                                                            <tr>
+                                                                <td><?=$key+1?></td>
+                                                                <td><?=$rp->tingkat_pendidikan?></td>
+                                                                <td><?=$rp->nama_sekolah?></td>
+                                                                <td><?=$rp->jurusan?></td>
+                                                                <td><?=$rp->tahun_masuk?></td>
+                                                                <td><?=$rp->tahun_lulus?></td>
+                                                            </tr>
+                                                            <?php }?>
+                                                        </table>
                                                     </div>
 
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            NISN
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->nisn?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            Tahun Masuk
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->tahun_masuk?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            Kelas Saat ini
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->nama_kelas?>
-                                                        </div>
+                                                    <!-- RIWAYAT PELATIHAN -->
+                                                    <div class="table-responsive">
+                                                        <h6>Riwayat Pelatihan</h6>
+                                                        <table class="table table-striped">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Nama Riwayat</th>
+                                                                <th>Tempat</th>
+                                                                <th>Penyelenggara</th>
+                                                                <th>No STTP</th>
+                                                                <th>Tanggal STTP</th>
+                                                                <th>Tanggal Mulai</th>
+                                                                <th>Tanggal Selesai</th>
+                                                                <th>Jumlah Jam</th>
+                                                            </tr>
+                                                            <?php foreach($riwayat_pelatihan as $key => $rp) { ?>
+                                                            <tr>
+                                                                <td><?=$key+1?></td>
+                                                                <td><?=$rp->nama_riwayat?></td>
+                                                                <td><?=$rp->tempat?></td>
+                                                                <td><?=$rp->penyelenggara?></td>
+                                                                <td><?=$rp->no_sttp?></td>
+                                                                <td><?=$rp->tanggal_sttp?></td>
+                                                                <td><?=$rp->tanggal_mulai?></td>
+                                                                <td><?=$rp->tanggal_selesai?></td>
+                                                                <td><?=$rp->jumlah_jam?></td>
+                                                            </tr>
+                                                            <?php }?>
+                                                        </table>
                                                     </div>
 
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            Riwayat Kelas 
-                                                            <ul>
-                                                            <?php foreach(getRiwayat($siswa->id)->result() as $riwayatpdk) { ?>
-                                                                <li><?=$riwayatpdk->nama_kelas?></li>
+                                                    <!-- RIWAYAT JABATAN -->
+                                                    <div class="table-responsive">
+                                                        <h6>Riwayat Jabatan</h6>
+                                                        <table class="table table-striped">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Jenis Jabatan</th>
+                                                                <th>Nama Jabatan</th>
+                                                                <th>Unit Kerja</th>
+                                                                <th>Nomor SK</th>
+                                                                <th>TMT</th>
+                                                                <th>Tanggal SK</th>
+                                                                <th>Pejabat Yang Mengesahkan</th>
+                                                            </tr>
+                                                            <?php foreach($riwayat_jabatan as $key => $rp) { ?>
+                                                            <tr>
+                                                                <td><?=$key+1?></td>
+                                                                <td><?=$rp->jenis_jabatan?></td>
+                                                                <td><?=$rp->nama_jabatan?></td>
+                                                                <td><?=$rp->nama_unit?></td>
+                                                                <td><?=$rp->nomor_sk?></td>
+                                                                <td><?=$rp->tmt?></td>
+                                                                <td><?=$rp->tanggal_sk?></td>
+                                                                <td><?=$rp->pejabat_pengesah?></td>
+                                                            </tr>
                                                             <?php }?>
-                                                            </ul>
-                                                        </div>
+                                                        </table>
                                                     </div>
-                                                    
+
+                                                    <!-- RIWAYAT TUGAS TAMBAHAN -->
+                                                    <div class="table-responsive">
+                                                        <h6>Riwayat Tugas Tambahan</h6>
+                                                        <table class="table table-striped">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Unit Kerja</th>
+                                                                <th>Nama Tugas</th>
+                                                                <th>Nomor SK</th>
+                                                                <th>TMT</th>
+                                                                <th>Tanggal SK</th>
+                                                                <th>Pejabat Yang Mengesahkan</th>
+                                                            </tr>
+                                                            <?php foreach($riwayat_tugas as $key => $rp) { ?>
+                                                            <tr>
+                                                                <td><?=$key+1?></td>
+                                                                <td><?=$rp->nama_unit?></td>
+                                                                <td><?=$rp->nama_tugas?></td>
+                                                                <td><?=$rp->nomor_sk?></td>
+                                                                <td><?=$rp->tmt?></td>
+                                                                <td><?=$rp->tanggal_sk?></td>
+                                                                <td><?=$rp->pejabat_pengesah?></td>
+                                                            </tr>
+                                                            <?php }?>
+                                                        </table>
+                                                    </div>
+
+                                                    <!-- RIWAYAT KEPANGKATAN -->
+                                                    <div class="table-responsive">
+                                                        <h6>Riwayat Kepangkatan</h6>
+                                                        <table class="table table-striped">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Pangkat/Golongan</th>
+                                                                <th>Regular/Pilihan</th>
+                                                                <th>TMT Pangkat</th>
+                                                                <th>Nomor SK</th>
+                                                                <th>Tanggal SK</th>
+                                                                <th>Pejabat Yang Mengesahkan</th>
+                                                            </tr>
+                                                            <?php foreach($riwayat_kepangkatan as $key => $rp) { ?>
+                                                            <tr>
+                                                                <td><?=$key+1?></td>
+                                                                <td><?=$rp->pangkat_golongan?></td>
+                                                                <td><?=$rp->regular_pilihan?></td>
+                                                                <td><?=$rp->tmt_pangkat?></td>
+                                                                <td><?=$rp->nomor_sk?></td>
+                                                                <td><?=$rp->tanggal_sk?></td>
+                                                                <td><?=$rp->pejabat_pengesah?></td>
+                                                            </tr>
+                                                            <?php }?>
+                                                        </table>
+                                                    </div>
+
+                                                    <!-- DATA KELUARGA -->
+                                                    <div class="table-responsive">
+                                                        <h6>Data Keluarga</h6>
+                                                        <table class="table table-striped">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Nama Pasangan</th>
+                                                                <th>Tempat Lahir</th>
+                                                                <th>Tanggal Lahir</th>
+                                                                <th>Tunjangan</th>
+                                                                <th>Tanggal Menikah</th>
+                                                                <th>Pekerjaan</th>
+                                                            </tr>
+                                                            <?php foreach($keluarga as $key => $rp) { ?>
+                                                            <tr>
+                                                                <td><?=$key+1?></td>
+                                                                <td><?=$rp->nama_pasangan?></td>
+                                                                <td><?=$rp->tempat_lahir?></td>
+                                                                <td><?=$rp->tanggal_lahir?></td>
+                                                                <td><?=$rp->tunjangan?></td>
+                                                                <td><?=$rp->tanggal_menikah?></td>
+                                                                <td><?=$rp->pekerjaan?></td>
+                                                            </tr>
+                                                            <?php }?>
+                                                        </table>
+                                                    </div>
+
+                                                    <!-- DATA ANAK -->
+                                                    <div class="table-responsive">
+                                                        <h6>Data Anak</h6>
+                                                        <table class="table table-striped">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Nama Anak</th>
+                                                                <th>Tempat Lahir</th>
+                                                                <th>Tanggal Lahir</th>
+                                                                <th>Status Anak</th>
+                                                                <th>Jenis Kelamin</th>
+                                                                <th>Anak Ke</th>
+                                                                <th>Pendidikan Terakhir</th>
+                                                            </tr>
+                                                            <?php foreach($anak as $key => $rp) { ?>
+                                                            <tr>
+                                                                <td><?=$key+1?></td>
+                                                                <td><?=$rp->nama_anak?></td>
+                                                                <td><?=$rp->tempat_lahir?></td>
+                                                                <td><?=$rp->tanggal_lahir?></td>
+                                                                <td><?=$rp->status_anak?></td>
+                                                                <td><?=$rp->jenis_kelamin?></td>
+                                                                <td><?=$rp->anak_ke?></td>
+                                                                <td><?=$rp->pendidikan_terakhir?></td>
+                                                            </tr>
+                                                            <?php }?>
+                                                        </table>
+                                                    </div>
+
+                                                    <!-- DATA ORANG TUA -->
+                                                    <div class="table-responsive">
+                                                        <h6>Data Orang Tua</h6>
+                                                        <table class="table table-striped">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Nama</th>
+                                                                <th>Tempat Lahir</th>
+                                                                <th>Tanggal Lahir</th>
+                                                                <th>Jenis Kelamin</th>
+                                                                <th>Alamat</th>
+                                                                <th>Pendidikan Terakhir</th>
+                                                            </tr>
+                                                            <?php foreach($ortu as $key => $rp) { ?>
+                                                            <tr>
+                                                                <td><?=$key+1?></td>
+                                                                <td><?=$rp->nama?></td>
+                                                                <td><?=$rp->tempat_lahir?></td>
+                                                                <td><?=$rp->tanggal_lahir?></td>
+                                                                <td><?=$rp->jenis_kelamin?></td>
+                                                                <td><?=$rp->alamat?></td>
+                                                                <td><?=$rp->pendidikan_terakhir?></td>
+                                                            </tr>
+                                                            <?php }?>
+                                                        </table>
+                                                    </div>
+
+                                                    <!-- NILAI DP2T -->
+                                                    <div class="table-responsive">
+                                                        <h6>Nilai DP2T (Lima Tahun Terakhir)</h6>
+                                                        <table class="table table-striped">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Tahun</th>
+                                                                <th>Nilai</th>
+                                                            </tr>
+                                                            <?php foreach($dpt as $key => $rp) { ?>
+                                                            <tr>
+                                                                <td><?=$key+1?></td>
+                                                                <td><?=$rp->tahun?></td>
+                                                                <td><?=$rp->nilai?></td>
+                                                            </tr>
+                                                            <?php }?>
+                                                        </table>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Data Keuangan -->
-                                        <div class="card mb-0">
-                                            <div class="card-header" id="headingOne" role="tab">
-                                                <h5 class="mb-0">
-                                                    <a data-toggle="collapse" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-														Data Keuangan
-													</a>
-                                                </h5>
-                                            </div>
-                                            <div class="collapse" id="collapseFour" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            Nomor VA
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            : <?=$siswa->nomor_va?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            Riwayat Keuangan
-                                                            <ul>
-                                                            <?php foreach(getRiwayat($siswa->id)->result() as $riwayatpdk) { ?>
-                                                                <li><?=$riwayatpdk->nama_kelas?></li>
-                                                            <?php }?>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>

@@ -34,10 +34,18 @@ class Homesiswa extends CI_Controller {
                 array_push($kelas,$getKelas->result());
             }
         }
+        $total = $this->db->get('siswa')->num_rows();
+        $aktif = $this->db->get_where('siswa',array('status_sekolah'=>'aktif'))->num_rows();
+        $alumni = $this->db->get_where('siswa',array('status_sekolah'=>'alumni'))->num_rows();
+        $mundur = $this->db->get_where('siswa',array('status_sekolah'=>'keluar'))->num_rows();
         $data = array(
             'ta' => $ta,
             'kelas' => $kelas,
             'app' => $appList,
+            'total' => $total,
+            'aktif' => $aktif,
+            'alumni' => $alumni,
+            'mundur' => $mundur,
             'content' => 'siswa/home/index',
             'breadcumb' => buildBreadcumb(array('App','SIMSIAK','Home'))
         );

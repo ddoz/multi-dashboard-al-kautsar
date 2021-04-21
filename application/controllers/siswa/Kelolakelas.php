@@ -12,7 +12,7 @@ class Kelolakelas extends CI_Controller {
 	public function index()
 	{   
         $data = array(
-            'script' => 'siswa/pengelolaan/script/js_kelas',
+            'script' => 'siswa/pengelolaan/script/js_kelas_index',
             'app' => getAppList(),
             'content' => 'siswa/pengelolaan/kelas_index',
             'breadcumb' => buildBreadcumb(array('App','SIMSIAK','Pengelolaan Siswa','Kelas'))
@@ -38,27 +38,48 @@ class Kelolakelas extends CI_Controller {
 
     public function siswa() {
         $id = $this->uri->segment(4);
-        $appList = getAppList();
-        $ta = [];
-        foreach($appList as $lit) {
-            //get tahun akademik
-            $this->db->select('tahun_akademik.*,app.app');
-            $this->db->from('tahun_akademik');
-            $this->db->join('app','app.id=tahun_akademik.app_id');
-            $this->db->where('tahun_akademik.app_id',$lit->app_id);
-            $getTa = $this->db->get();
-            if($getTa->num_rows() > 0) {
-                array_push($ta,$getTa->result());
-            }
+        if(!intval($id)) {
+            redirect(base_url()."siswa/kelolakelas");
         }
+        $appList = getAppList();
 
         $kelas = $this->db->get_where('kelas',array('id'=>$id))->row();
 
+        $this->db->select("tahun_akademik.*");
+        $this->db->from("tahun_akademik");
+        $this->db->join("kelas","kelas.app_id=tahun_akademik.app_id");
+        $this->db->where("kelas.id",$kelas->id);
+        $tahun_akademik = $this->db->get()->result();
+
+        $this->db->select("tahun_akademik.*");
+        $this->db->from("tahun_akademik");
+        $this->db->join("kelas","kelas.app_id=tahun_akademik.app_id");
+        $this->db->where("kelas.id",$kelas->id);
+        $this->db->where("tahun_akademik.status",'1');
+        $tahun_akademik_aktif = @$this->db->get();
+        $notfound = "";
+        if($this->input->get('ta')!='') {
+            $tahun_akademik_aktif = $this->db->get_where('tahun_akademik',array('id'=>$this->input->get('ta')));
+            if($tahun_akademik_aktif->num_rows()==0) {
+                $notfound = "Data tidak ditemukan.";
+            }
+        }
+
+        $this->db->select("siswa.*,siswa_kelas.status as status_kelas");
+        $this->db->from('siswa');
+        $this->db->join('siswa_kelas','siswa_kelas.siswa_id=siswa.id');
+        $this->db->where('siswa_kelas.kelas_id',$id);
+        $this->db->where('siswa_kelas.tahun_akademik_id',$tahun_akademik_aktif->row()->id);
+        $siswa = $this->db->get()->result();
+
         $data = array(
+            'ta_aktif' => $tahun_akademik_aktif->row(),
             'kelas' => $kelas,
-            'ta' => $ta,
-            'script' => 'siswa/pengelolaan/script/js_kelas',
+            'ta' => $tahun_akademik,
+            'nodata' => $notfound,
+            'script' => 'siswa/pengelolaan/script/js_kelas_index',
             'app' => getAppList(),
+            'siswa' => $siswa,
             'content' => 'siswa/pengelolaan/kelas_siswa',
             'breadcumb' => buildBreadcumb(array('App','SIMSIAK','Pengelolaan Siswa','Kelas','Siswa'))
         );

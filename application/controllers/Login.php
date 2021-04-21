@@ -13,7 +13,7 @@ class Login extends CI_Controller {
             redirect(base_url().'welcome/app');
         }
 		$data['content'] = 'welcome_message';
-		$this->load->view('login');
+		$this->load->view('login_new');
     }
     
     public function auth() {

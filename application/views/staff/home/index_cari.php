@@ -20,10 +20,10 @@
                                 <div class="col-12">
 
                                     <div class="row">
-                                        <?php foreach($siswa as $key => $s) { 
+                                        <?php foreach($staff as $key => $s) { 
                                                 $image = base_url()."assets/img/user.svg";
-                                                if($s->avatar!='') {
-                                                    $image = base_url()."uploads/".$s->avatar;
+                                                if($s->foto!='') {
+                                                    $image = base_url()."uploads/".$s->foto;
                                                 }
                                             ?>
                                         <div class="col-md-3">
@@ -31,8 +31,7 @@
                                                 <img class="card-img-top" src="<?=$image?>" alt="Avatar">
                                                 <div class="card-body">
                                                     <h5 class="card-title text-center" style="margin-top:10px"><?=$s->nama?></h5>
-                                                    <p>Kelas : <?=$s->nama_kelas?><br>Status Kelas : <?=($s->status_kelas)?'Aktif':'Tidak Aktif'?></p>
-                                                    <a href="<?=base_url()?>siswa/homesiswa/detail/<?=$s->id?>" data-toggle="tooltip" data-placement="bottom" title="Detail Data Siswa" class="btn btn-info btn-block"><svg class="c-icon">
+                                                    <a href="<?=base_url()?>staff/homestaff/detail/<?=$s->id?>" data-toggle="tooltip" data-placement="bottom" title="Detail Data Siswa" class="btn btn-info btn-block"><svg class="c-icon">
                                 <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-search"></use>
                             </svg>&nbsp;</a>
                                                 </div>

@@ -6,10 +6,34 @@
                 <div class="card">
                 <div class="card-header"><svg class="c-icon">
                         <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-cog"></use>
-                    </svg>&nbsp;Data Siswa Kelas <?=$kelas->nama_kelas?></div>
+                    </svg>&nbsp;Data Siswa Kelas <?=$kelas->nama_kelas?>
+                    Tahun Akademik : <?=@$ta_aktif->tahun_akademik?> <?=@$nodata?>
+                    </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
+
+                            <form action="" method="get">
+                            <div class="row">
+                                <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">Pilih Tahun Akademik</label>
+                                            <select name="ta" id="" class="form-control">
+                                                <option value="">Pilih</option>
+                                                <?php foreach($ta as $val) { ?>
+                                                <option value="<?=$val->id?>"><?=$val->tahun_akademik?></option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+                                        
+                                </div>
+                                <div class="col-md-2">
+                                        <div class="form-group mt-4">
+                                            <input type="submit" value="Filter" class="btn btn-primary">
+                                        </div>
+                                </div>
+                            </div>
+                                    </form>
                             
                             <div class="row">
                             <!-- /.col-->
@@ -21,11 +45,19 @@
                                                 <th>NIS</th>
                                                 <th>NISN</th>
                                                 <th>Nama Siswa</th>
-                                                <th>Nama Kelas</th>
                                                 <th>Status</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
+                                        <tbody>
+                                            <?php foreach($siswa as $s) { ?>
+                                                <tr>
+                                                    <td><?=$s->nis?></td>
+                                                    <td><?=$s->nisn?></td>
+                                                    <td><?=$s->nama?></td>
+                                                    <td><?=($s->status_kelas=="0")?"Tidak Aktif":"Aktif"?></td>
+                                                </tr>
+                                            <?php }?>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>

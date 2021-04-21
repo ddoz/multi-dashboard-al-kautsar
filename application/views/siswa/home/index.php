@@ -1,5 +1,73 @@
 <div class="container-fluid">
         <div class="fade-in">
+        <div class="row">
+                <div class="col-sm-6 col-lg-3">
+                  <div class="card text-white bg-primary">
+                    <div class="card-body card-body pb-0 d-flex justify-content-between align-items-start">
+                      <div>
+                        <div class="text-value-lg"><?=$total?></div>
+                        <div>Jumlah Siswa</div>
+                    </div>
+                        <div class="btn-group">
+                            <i class="fa fa-users"></i>
+                        </div>
+                      
+                    </div>
+                    <div class="c-chart-wrapper mt-3 mx-3" style="height:10px;">
+                    </div>
+                  </div>
+                </div>
+                <!-- /.col-->
+                <div class="col-sm-6 col-lg-3">
+                  <div class="card text-white bg-info">
+                    <div class="card-body card-body pb-0 d-flex justify-content-between align-items-start">
+                      <div>
+                        <div class="text-value-lg"><?=$aktif?></div>
+                        <div>Jumlah Siswa Aktif</div>
+                      </div>
+                      <div class="btn-group">
+                        <i class="fa fa-check"></i>
+                      </div>
+                    </div>
+                    <div class="c-chart-wrapper mt-3 mx-3" style="height:10px;">
+                    </div>
+                  </div>
+                </div>
+                <!-- /.col-->
+                <div class="col-sm-6 col-lg-3">
+                  <div class="card text-white bg-warning">
+                    <div class="card-body card-body pb-0 d-flex justify-content-between align-items-start">
+                      <div>
+                        <div class="text-value-lg"><?=$alumni?></div>
+                        <div>Jumlah Alumni</div>
+                      </div>
+                      <div class="btn-group">
+                            <i class="fa fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="c-chart-wrapper mt-3" style="height:10px;">
+                    </div>
+                  </div>
+                </div>
+                <!-- /.col-->
+                <div class="col-sm-6 col-lg-3">
+                  <div class="card text-white bg-danger">
+                    <div class="card-body card-body pb-0 d-flex justify-content-between align-items-start">
+                      <div>
+                        <div class="text-value-lg"><?=$mundur?></div>
+                        <div>Jumlah Siswa Mengundurkan Diri</div>
+                      </div>
+                      <div class="btn-group">
+                            <i class="fa fa-times"></i>
+                        </div>
+                    </div>
+                    <div class="c-chart-wrapper mt-3 mx-3" style="height:10px;">
+                    </div>
+                  </div>
+                </div>
+                <!-- /.col-->
+              </div>
+
             <div class="row">
             <div class="col-md-12">
                 <div class="card">

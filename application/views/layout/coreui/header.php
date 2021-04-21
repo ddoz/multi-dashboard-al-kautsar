@@ -21,9 +21,12 @@
     <meta name="theme-color" content="#ffffff">
     <!-- Main styles for this application-->
     <link href="<?=template('default')?>css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?=base_url()?>assets/css/datapicker/datepicker3.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.7/css/rowReorder.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Global site tag (gtag.js) - Google Analytics-->
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
     <script>
@@ -43,12 +46,7 @@
   <body class="c-app">
     <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
       <div class="c-sidebar-brand d-lg-down-none">
-        <svg class="c-sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
-          <use xlink:href="<?=template('default')?>assets/brand/coreui.svg#full"></use>
-        </svg>
-        <svg class="c-sidebar-brand-minimized" width="46" height="46" alt="CoreUI Logo">
-          <use xlink:href="<?=template('default')?>assets/brand/coreui.svg#signet"></use>
-        </svg>
+        <img src="<?=base_url()?>assets/img/alkautsar.png" class="img-thumbnail" width="80" alt="">
       </div>
       <ul class="c-sidebar-nav">
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<?=base_url()?>">
@@ -95,30 +93,64 @@
             <svg class="c-sidebar-nav-icon">
               <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
             </svg> Home Staff</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<?=base_url()?>staff/kelolastaff">
             <svg class="c-sidebar-nav-icon">
               <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
             </svg> Pengelolaan</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<?=base_url()?>staff/laporanstaff">
             <svg class="c-sidebar-nav-icon">
               <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-print"></use>
             </svg> Laporan</a></li>
             <li class="c-sidebar-nav-title">SIDMA</li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<?=base_url()?>siswa/home">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<?=base_url()?>dma/homedma">
             <svg class="c-sidebar-nav-icon">
               <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
-            </svg> Home Siswa</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">
+            </svg> Home DMA</a></li>
+        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <svg class="c-sidebar-nav-icon">
-              <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
-            </svg> Pengelolaan</a></li>
-        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">
+              <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-cog"></use>
+            </svg> Pengelolaan</a>
+          <ul class="c-sidebar-nav-dropdown-items">
+            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<?=base_url()?>dma/kelolabarang" target="_top">
+                <svg class="c-sidebar-nav-icon">
+                  <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-building"></use>
+                </svg> Barang</a></li>
+              <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<?=base_url()?>dma/kelolagedung" target="_top">
+                <svg class="c-sidebar-nav-icon">
+                  <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-building"></use>
+                </svg> Gedung &amp; Ruangan</a></li>
+              <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<?=base_url()?>dma/kelolalayanan" target="_top">
+                <svg class="c-sidebar-nav-icon">
+                  <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+                </svg> Layanan</a></li>
+              <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<?=base_url()?>dma/kelolaperbaikan" target="_top">
+                <svg class="c-sidebar-nav-icon">
+                  <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-money"></use>
+                </svg> Perbaikan</a></li>
+              <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<?=base_url()?>dma/kelolateknisi" target="_top">
+                <svg class="c-sidebar-nav-icon">
+                  <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-money"></use>
+                </svg> Teknisi</a></li>
+            
+          </ul>
+        </li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<?=base_url()?>dma/laporandma">
             <svg class="c-sidebar-nav-icon">
               <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-print"></use>
             </svg> Laporan</a></li>
-        
-        <li class="c-sidebar-nav-divider"></li>
-        
+        <!-- <li class="c-sidebar-nav-divider"></li> -->
+        <li class="c-sidebar-nav-title">Setting</li>
+        <?php if(isSuper()) { ?>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<?=base_url()?>setting/kelolaunitkerja">
+            <svg class="c-sidebar-nav-icon">
+              <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-list"></use>
+            </svg> Unit Kerja</a></li>
+            
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<?=base_url()?>setting/kelolauser">
+            <svg class="c-sidebar-nav-icon">
+              <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+            </svg> User</a></li>
+            <?php } ?>
       </ul>
       <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
     </div>
@@ -138,11 +170,11 @@
           </svg>
         </button>
         <ul class="c-header-nav d-md-down-none">
-          <li>Yayasan Al Kautsar Lampung | Anda Login Sebagai </li>
+          <li>Yayasan Al Kautsar Lampung | Anda Login Sebagai <b><?=ucfirst($this->session->userdata('nama'))?></b></li>
         </ul>
         <ul class="c-header-nav ml-auto mr-4">
           <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-              <div class="c-avatar"><img class="c-avatar-img" src="<?=template('default')?>assets/img/avatars/6.jpg" alt="user@email.com"></div>
+              <div class="c-avatar"><img class="c-avatar-img" src="<?=base_url()?>assets/img/user.svg" alt="user@email.com"></div>
             </a>
             <div class="dropdown-menu dropdown-menu-right pt-0">
               <div class="dropdown-header bg-light py-2"><strong>Settings</strong></div><a class="dropdown-item" href="#">

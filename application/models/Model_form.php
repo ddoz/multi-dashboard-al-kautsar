@@ -42,4 +42,26 @@ class Model_form extends CI_Model {
         }
         return $output;
     }
+
+    function optionLevel() {
+        $this->db->select("level.*");
+        $this->db->from('level');
+        $result = $this->db->get()->result();
+        $output = array();
+        foreach($result as $r) {
+            $output[$r->id] = $r->level;
+        }
+        return $output;
+    }
+
+    function optionRole() {
+        $this->db->select("role.*");
+        $this->db->from('role');
+        $result = $this->db->get()->result();
+        $output = array();
+        foreach($result as $r) {
+            $output[$r->id] = $r->role;
+        }
+        return $output;
+    }
 }

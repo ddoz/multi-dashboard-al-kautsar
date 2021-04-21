@@ -116,7 +116,7 @@
                             location.href='<?=base_url()?>welcome/app';
                         },3000);
                     }else {
-                        $.notify("response.message", "error");
+                        $.notify(response.message, "error");
                     }
                 },
                 error: function(err) {

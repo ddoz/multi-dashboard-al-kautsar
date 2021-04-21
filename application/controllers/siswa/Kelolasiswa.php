@@ -185,7 +185,7 @@ class Kelolasiswa extends CI_Controller {
 			),
 		  );
         $data = array(
-            'script' => 'siswa/pengelolaan/script/js_siswa',
+            'script' => 'siswa/pengelolaan/script/js_siswa_index',
             'app' => getAppList(),
             'form' => $form,
             'content' => 'siswa/pengelolaan/index',
@@ -205,14 +205,22 @@ class Kelolasiswa extends CI_Controller {
     public function datatableSiswa(){
         $appid = $this->uri->segment(4);
         $this->load->library('datatables');
-        $this->datatables->select('siswa.*,siswa_app.status,siswa_app.app_id');
+        $this->datatables->select('siswa.*,siswa_kelas.status,siswa_kelas.app_id');
         $this->datatables->from('siswa');
-        $this->datatables->join('siswa_app','siswa_app.siswa_id=siswa.id');
-        $this->datatables->where('siswa_app.app_id',$appid);
+        $this->datatables->join('siswa_kelas','siswa_kelas.siswa_id=siswa.id');
+        $this->datatables->where('siswa_kelas.app_id',$appid);
+        $this->datatables->where('siswa_kelas.status','1');
         $this->datatables->add_column('image',function($row){
             if($row['avatar']!="") {
                 return "<img src='".base_url()."uploads/".$row['avatar']."' style='width:100px;height:100px'>";
             }return 'Belum diupload';
+        });
+        $this->datatables->add_column('status',function($row){
+            $status = "Tidak Aktif";
+            if($row['status']=="1") {
+                $status = "Aktif";
+            }
+            return $status;
         });
         $this->datatables->add_column('action',function($row){
             $button = "<button type='button' class='btn btn-warning btn-xs' onclick='edit(".json_encode($row).")'>Ubah</button>";
@@ -234,10 +242,6 @@ class Kelolasiswa extends CI_Controller {
             "no_kk"	 => $this->input->post("no_kk"),
             "agama"	 => $this->input->post("agama"),
             "alamat" => $this->input->post("alamat"),
-            "alamat_tempat_tinggal" => $this->input->post("alamat_tempat_tinggal"),
-            "nis" => $this->input->post("nis"),
-            "tahun_masuk" => $this->input->post("tahun_masuk"),
-            "nomor_va" => $this->input->post("nomor_va"),
             "rt" => $this->input->post("rt"),
             "rw" => $this->input->post("rw"),
             "dusun"	 => $this->input->post("dusun"),
@@ -256,6 +260,12 @@ class Kelolasiswa extends CI_Controller {
             "ibu_penghasilan"	 => $this->input->post("ibu_penghasilan"),
             "ibu_hp"	 => $this->input->post("ibu_hp"),
             "sekolah_asal" => $this->input->post("sekolah_asal"),
+
+            "alamat_tempat_tinggal" => $this->input->post("alamat_tempat_tinggal"),
+            "nis" => $this->input->post("nis"),
+            "tahun_masuk" => $this->input->post("tahun_masuk"),
+            "nomor_va" => $this->input->post("nomor_va"),
+
             "created_at" => date("Y-m-d H:i:s"),
             "created_by" => $this->session->userdata("id"),
         );
@@ -351,12 +361,10 @@ class Kelolasiswa extends CI_Controller {
                     "ibu_penghasilan"	 => @$val->ibu_penghasilan,
                     "ibu_hp"	 => @$val->ibu_hp,
                     "sekolah_asal" => @$val->sekolah_asal,
-
                     "alamat_tempat_tinggal" => @$val->alamat_tempat_tinggal,
                     "nis" => @$val->nis,
                     "tahun_masuk" => @$val->tahun_masuk,
                     "nomor_va" => @$val->nomor_va,
-
                     "created_at" => date("Y-m-d H:i:s"),
                     "created_by" => $this->session->userdata("id"),
                 );
