@@ -15,7 +15,7 @@
                             <div class="col-12">
                                 <div class="c-callout c-callout-info">
                                 <div class="text-value-lg">
-                                <button class="btn btn-primary btn-xs btnmodalForm" app-id="<?=$listApp->app_id?>"> Tambah Data</button>
+                                <a href="<?=base_url()?>siswa/kelolasiswa/add/<?=$listApp->app_id?>" class="btn btn-primary btn-xs"> Tambah Data</a>
                                 <button class="btn btn-warning btn-xs btnmodalFormImport" app-id="<?=$listApp->app_id?>"> Import Data</button>
                                 <a class="btn btn-success btn-xs" href="<?=base_url()?>siswa/kelolasiswa/kenaikankelas/<?=$listApp->app_id?>"> Kenaikan Kelas</a>
                             </div>
@@ -137,10 +137,47 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form id="formHapus" action="<?=base_url()?>siswa/pengelolaansiswa/hapus">
+                <form id="formHapus" action="<?=base_url()?>siswa/kelolasiswa/hapus">
                 <div class="modal-body">
                     <h2>Hapus data ini?</h2>
                     <input type="hidden" name="id" id="id_input_hapus">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Ya Hapus Data</button>
+                    </form>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="modalFormUbahStatus" role="dialog">
+        <div class="modal-dialog modals-default">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form id="formUbahStatus" action="<?=base_url()?>siswa/kelolasiswa/ubahstatus">
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="id_input_ubah_status">
+                    <div class="form-group">
+                        <label for="">Nama Siswa</label>
+                        <input type="text" readonly="readonly" disabled="disabled" id="input_nama_siswa_ubah_status" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Status</label>
+                        <select name="status_sekolah" id="" required class="form-control">
+                            <option value="aktif">Aktif</option>
+                            <option value="alumni">Alumni</option>
+                            <option value="keluar">Keluar</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Tanggal</label>
+                        <input type="text" name="tanggal" required class="form-control datepicker">
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-danger">Ya Hapus Data</button>

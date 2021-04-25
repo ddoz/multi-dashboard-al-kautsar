@@ -11,12 +11,191 @@ class Kelolasiswa extends CI_Controller {
 
 	public function index()
 	{   
-		$form = array(
+		
+        $data = array(
+            'script' => 'siswa/pengelolaan/script/js_siswa_index',
+            'app' => getAppList(),
+            // 'form' => $form,
+            'content' => 'siswa/pengelolaan/index',
+            'breadcumb' => buildBreadcumb(array('App','SIMSIAK','Pengelolaan Siswa'))
+        );
+        buildPage($data);
+    }
+
+    public function add()
+	{   
+        $id = $this->uri->segment(4);
+        if(!intval($id)) {
+            redirect(base_url()."siswa/kelolasiswa");
+        }
+        $form = array(
+            array(
+                "type" => "input",
+                "label" => "Nama Lengkap",
+                "name" => "nama"
+              ),
+            array(
+                "type" => "select",
+                "label" => "Jenis Kelamin",
+                "name" => "jenis_kelamin",
+                "option" => array("L"=>"Laki-Laki","P"=>"Perempuan")
+              ),
+            array(
+                "type" => "select",
+                "label" => "Agama",
+                "name" => "agama",
+                "option" => array("Islam"=>"Islam")
+              ),
+            array(
+                "type" => "input",
+                "label" => "Tempat Lahir",
+                "name" => "tempat_lahir"
+            ),
+            array(
+                "type" => "datepicker",
+                "label" => "Tanggal Lahir",
+                "name" => "tanggal_lahir"
+            ),
+            array(
+                "type" => "textarea",
+                "label" => "Alamat Tempat Tinggal Sekolah",
+                "name" => "alamat_tempat_tinggal"
+              ),
+            array(
+                "type" => "input",
+                "label" => "Telepon",
+                "name" => "telepon",
+              ),
+            array(
+                "type" => "input",
+                "label" => "No HP",
+                "name" => "no_hp",
+              ),
+              array(
+                "type" => "input",
+                "label" => "NIK",
+                "name" => "nik"
+              ),
+              array(
+                "type" => "input",
+                "label" => "No Kartu Keluarga",
+                "name" => "no_kk"
+              ),
+              array(
+                "type" => "input",
+                "label" => "Nama Ayah",
+                "name" => "ayah_nama",
+              ),
+              array(
+                "type" => "input",
+                "label" => "Pekerjaan Ayah",
+                "name" => "ayah_pekerjaan",
+              ),
+              array(
+                "type" => "input",
+                "label" => "Penghasilan Ayah",
+                "name" => "ayah_penghasilan",
+              ),
+              array(
+                "type" => "input",
+                "label" => "No HP Ayah",
+                "name" => "ayah_hp",
+              ),
+              array(
+                "type" => "input",
+                "label" => "Nama Ibu",
+                "name" => "ibu_nama",
+              ),
+              array(
+                "type" => "input",
+                "label" => "Pekerjaan Ibu",
+                "name" => "ibu_pekerjaan",
+              ),
+              array(
+                "type" => "input",
+                "label" => "Penghasilan Ibu",
+                "name" => "ibu_penghasilan",
+              ),
+              array(
+                "type" => "input",
+                "label" => "No HP Ibu",
+                "name" => "ibu_hp",
+              ),
+              array(
+                "type" => "textarea",
+                "label" => "Alamat",
+                "name" => "alamat"
+              ),
+              array(
+                "type" => "input",
+                "label" => "RT",
+                "name" => "rt",
+              ),
+              array(
+                "type" => "input",
+                "label" => "RW",
+                "name" => "rw",
+              ),
+              array(
+                "type" => "input",
+                "label" => "Dusun",
+                "name" => "dusun",
+              ),
+              array(
+                "type" => "input",
+                "label" => "Kelurahan",
+                "name" => "kelurahan",
+              ),
+              array(
+                "type" => "input",
+                "label" => "Kecamatan",
+                "name" => "kecamatan",
+              ),
+              array(
+                "type" => "input",
+                "label" => "Kode Pos",
+                "name" => "kode_pos",
+              ),
+              array(
+                "type" => "input",
+                "label" => "NIS",
+                "name" => "nis",
+              ),
+              array(
+                "type" => "input",
+                "label" => "NISN",
+                "name" => "nisn"
+              ),
+              array(
+                "type" => "input",
+                "label" => "SKHUN",
+                "name" => "skhun",
+              ),
+              array(
+                "type" => "input",
+                "label" => "Asal Sekolah",
+                "name" => "sekolah_asal",
+              ),
+
+
+              array(
+                "type" => "input",
+                "label" => "Tahun Masuk",
+                "name" => "tahun_masuk",
+              ),
+
+           
+            array(
+                "type" => "input",
+                "label" => "Nomor VA",
+                "name" => "nomor_va",
+              ),
+			
             array(
                 "type" => "select",
                 "label" => "Tahun Akademik",
                 "name" => "tahun_akademik",
-                "option" => $this->Model_form->optionTahunAkademik()
+                "option" => $this->Model_form->optionTahunAkademikPerApp($id)
               ),
             array(
                 "type" => "select",
@@ -24,172 +203,21 @@ class Kelolasiswa extends CI_Controller {
                 "name" => "kelas",
                 "option" => $this->Model_form->optionKelas()
               ),
-            array(
-                "type" => "input",
-                "label" => "Tahun Masuk",
-                "name" => "tahun_masuk",
-              ),
+            
 
-            array(
-                "type" => "input",
-                "label" => "NIS",
-                "name" => "nis",
-              ),
-
-            array(
-                "type" => "input",
-                "label" => "Nomor VA",
-                "name" => "nomor_va",
-              ),
-			array(
-			  "type" => "input",
-			  "label" => "Nama Lengkap",
-			  "name" => "nama"
-			),
-			array(
-			  "type" => "select",
-			  "label" => "Jenis Kelamin",
-              "name" => "jenis_kelamin",
-              "option" => array("L"=>"Laki-Laki","P"=>"Perempuan")
-			),
-			array(
-			  "type" => "input",
-			  "label" => "NISN",
-			  "name" => "nisn"
-			),
-			array(
-			  "type" => "input",
-			  "label" => "Tempat Lahir",
-			  "name" => "tempat_lahir"
-			),
-			array(
-			  "type" => "datepicker",
-			  "label" => "Tanggal Lahir",
-			  "name" => "tanggal_lahir"
-			),
-			array(
-			  "type" => "input",
-			  "label" => "NIK",
-			  "name" => "nik"
-			),
-			array(
-			  "type" => "input",
-			  "label" => "No Kartu Keluarga",
-			  "name" => "no_kk"
-			),
-			array(
-			  "type" => "select",
-			  "label" => "Agama",
-              "name" => "agama",
-              "option" => array("Islam"=>"Islam")
-			),
-			array(
-			  "type" => "textarea",
-			  "label" => "Alamat",
-			  "name" => "alamat"
-            ),
-			array(
-			  "type" => "input",
-			  "label" => "RT",
-              "name" => "rt",
-            ),
-            array(
-			  "type" => "input",
-			  "label" => "RW",
-              "name" => "rw",
-			),
-            array(
-			  "type" => "input",
-			  "label" => "Dusun",
-              "name" => "dusun",
-			),
-            array(
-			  "type" => "input",
-			  "label" => "Kelurahan",
-              "name" => "kelurahan",
-			),
-            array(
-			  "type" => "input",
-			  "label" => "Kecamatan",
-              "name" => "kecamatan",
-			),
-            array(
-			  "type" => "input",
-			  "label" => "Kode Pos",
-              "name" => "kode_pos",
-			),
-			array(
-			  "type" => "textarea",
-			  "label" => "Alamat Tempat Tinggal Sekolah",
-			  "name" => "alamat_tempat_tinggal"
-            ),
-            array(
-			  "type" => "input",
-			  "label" => "Telepon",
-              "name" => "telepon",
-			),
-            array(
-			  "type" => "input",
-			  "label" => "No HP",
-              "name" => "no_hp",
-			),
-            array(
-			  "type" => "input",
-			  "label" => "SKHUN",
-              "name" => "skhun",
-			),
-            array(
-			  "type" => "input",
-			  "label" => "Nama Ayah",
-              "name" => "ayah_nama",
-			),
-            array(
-			  "type" => "input",
-			  "label" => "Pekerjaan Ayah",
-              "name" => "ayah_pekerjaan",
-			),
-            array(
-			  "type" => "input",
-			  "label" => "Penghasilan Ayah",
-              "name" => "ayah_penghasilan",
-			),
-            array(
-			  "type" => "input",
-			  "label" => "No HP Ayah",
-              "name" => "ayah_hp",
-			),
-            array(
-			  "type" => "input",
-			  "label" => "Nama Ibu",
-              "name" => "ibu_nama",
-			),
-            array(
-			  "type" => "input",
-			  "label" => "Pekerjaan Ibu",
-              "name" => "ibu_pekerjaan",
-			),
-            array(
-			  "type" => "input",
-			  "label" => "Penghasilan Ibu",
-              "name" => "ibu_penghasilan",
-			),
-            array(
-			  "type" => "input",
-			  "label" => "No HP Ibu",
-              "name" => "ibu_hp",
-			),
-            array(
-			  "type" => "input",
-			  "label" => "Asal Sekolah",
-              "name" => "sekolah_asal",
-			),
+			
+			
+			
+			
+			
+            
 		  );
         $data = array(
             'script' => 'siswa/pengelolaan/script/js_siswa_index',
             'app' => getAppList(),
             'form' => $form,
-            'content' => 'siswa/pengelolaan/index',
-            'breadcumb' => buildBreadcumb(array('App','SIMSIAK','Pengelolaan Siswa'))
+            'content' => 'siswa/pengelolaan/index_add',
+            'breadcumb' => buildBreadcumb(array('App','SIMSIAK','Pengelolaan Siswa','Tambah Data'))
         );
         buildPage($data);
     }
@@ -209,7 +237,8 @@ class Kelolasiswa extends CI_Controller {
         $this->datatables->from('siswa');
         $this->datatables->join('siswa_kelas','siswa_kelas.siswa_id=siswa.id');
         $this->datatables->where('siswa_kelas.app_id',$appid);
-        $this->datatables->where('siswa_kelas.status','1');
+        // $this->datatables->where('siswa_kelas.status','1');
+        $this->datatables->group_by('siswa.id');
         $this->datatables->add_column('image',function($row){
             if($row['avatar']!="") {
                 return "<img src='".base_url()."uploads/".$row['avatar']."' style='width:100px;height:100px'>";
@@ -224,6 +253,7 @@ class Kelolasiswa extends CI_Controller {
         });
         $this->datatables->add_column('action',function($row){
             $button = "<button type='button' class='btn btn-warning btn-xs' onclick='edit(".json_encode($row).")'>Ubah</button>";
+            $button .= "<button type='button' class='btn btn-info btn-xs' onclick='ubahstatus(".json_encode($row).")'>Status Sekolah</button>";
             $button .= "<button type='button' class='btn btn-danger btn-xs btnHapus' onclick='hapus(".$row['id'].",".$row['app_id'].")'>Hapus</button>";
             return $button;
         });
@@ -231,6 +261,102 @@ class Kelolasiswa extends CI_Controller {
 	}
 
     public function simpan() {
+
+        $insert = array(
+            "nama" => $this->input->post("nama"),
+            "jenis_kelamin" => $this->input->post("jenis_kelamin"),
+            "nisn" => $this->input->post("nisn"),
+            "tempat_lahir"	 => $this->input->post("tempat_lahir"),
+            "tanggal_lahir" => date("Y-m-d", strtotime($this->input->post("tanggal_lahir"))),
+            "nik"	 => $this->input->post("nik"),
+            "no_kk"	 => $this->input->post("no_kk"),
+            "agama"	 => $this->input->post("agama"),
+            "alamat" => $this->input->post("alamat"),
+            "rt" => $this->input->post("rt"),
+            "rw" => $this->input->post("rw"),
+            "dusun"	 => $this->input->post("dusun"),
+            "kelurahan"	 => $this->input->post("kelurahan"),
+            "kecamatan"	 => $this->input->post("kecamatan"),
+            "kode_pos"	 => $this->input->post("kode_pos"),
+            "telepon" => $this->input->post("telepon"),	
+            "no_hp"	 => $this->input->post("no_hp"),
+            "skhun"	 => $this->input->post("skhun"),
+            "ayah_nama"	 => $this->input->post("ayah_nama"),
+            "ayah_pekerjaan" => $this->input->post("ayah_pekerjaan"),	
+            "ayah_penghasilan"	 => $this->input->post("ayah_penghasilan"),
+            "ayah_hp"	 => $this->input->post("ayah_hp"),
+            "ibu_nama" => $this->input->post("ibu_nama"),	
+            "ibu_pekerjaan"	 => $this->input->post("ibu_pekerjaan"),
+            "ibu_penghasilan"	 => $this->input->post("ibu_penghasilan"),
+            "ibu_hp"	 => $this->input->post("ibu_hp"),
+            "sekolah_asal" => $this->input->post("sekolah_asal"),
+
+            "alamat_tempat_tinggal" => $this->input->post("alamat_tempat_tinggal"),
+            "nis" => $this->input->post("nis"),
+            "tahun_masuk" => $this->input->post("tahun_masuk"),
+            "nomor_va" => $this->input->post("nomor_va"),
+
+            "created_at" => date("Y-m-d H:i:s"),
+            "created_by" => $this->session->userdata("id"),
+        );
+
+        $fileName = "";
+        $message = "Data tersimpan";
+        if(isset($_FILES['avatar'])) {
+            $config['upload_path']          = './uploads/';
+            $config['allowed_types']        = 'jpg|png';
+            $config['max_size']             = 1024;
+            $config['file_name']            = $insert['nisn']."_avatar_".date("Ymdhis");
+
+            $this->load->library('upload', $config);
+            if ( ! $this->upload->do_upload('avatar'))
+            {
+                $message = "Data tersimpan tanpa gambar, silahkan gunakan menu edit. eror : " .$this->upload->display_errors();
+            }
+            else
+            {
+                $data = $this->upload->data();
+                $fileName = $data['file_name'];
+                $insert["avatar"] = $fileName;
+            }
+        }
+
+        $this->db->trans_begin();
+
+        $simpansiswa = $this->db->insert("siswa",$insert);
+
+        $dataInsertSiswaApp = array(
+            "app_id" => $this->input->post("app_id",true),
+            "siswa_id" => $this->db->insert_id(),
+            "status" => "1",
+            "created_at" => date("Y-m-d H:i:s"),
+            "created_by" => $this->session->userdata("id"),
+        );
+        $simpan = $this->db->insert("siswa_app",$dataInsertSiswaApp);
+
+        $insertSiswaKelas = array(
+            "siswa_id" => $dataInsertSiswaApp['siswa_id'],
+            "kelas_id" => $this->input->post('kelas'),
+            "tahun_akademik_id" => $this->input->post('tahun_akademik'),
+            "app_id" => $this->input->post("app_id",true),
+            "status" => "1",
+            "created_at" => date("Y-m-d H:i:s"),
+            "created_by" => $this->session->userdata("id")
+        );
+
+        $this->db->insert("siswa_kelas",$insertSiswaKelas);
+
+        if($this->db->trans_status()!==FALSE) {
+            $this->db->trans_commit();
+            echo json_encode(array("msg"=>$message));
+            exit();
+        }
+        $this->db->trans_rollback();
+        echo json_encode(array("msg"=>"Gagal Simpan Data"));
+        exit();
+    }
+
+    public function simpan2() {
 
         $insert = array(
             "nama" => $this->input->post("nama"),
@@ -508,6 +634,37 @@ class Kelolasiswa extends CI_Controller {
         if($this->db->trans_status()!==FALSE) {
             $this->db->trans_commit();
             @unlink("./uploads/".$avatar);
+            echo json_encode(array("msg"=>"ok"));
+            exit();
+        }else {
+            $this->db->trans_rollback();
+        }
+        echo json_encode(array("msg"=>"no"));
+        exit();
+    }
+
+    public function ubahstatus() {
+        //butuh helper untuk cek apakah ta digunakan atau tidak
+        
+        $this->db->trans_begin();
+
+        $data = $this->db->get_where('siswa',array('id'=>$this->input->post('id')));
+        $avatar = "";
+        if($data->num_rows()>0) {
+            $avatar = $data->row()->avatar;
+        }
+        $this->db->where("id",$this->input->post("id",true));
+        $this->db->update("siswa",array("tanggal_keluar"=>date("Y-m-d",strtotime($this->input->post("tanggal"))),"status_sekolah"=>$this->input->post("status_sekolah")));
+
+        if($this->input->post("status_sekolah")!="Aktif") {
+            $this->db->where("siswa_id",$this->input->post("id"));
+            $this->db->update("siswa_app",array("status"=>"0"));
+    
+            $this->db->where("siswa_id",$this->input->post("id"));
+            $this->db->update("siswa_kelas",array("status"=>"0"));
+        }
+        if($this->db->trans_status()!==FALSE) {
+            $this->db->trans_commit();
             echo json_encode(array("msg"=>"ok"));
             exit();
         }else {

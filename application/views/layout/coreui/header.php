@@ -177,13 +177,10 @@
               <div class="c-avatar"><img class="c-avatar-img" src="<?=base_url()?>assets/img/user.svg" alt="user@email.com"></div>
             </a>
             <div class="dropdown-menu dropdown-menu-right pt-0">
-              <div class="dropdown-header bg-light py-2"><strong>Settings</strong></div><a class="dropdown-item" href="#">
+              <div class="dropdown-header bg-light py-2"><strong>Settings</strong></div><a class="dropdown-item" href="<?=base_url()?>">
                 <svg class="c-icon mr-2">
-                  <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-user"></use>
-                </svg> Profile</a><a class="dropdown-item" href="#">
-                <svg class="c-icon mr-2">
-                  <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-settings"></use>
-                </svg> Settings</a>
+                  <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                </svg> Password</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="<?=base_url()?>welcome/logout">
                 <svg class="c-icon mr-2">

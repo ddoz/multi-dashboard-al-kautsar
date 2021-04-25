@@ -26,12 +26,12 @@ $(document).ready(function() {
             success: function(response) {
                 $("#formHapus")[0].reset();
                 $('#modalHapus').modal('hide');
-                notifyOK("Berhasil Hapus Data");
+                $.notify("Berhasil Hapus Data","success");
                 $('#datatable-'+appId).DataTable().ajax.reload(null, false);
             },
             error: function(error) {
                 $('#modalHapus').modal('hide');
-                notifyNO("Gagal Hapus Data, silahkan coba kembali");
+                $.notify("Gagal Hapus Data, silahkan coba kembali","error");
             }
         })
     });
@@ -44,12 +44,12 @@ $(document).ready(function() {
             success: function(response) {
                 $("#formImport")[0].reset();
                 $('#modalFormImport').modal('hide');
-                notifyOK("Berhasil Import Data");
+                $.notify("Berhasil Import Data","success");
                 $('#datatable-'+appId).DataTable().ajax.reload(null, false);
             },
             error: function(error) {
                 $('#modalFormImport').modal('hide');
-                notifyNO("Gagal Import Data, silahkan coba kembali");
+                $.notify("Gagal Import Data, silahkan coba kembali","error");
             }
         })
     });
@@ -68,12 +68,57 @@ $(document).ready(function() {
                 $("#form")[0].reset();
                 document.getElementById("data").innerHTML = "";
                 $('#modalForm').modal('hide');
-                notifyOK(res.msg);
+                $.notify(res.msg,"success");
                 $('#datatable-'+appId).DataTable().ajax.reload(null, false);
             },
             error: function(error) {
                 $('#modalForm').modal('hide');
-                notifyNO("Gagal Simpan Data, silahkan coba kembali");
+                $.notify("Gagal Simpan Data, silahkan coba kembali", "error");
+            }
+        })
+    })
+    $("#form2").submit(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        $.ajax({
+            url: $(this).attr("action"),
+            type: "POST",
+            data: formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                $.notify(res.msg,"success");
+            },
+            error: function(error) {
+                $.notify("Gagal Simpan Data, silahkan coba kembali", "error");
+            }
+        })
+    })
+    $("#formUbahStatus").submit(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        $.ajax({
+            url: $(this).attr("action"),
+            type: "POST",
+            data: formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                var res = JSON.parse(response);
+                $("#formUbahStatus")[0].reset();
+                $('#modalFormUbahStatus').modal('hide');
+                if(res.msg=="no") {
+                    $.notify("Gagal Ubah Data, silahkan coba kembali","error");
+                }else {
+                    $.notify("Berhasil ubah Data","success");
+                }
+                $('#datatable-'+appId).DataTable().ajax.reload(null, false);
+            },
+            error: function(error) {
+                $('#modalFormUbahStatus').modal('hide');
+                $.notify("Gagal Ubah Data, silahkan coba kembali","error");
             }
         })
     })
@@ -107,6 +152,14 @@ function hapus(id,appid){
     dataId = id;
     appId = appid;
     $("#id_input_hapus").val(dataId);
+}
+
+function ubahstatus(data) {
+    $("#modalFormUbahStatus").modal({ backdrop: 'static', keyboard: false });
+    dataId = data.id;
+    appId = data.app_id;
+    $("#id_input_ubah_status").val(dataId);
+    $("#input_nama_siswa_ubah_status").val(data.nama);
 }
 
 function edit(data) {

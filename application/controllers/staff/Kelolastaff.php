@@ -83,6 +83,11 @@ class Kelolastaff extends CI_Controller {
 			),
 			array(
 			  "type" => "datepicker",
+			  "label" => "Mulai Bekerja Tanggal",
+			  "name" => "tanggal_masuk_kerja"
+			),
+			array(
+			  "type" => "datepicker",
 			  "label" => "Berhenti Tanggal",
 			  "name" => "berhenti_tanggal"
 			),
@@ -144,6 +149,14 @@ class Kelolastaff extends CI_Controller {
             }
             return 'Belum diupload';
         });
+        $this->datatables->add_column('lama_bekerja',function($row){
+            $date1 = new DateTime($row['tanggal_masuk_kerja']);
+            $date2 = $date1->diff(new DateTime(date("Y-m-d")));
+            $string = $date2->y.' tahun'."\n";
+            $string .= $date2->m.' bulan'."\n";
+            $string .= $date2->d.' hari'."\n";
+            return $string;
+        });
         $this->datatables->add_column('action',function($row){
             $button = "<a href='".base_url()."staff/kelolastaff/detail/".$row['id']."' class='btn btn-info btn-xs'>detail</a>";
             $button .= "<button type='button' class='btn btn-danger btn-xs btnHapus' onclick='hapus(".$row['id'].")'>hapus</button>";
@@ -194,7 +207,7 @@ class Kelolastaff extends CI_Controller {
             "tanggal_lahir"	 =>	date('Y-m-d',strtotime($this->input->post("tanggal_lahir"))),	
             "no_hp" =>	$this->input->post("no_hp"),	
             "jenjang_pendidikan"=>	$this->input->post("jenjang_pendidikan"),	
-            // "app_id" =>	$this->input->post("email"),	
+            "tanggal_masuk_kerja" =>	date('Y-m-d',strtotime($this->input->post("tanggal_masuk_kerja"))),	
             "unit"	=>	$this->input->post("unit"),	
             "masa_kerja" =>	$this->input->post("masa_kerja"),	
             "berhenti_tanggal"	=>	date('Y-m-d',strtotime($this->input->post("berhenti_tanggal"))),	
@@ -257,7 +270,7 @@ class Kelolastaff extends CI_Controller {
             "tanggal_lahir"	 =>	date('Y-m-d',strtotime($this->input->post("tanggal_lahir"))),	
             "no_hp" =>	$this->input->post("no_hp"),	
             "jenjang_pendidikan"=>	$this->input->post("jenjang_pendidikan"),	
-            // "app_id" =>	$this->input->post("email"),	
+            "tanggal_masuk_kerja" =>	date('Y-m-d',strtotime($this->input->post("tanggal_masuk_kerja"))),	
             "unit"	=>	$this->input->post("unit"),	
             "masa_kerja" =>	$this->input->post("masa_kerja"),	
             "berhenti_tanggal"	=>	date('Y-m-d',strtotime($this->input->post("berhenti_tanggal"))),	

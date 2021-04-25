@@ -20,6 +20,19 @@ class Model_form extends CI_Model {
         return $output;
     }
 
+    function optionTahunAkademikPerApp($id) {
+        $this->db->select("tahun_akademik.*,app.app");
+        $this->db->from('tahun_akademik');
+        $this->db->join("app","app.id=tahun_akademik.app_id");
+        $this->db->where("app.id",$id);
+        $result = $this->db->get()->result();
+        $output = array();
+        foreach($result as $r) {
+            $output[$r->id] = $r->tahun_akademik.' ('.$r->app.')';
+        }
+        return $output;
+    }
+
     function optionKelas() {
         $this->db->select("kelas.*,app.app");
         $this->db->from('kelas');
