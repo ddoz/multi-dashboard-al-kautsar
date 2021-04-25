@@ -5,14 +5,14 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-SET NAMES utf8mb4;
+-- SET NAMES utf8mb4;
 
 DROP TABLE IF EXISTS `app`;
 CREATE TABLE `app` (
   `id` int NOT NULL AUTO_INCREMENT,
   `app` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `app` (`id`, `app`) VALUES
 (1,	'SD'),
@@ -29,7 +29,7 @@ CREATE TABLE `dma_barang` (
   `stok_barang` bigint NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `dma_barang` (`id`, `nama_barang`, `merk_barang`, `nomor_barang`, `stok_barang`, `created_at`) VALUES
 (3,	'Kabel',	'-',	'-',	-24,	'2021-01-03 04:29:45'),
@@ -43,7 +43,7 @@ CREATE TABLE `dma_gedung` (
   `nama_gedung` varchar(100) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `dma_gedung` (`id`, `nama_gedung`, `created_at`) VALUES
 (2,	'Gedung A',	'2021-01-03 04:29:11'),
@@ -55,7 +55,7 @@ CREATE TABLE `dma_layanan` (
   `nama_layanan` varchar(100) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `dma_layanan` (`id`, `nama_layanan`, `created_at`) VALUES
 (2,	'Perbaikan dan Pemeliharaan AC',	'2021-01-03 04:28:36'),
@@ -74,7 +74,7 @@ CREATE TABLE `dma_pelaporan` (
   `done_at` datetime DEFAULT NULL COMMENT 'waktu selesai',
   `user_lapor` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `dma_pelaporan` (`id`, `id_gedung`, `id_layanan`, `keterangan_laporan`, `gambar_laporan`, `status_laporan`, `created_at`, `start_at`, `done_at`, `user_lapor`) VALUES
 (1,	2,	2,	'AC TIdak Dingin',	NULL,	2,	'2021-01-03 15:00:08',	'2021-01-13 15:47:38',	'2021-01-13 23:48:03',	2),
@@ -92,7 +92,7 @@ CREATE TABLE `dma_perbaikan` (
   `hasil_foto` text NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `dma_perbaikan` (`id`, `id_laporan`, `keterangan_proses`, `user_admin`, `hasil_foto`, `created_at`) VALUES
 (3,	1,	'Selesai dikerjakan',	1,	'1,3_selesai_20210113114803.jpg',	'2021-01-13 15:47:38'),
@@ -109,7 +109,7 @@ CREATE TABLE `dma_perbaikan_barang` (
   `jumlah` int NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `dma_perbaikan_barang` (`id`, `id_perbaikan`, `id_barang`, `jumlah`, `created_at`) VALUES
 (2,	3,	3,	4,	'2021-01-13 23:48:03'),
@@ -130,7 +130,7 @@ CREATE TABLE `dma_perbaikan_teknisi` (
   `id_perbaikan` int NOT NULL,
   `user_teknisi` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `dma_perbaikan_teknisi` (`id`, `id_perbaikan`, `user_teknisi`) VALUES
 (3,	10,	1),
@@ -145,7 +145,7 @@ CREATE TABLE `dma_ruangan` (
   `nama_ruangan` varchar(100) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `dma_ruangan` (`id`, `id_gedung`, `nama_ruangan`, `created_at`) VALUES
 (2,	2,	'Arsip',	'2021-03-31 15:37:56'),
@@ -157,7 +157,7 @@ CREATE TABLE `dma_teknisi` (
   `nama_teknisi` varchar(200) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `dma_teknisi` (`id`, `nama_teknisi`, `created_at`) VALUES
 (1,	'Adam Japal',	'2021-01-13 21:57:22'),
@@ -169,7 +169,7 @@ CREATE TABLE `kelas` (
   `nama_kelas` varchar(200) NOT NULL,
   `app_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `kelas` (`id`, `nama_kelas`, `app_id`) VALUES
 (1,	'SD 1',	1),
@@ -192,7 +192,7 @@ CREATE TABLE `keuangan` (
   `id` int NOT NULL AUTO_INCREMENT,
   `jenis_keuangan` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `keuangan` (`id`, `jenis_keuangan`) VALUES
 (1,	'UP'),
@@ -210,7 +210,7 @@ CREATE TABLE `keuangan_siswa` (
   `jumlah_bayar` int NOT NULL,
   `tanggal_bayar` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `keuangan_siswa` (`id`, `keuangan_id`, `siswa_id`, `tahun_akademik_id`, `app_id`, `jumlah_bayar`, `tanggal_bayar`) VALUES
 (1,	1,	29,	1,	1,	1000000,	'2021-03-30'),
@@ -223,7 +223,7 @@ CREATE TABLE `level` (
   `id` int NOT NULL AUTO_INCREMENT,
   `level` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `level` (`id`, `level`) VALUES
 (1,	'yayasan'),
@@ -238,7 +238,7 @@ CREATE TABLE `role` (
   `id` int NOT NULL AUTO_INCREMENT,
   `role` varchar(25) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `role` (`id`, `role`) VALUES
 (1,	'all'),
@@ -253,7 +253,7 @@ CREATE TABLE `role_app` (
   `role_id` int NOT NULL,
   `app_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `role_app` (`id`, `role_id`, `app_id`) VALUES
 (1,	1,	1),
@@ -267,41 +267,41 @@ INSERT INTO `role_app` (`id`, `role_id`, `app_id`) VALUES
 DROP TABLE IF EXISTS `siswa`;
 CREATE TABLE `siswa` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `jenis_kelamin` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `avatar` varchar(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `jenis_kelamin` varchar(10) NOT NULL,
   `nisn` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `nis` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `nomor_va` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tahun_masuk` varchar(7) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tempat_lahir` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `tempat_lahir` text,
   `tanggal_lahir` date DEFAULT NULL,
-  `nik` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `no_kk` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `agama` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `alamat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `alamat_tempat_tinggal` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `rt` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `rw` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `dusun` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `provinsi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `kabupaten` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `kecamatan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `kelurahan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `kode_pos` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `telepon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `no_hp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `skhun` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `ayah_nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `ayah_pekerjaan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `ayah_penghasilan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `ayah_hp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `ibu_nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `ibu_pekerjaan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `ibu_penghasilan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `ibu_hp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `sekolah_asal` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `status_sekolah` enum('aktif','alumni','keluar') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'aktif',
+  `nik` varchar(20) DEFAULT NULL,
+  `no_kk` varchar(20) DEFAULT NULL,
+  `agama` varchar(20) DEFAULT NULL,
+  `alamat` text,
+  `alamat_tempat_tinggal` text,
+  `rt` varchar(5) DEFAULT NULL,
+  `rw` varchar(5) DEFAULT NULL,
+  `dusun` varchar(255) DEFAULT NULL,
+  `provinsi` varchar(255) DEFAULT NULL,
+  `kabupaten` varchar(255) DEFAULT NULL,
+  `kecamatan` varchar(255) DEFAULT NULL,
+  `kelurahan` varchar(255) DEFAULT NULL,
+  `kode_pos` varchar(255) DEFAULT NULL,
+  `telepon` varchar(255) DEFAULT NULL,
+  `no_hp` varchar(255) DEFAULT NULL,
+  `skhun` varchar(255) DEFAULT NULL,
+  `ayah_nama` varchar(255) DEFAULT NULL,
+  `ayah_pekerjaan` varchar(255) DEFAULT NULL,
+  `ayah_penghasilan` varchar(255) DEFAULT NULL,
+  `ayah_hp` varchar(255) DEFAULT NULL,
+  `ibu_nama` varchar(255) DEFAULT NULL,
+  `ibu_pekerjaan` varchar(255) DEFAULT NULL,
+  `ibu_penghasilan` varchar(255) DEFAULT NULL,
+  `ibu_hp` varchar(255) DEFAULT NULL,
+  `sekolah_asal` varchar(255) DEFAULT NULL,
+  `status_sekolah` enum('aktif','alumni','keluar') DEFAULT 'aktif',
   `tanggal_keluar` date DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `created_by` int DEFAULT NULL,
@@ -321,7 +321,7 @@ CREATE TABLE `siswa_app` (
   `created_at` datetime NOT NULL,
   `created_by` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `siswa_app` (`id`, `app_id`, `siswa_id`, `status`, `created_at`, `created_by`) VALUES
 (31,	1,	29,	'0',	'2021-03-30 11:50:41',	1),
@@ -339,7 +339,7 @@ CREATE TABLE `siswa_kelas` (
   `created_at` datetime NOT NULL,
   `created_by` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `siswa_kelas` (`id`, `siswa_id`, `kelas_id`, `tahun_akademik_id`, `app_id`, `status`, `created_at`, `created_by`) VALUES
 (12,	29,	1,	1,	1,	0,	'2021-03-30 11:50:41',	1),
@@ -356,12 +356,12 @@ CREATE TABLE `staff_anak` (
   `tempat_lahir` varchar(255) NOT NULL,
   `tanggal_lahir` date NOT NULL,
   `status_anak` varchar(255) NOT NULL,
-  `jenis_kelamin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `jenis_kelamin` varchar(255) NOT NULL,
   `anak_ke` int NOT NULL,
   `pendidikan_terakhir` varchar(255) NOT NULL,
   `staff_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `staff_anak` (`id`, `nama_anak`, `tempat_lahir`, `tanggal_lahir`, `status_anak`, `jenis_kelamin`, `anak_ke`, `pendidikan_terakhir`, `staff_id`) VALUES
 (2,	'asd',	'asf',	'2021-05-03',	'Kandung',	'Laki-Laki',	1,	'SD',	1);
@@ -370,32 +370,32 @@ DROP TABLE IF EXISTS `staff_data`;
 CREATE TABLE `staff_data` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nama` varchar(255) NOT NULL,
-  `nik` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `nip_npy` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `agama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `jenis_kelamin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nik` varchar(255) NOT NULL,
+  `nip_npy` varchar(255) NOT NULL,
+  `agama` varchar(255) NOT NULL,
+  `jenis_kelamin` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `alamat` text NOT NULL,
-  `tempat_lahir` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `tempat_lahir` varchar(255) DEFAULT NULL,
   `tanggal_lahir` date DEFAULT NULL,
-  `no_hp` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `jenjang_pendidikan` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `no_hp` varchar(15) DEFAULT NULL,
+  `jenjang_pendidikan` varchar(10) DEFAULT NULL,
   `app_id` int DEFAULT NULL,
   `unit` varchar(200) DEFAULT NULL,
   `masa_kerja` varchar(200) DEFAULT NULL,
   `tanggal_masuk_kerja` date DEFAULT NULL,
   `berhenti_tanggal` date DEFAULT NULL,
   `pensiun_tanggal` date DEFAULT NULL,
-  `foto` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `golongan_darah` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `gelar_depan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `gelar_belakang` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `pangkat_lama` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `pangkat_baru` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `foto` text,
+  `golongan_darah` varchar(4) DEFAULT NULL,
+  `gelar_depan` varchar(50) DEFAULT NULL,
+  `gelar_belakang` varchar(50) DEFAULT NULL,
+  `pangkat_lama` varchar(50) DEFAULT NULL,
+  `pangkat_baru` varchar(50) DEFAULT NULL,
   `status_staff` varchar(100) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `staff_data` (`id`, `nama`, `nik`, `nip_npy`, `agama`, `jenis_kelamin`, `email`, `alamat`, `tempat_lahir`, `tanggal_lahir`, `no_hp`, `jenjang_pendidikan`, `app_id`, `unit`, `masa_kerja`, `tanggal_masuk_kerja`, `berhenti_tanggal`, `pensiun_tanggal`, `foto`, `golongan_darah`, `gelar_depan`, `gelar_belakang`, `pangkat_lama`, `pangkat_baru`, `status_staff`, `created_at`) VALUES
 (1,	'Adam',	'Adam',	'23523',	'islam',	'L',	'adam.japal@gmail.com',	'bandar lampung',	'srikaton',	'1930-05-02',	'085726668561',	NULL,	2,	'10',	'2',	'2019-08-17',	'1900-12-05',	'1900-12-06',	'_avatar_20210331031033.png',	'B',	'Dr',	'S.Kom',	'-',	'-',	'Honor',	'2021-01-14 08:05:56');
@@ -407,7 +407,7 @@ CREATE TABLE `staff_dpt` (
   `nilai` int NOT NULL,
   `staff_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `staff_dpt` (`id`, `tahun`, `nilai`, `staff_id`) VALUES
 (1,	2021,	13,	1);
@@ -424,7 +424,7 @@ CREATE TABLE `staff_jabatan` (
   `pejabat_pengesah` varchar(255) NOT NULL,
   `staff_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `staff_jabatan` (`id`, `jenis_jabatan`, `nama_jabatan`, `unit_kerja`, `nomor_sk`, `tmt`, `tanggal_sk`, `pejabat_pengesah`, `staff_id`) VALUES
 (2,	'a',	'a',	'3',	'235',	'2021-04-21',	'2021-04-28',	'a',	1);
@@ -438,7 +438,7 @@ CREATE TABLE `staff_kenaikan_jabatan` (
   `nama_jabatan` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `staff_kenaikan_jabatan` (`id`, `staff_id`, `sk_kenaikan_jabatan`, `tmt`, `nama_jabatan`, `created_at`) VALUES
 (1,	1,	'sk.pdf',	'2021-01-14',	'PRANATA KOMPUTER',	'2021-01-14 08:32:39');
@@ -454,7 +454,7 @@ CREATE TABLE `staff_kepangkatan` (
   `pejabat_pengesah` varchar(255) NOT NULL,
   `staff_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `staff_kepangkatan` (`id`, `pangkat_golongan`, `regular_pilihan`, `tmt_pangkat`, `nomor_sk`, `tanggal_sk`, `pejabat_pengesah`, `staff_id`) VALUES
 (1,	'asf',	'asf',	'2021-03-30',	'ac5',	'2021-03-25',	'sadgf',	1);
@@ -466,11 +466,11 @@ CREATE TABLE `staff_ortu` (
   `tempat_lahir` varchar(255) NOT NULL,
   `tanggal_lahir` date NOT NULL,
   `alamat` text NOT NULL,
-  `jenis_kelamin` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `jenis_kelamin` varchar(20) NOT NULL,
   `pendidikan_terakhir` varchar(255) NOT NULL,
   `staff_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `staff_ortu` (`id`, `nama`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `jenis_kelamin`, `pendidikan_terakhir`, `staff_id`) VALUES
 (1,	'lkhk',	'hj',	'2021-03-04',	'asgfsx',	'Laki-Laki',	'sg',	1);
@@ -486,7 +486,7 @@ CREATE TABLE `staff_pasangan` (
   `pekerjaan` varchar(255) NOT NULL,
   `staff_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `staff_pasangan` (`id`, `nama_pasangan`, `tempat_lahir`, `tanggal_lahir`, `tunjangan`, `tanggal_menikah`, `pekerjaan`, `staff_id`) VALUES
 (2,	'kgjk,',	'kgkhb',	'2021-03-03',	832695,	'2021-04-07',	'Report Presensi',	1);
@@ -494,7 +494,7 @@ INSERT INTO `staff_pasangan` (`id`, `nama_pasangan`, `tempat_lahir`, `tanggal_la
 DROP TABLE IF EXISTS `staff_pelatihan`;
 CREATE TABLE `staff_pelatihan` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nama_riwayat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nama_riwayat` varchar(255) NOT NULL,
   `tempat` varchar(255) NOT NULL,
   `penyelenggara` varchar(255) NOT NULL,
   `no_sttp` varchar(255) NOT NULL,
@@ -504,7 +504,7 @@ CREATE TABLE `staff_pelatihan` (
   `jumlah_jam` int NOT NULL,
   `staff_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `staff_pelatihan` (`id`, `nama_riwayat`, `tempat`, `penyelenggara`, `no_sttp`, `tanggal_sttp`, `tanggal_mulai`, `tanggal_selesai`, `jumlah_jam`, `staff_id`) VALUES
 (2,	'kg',	'gukj',	'hilgbk',	'85tu',	'2021-03-24',	'2021-03-30',	'2021-03-31',	312,	1);
@@ -519,7 +519,7 @@ CREATE TABLE `staff_pendidikan` (
   `tahun_lulus` varchar(6) NOT NULL,
   `staff_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `staff_pendidikan` (`id`, `tingkat_pendidikan`, `nama_sekolah`, `jurusan`, `tahun_masuk`, `tahun_lulus`, `staff_id`) VALUES
 (6,	'S3',	'UGM',	'Informatika',	'2019',	'2021',	1);
@@ -535,7 +535,7 @@ CREATE TABLE `staff_tugas_tambahan` (
   `pejabat_pengesah` varchar(255) NOT NULL,
   `staff_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `staff_tugas_tambahan` (`id`, `unit_kerja_id`, `nama_tugas`, `nomor_sk`, `tmt`, `tanggal_sk`, `pejabat_pengesah`, `staff_id`) VALUES
 (2,	3,	'kgkg',	'976',	'2021-04-13',	'2021-04-28',	'dsagd',	1);
@@ -547,7 +547,7 @@ CREATE TABLE `tahun_akademik` (
   `app_id` int NOT NULL,
   `status` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `tahun_akademik` (`id`, `tahun_akademik`, `app_id`, `status`) VALUES
 (1,	'SD 2020/2021 Genap',	1,	1),
@@ -563,9 +563,9 @@ DROP TABLE IF EXISTS `tbl_kabkot`;
 CREATE TABLE `tbl_kabkot` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `provinsi_id` int unsigned NOT NULL,
-  `kabupaten_kota` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ibukota` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `k_bsni` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `kabupaten_kota` varchar(100) DEFAULT NULL,
+  `ibukota` varchar(100) DEFAULT NULL,
+  `k_bsni` char(3) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `kabkot` (`kabupaten_kota`) USING BTREE,
   KEY `fk_provs_kabkots_idx` (`provinsi_id`) USING BTREE,
@@ -1092,7 +1092,7 @@ DROP TABLE IF EXISTS `tbl_kecamatan`;
 CREATE TABLE `tbl_kecamatan` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `kabkot_id` int unsigned NOT NULL,
-  `kecamatan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `kecamatan` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `fk_kabkots_kecs_idx` (`kabkot_id`) USING BTREE,
   KEY `kecamatan` (`kecamatan`) USING BTREE
@@ -8201,8 +8201,8 @@ DROP TABLE IF EXISTS `tbl_kelurahan`;
 CREATE TABLE `tbl_kelurahan` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `kecamatan_id` int unsigned NOT NULL,
-  `kelurahan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `kd_pos` char(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `kelurahan` varchar(100) DEFAULT NULL,
+  `kd_pos` char(5) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `fk_kecs_kels_idx` (`kecamatan_id`) USING BTREE,
   KEY `kelurahan` (`kelurahan`) USING BTREE,
@@ -90719,9 +90719,9 @@ INSERT INTO `tbl_kelurahan` (`id`, `kecamatan_id`, `kelurahan`, `kd_pos`) VALUES
 DROP TABLE IF EXISTS `tbl_provinsi`;
 CREATE TABLE `tbl_provinsi` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `provinsi` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ibukota` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `p_bsni` char(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provinsi` varchar(100) DEFAULT NULL,
+  `ibukota` varchar(100) DEFAULT NULL,
+  `p_bsni` char(5) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `provinsi` (`provinsi`) USING BTREE,
   KEY `ibukota_provinsi` (`ibukota`) USING BTREE,
@@ -90769,7 +90769,7 @@ CREATE TABLE `unit` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nama_unit` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `unit` (`id`, `nama_unit`) VALUES
 (1,	'TK'),
@@ -90798,7 +90798,7 @@ CREATE TABLE `users` (
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`level_id`) REFERENCES `level` (`id`),
   CONSTRAINT `users_ibfk_2` FOREIGN KEY (`level_id`) REFERENCES `level` (`id`),
   CONSTRAINT `users_ibfk_3` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 INSERT INTO `users` (`id`, `nama`, `username`, `password`, `level_id`, `role_id`) VALUES
 (1,	'Yayasan',	'yayasan',	'$2y$10$XeqxBELJmzPHSUIRc.vQjOAGdL.3sFOjiqoZ0eFINoX4hheg1VYt6',	1,	1),
