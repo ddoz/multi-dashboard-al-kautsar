@@ -6,7 +6,9 @@
                 <div class="card">
                 <div class="card-header"><svg class="c-icon">
                         <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-plus"></use>
-                    </svg>&nbsp;Tambah Data</div>
+                    </svg>&nbsp;Tambah Data  <a class="btn btn-success btn-sm float-right" href="<?=base_url()?>siswa/kelolasiswa">
+                        <i class="fas fa-search"></i>
+                    Lihat Data</a> </div>
                 <div class="card-body">
                    <form id="form2" action="<?=base_url()?>siswa/pengelolaankelas/simpan2" enctype="multipart/form-data">
                         <input type="hidden" name="app_id" value="<?=$this->uri->segment(4)?>">
