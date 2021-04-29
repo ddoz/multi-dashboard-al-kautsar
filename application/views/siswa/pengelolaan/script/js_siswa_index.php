@@ -2,6 +2,49 @@
 var appId = 0;
 var dataId = 0;
 $(document).ready(function() {
+
+    $('#app_id_import').change(function(e) {
+        var data = $(this).val();
+        if(data!="") {
+            $("#tahun_akademik_id").empty();
+            $.ajax({
+                url: "<?=base_url()?>siswa/kelolasiswa/getTahunAkademik",
+                type: "POST",
+                data: {id:data},
+                success: function(response) {
+                    var res = JSON.parse(response);
+                    res.forEach(function(item) {
+                        $("#tahun_akademik_id").append("<option value='"+item.id+"'>"+item.tahun_akademik+"</option>");
+                    })
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+
+                }
+            });
+
+            $("#kelas_id").empty();
+            $.ajax({
+                url: "<?=base_url()?>siswa/kelolasiswa/getKelas",
+                type: "POST",
+                data: {id:data},
+                success: function(response) {
+                    var res = JSON.parse(response);
+                    res.forEach(function(item) {
+                        $("#kelas_id").append("<option value='"+item.id+"'>"+item.nama_kelas+"</option>");
+                    })
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+
+                }
+            })
+        }else {
+
+        }
+    });
+
+    $('.btnTambahData').click(function(e) {
+        $("#modalTambahData").modal('show');
+    });
     $(".btnmodalForm").click(function(e) {
         e.preventDefault();
         $("#modalForm").modal({ backdrop: 'static', keyboard: false });

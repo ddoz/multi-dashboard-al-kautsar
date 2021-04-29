@@ -24,7 +24,7 @@ class Kelolasiswa extends CI_Controller {
 
     public function add()
 	{   
-        $id = $this->uri->segment(4);
+        $id = $this->input->get('app_id');
         if(!intval($id)) {
             redirect(base_url()."siswa/kelolasiswa");
         }
@@ -459,76 +459,124 @@ class Kelolasiswa extends CI_Controller {
         if(!empty($data)) {
             $this->db->trans_begin();
             foreach($data as $val) {
-                $insert = array(
-                    "nama" => @$val->nama,
-                    "jenis_kelamin" => @$val->jenis_kelamin,
-                    "nisn" => @$val->nisn,
-                    "tempat_lahir"	 => @$val->tempat_lahir,
-                    "tanggal_lahir" => (@$val->tanggal_lahir!="")?date("Y-m-d", strtotime(@$val->tanggal_lahir)):null,
-                    "nik"	 => @$val->nik,
-                    "no_kk"	 => @$val->no_kk,
-                    "agama"	 => @$val->agama,
-                    "alamat" => @$val->alamat,
-                    "rt" => @$val->rt,
-                    "rw" => @$val->rw,
-                    "dusun"	 => @$val->dusun,
-                    "kelurahan"	 => @$val->kelurahan,
-                    "kecamatan"	 => @$val->kecamatan,
-                    "kode_pos"	 => @$val->kode_pos,
-                    "telepon" => @$val->telepon,	
-                    "no_hp"	 => @$val->no_hp,
-                    "skhun"	 => @$val->skhun,
-                    "ayah_nama"	 => @$val->ayah_nama,
-                    "ayah_pekerjaan" => @$val->ayah_pekerjaan,	
-                    "ayah_penghasilan"	 => @$val->ayah_penghasilan,
-                    "ayah_hp"	 => @$val->ayah_hp,
-                    "ibu_nama" => @$val->ibu_nama,	
-                    "ibu_pekerjaan"	 => @$val->ibu_pekerjaan,
-                    "ibu_penghasilan"	 => @$val->ibu_penghasilan,
-                    "ibu_hp"	 => @$val->ibu_hp,
-                    "sekolah_asal" => @$val->sekolah_asal,
-                    "alamat_tempat_tinggal" => @$val->alamat_tempat_tinggal,
-                    "nis" => @$val->nis,
-                    "tahun_masuk" => @$val->tahun_masuk,
-                    "nomor_va" => @$val->nomor_va,
-                    "created_at" => date("Y-m-d H:i:s"),
-                    "created_by" => $this->session->userdata("id"),
-                );
 
-                $this->db->insert('siswa',$insert);
-                $dataInsertSiswaApp = array(
-                    "app_id" => $this->input->post("app_id",true),
-                    "siswa_id" => $this->db->insert_id(),
-                    "status" => "1",
-                    "created_at" => date("Y-m-d H:i:s"),
-                    "created_by" => $this->session->userdata("id"),
-                );
-                $this->db->insert("siswa_app",$dataInsertSiswaApp);
+                //cek duplikat
+                $getData = $this->db->get_where('siswa',array("LOWER(nama)"=>strtolower(@$val->nama)));
+                if($getData->num_rows() > 0) {
+                    //update data
+                    $update = array(
+                        "jenis_kelamin" => @$val->jenis_kelamin,
+                        "nisn" => @$val->nisn,
+                        "tempat_lahir"	 => @$val->tempat_lahir,
+                        "tanggal_lahir" => (@$val->tanggal_lahir!="")?date("Y-m-d", strtotime(@$val->tanggal_lahir)):null,
+                        "nik"	 => @$val->nik,
+                        "no_kk"	 => @$val->no_kk,
+                        "agama"	 => @$val->agama,
+                        "alamat" => @$val->alamat,
+                        "rt" => @$val->rt,
+                        "rw" => @$val->rw,
+                        "dusun"	 => @$val->dusun,
+                        "kelurahan"	 => @$val->kelurahan,
+                        "kecamatan"	 => @$val->kecamatan,
+                        "kode_pos"	 => @$val->kode_pos,
+                        "telepon" => @$val->telepon,	
+                        "no_hp"	 => @$val->no_hp,
+                        "skhun"	 => @$val->skhun,
+                        "ayah_nama"	 => @$val->ayah_nama,
+                        "ayah_pekerjaan" => @$val->ayah_pekerjaan,	
+                        "ayah_penghasilan"	 => @$val->ayah_penghasilan,
+                        "ayah_hp"	 => @$val->ayah_hp,
+                        "ibu_nama" => @$val->ibu_nama,	
+                        "ibu_pekerjaan"	 => @$val->ibu_pekerjaan,
+                        "ibu_penghasilan"	 => @$val->ibu_penghasilan,
+                        "ibu_hp"	 => @$val->ibu_hp,
+                        "sekolah_asal" => @$val->sekolah_asal,
+                        "alamat_tempat_tinggal" => @$val->alamat_tempat_tinggal,
+                        "nis" => @$val->nis,
+                        "tahun_masuk" => @$val->tahun_masuk,
+                        "nomor_va" => @$val->nomor_va,
+                        "created_at" => date("Y-m-d H:i:s"),
+                        "created_by" => $this->session->userdata("id"),
+                    );
 
-                $qtahun_akademik = $this->db->get_where('tahun_akademik',array("tahun_akademik"=>trim(@$val->tahun_akademik)));
-                $tahun_akademik = 0;
-                if($qtahun_akademik->num_rows() > 0) {
-                    $tahun_akademik = $qtahun_akademik->row()->id;
-                }
-
-                $qkelas = $this->db->get_where('kelas',array("nama_kelas"=>trim(@$val->kelas)));
-                $kelas = 0;
-                if($qkelas->num_rows() > 0) {
-                    $kelas = $qkelas->row()->id;
-                }
-
-                if($kelas != 0 && $tahun_akademik != 0) {
-                    $insertSiswaKelas = array(
-                        "siswa_id" => $dataInsertSiswaApp['siswa_id'],
-                        "kelas_id" => $kelas,
-                        "tahun_akademik_id" => $tahun_akademik,
+                    $this->db->where('LOWER(nama)',$getData->row()->id);
+                    $this->db->update('siswa',$update);
+                }else {
+                    $insert = array(
+                        "nama" => @$val->nama,
+                        "jenis_kelamin" => @$val->jenis_kelamin,
+                        "nisn" => @$val->nisn,
+                        "tempat_lahir"	 => @$val->tempat_lahir,
+                        "tanggal_lahir" => (@$val->tanggal_lahir!="")?date("Y-m-d", strtotime(@$val->tanggal_lahir)):null,
+                        "nik"	 => @$val->nik,
+                        "no_kk"	 => @$val->no_kk,
+                        "agama"	 => @$val->agama,
+                        "alamat" => @$val->alamat,
+                        "rt" => @$val->rt,
+                        "rw" => @$val->rw,
+                        "dusun"	 => @$val->dusun,
+                        "kelurahan"	 => @$val->kelurahan,
+                        "kecamatan"	 => @$val->kecamatan,
+                        "kode_pos"	 => @$val->kode_pos,
+                        "telepon" => @$val->telepon,	
+                        "no_hp"	 => @$val->no_hp,
+                        "skhun"	 => @$val->skhun,
+                        "ayah_nama"	 => @$val->ayah_nama,
+                        "ayah_pekerjaan" => @$val->ayah_pekerjaan,	
+                        "ayah_penghasilan"	 => @$val->ayah_penghasilan,
+                        "ayah_hp"	 => @$val->ayah_hp,
+                        "ibu_nama" => @$val->ibu_nama,	
+                        "ibu_pekerjaan"	 => @$val->ibu_pekerjaan,
+                        "ibu_penghasilan"	 => @$val->ibu_penghasilan,
+                        "ibu_hp"	 => @$val->ibu_hp,
+                        "sekolah_asal" => @$val->sekolah_asal,
+                        "alamat_tempat_tinggal" => @$val->alamat_tempat_tinggal,
+                        "nis" => @$val->nis,
+                        "tahun_masuk" => @$val->tahun_masuk,
+                        "nomor_va" => @$val->nomor_va,
+                        "created_at" => date("Y-m-d H:i:s"),
+                        "created_by" => $this->session->userdata("id"),
+                    );
+    
+                    $this->db->insert('siswa',$insert);
+                    $dataInsertSiswaApp = array(
                         "app_id" => $this->input->post("app_id",true),
+                        "siswa_id" => $this->db->insert_id(),
                         "status" => "1",
                         "created_at" => date("Y-m-d H:i:s"),
-                        "created_by" => $this->session->userdata("id")
+                        "created_by" => $this->session->userdata("id"),
                     );
-                    $this->db->insert("siswa_kelas",$insertSiswaKelas);
+                    $this->db->insert("siswa_app",$dataInsertSiswaApp);
+    
+                    /*$qtahun_akademik = $this->db->get_where('tahun_akademik',array("tahun_akademik"=>trim(@$val->tahun_akademik)));
+                    $tahun_akademik = 0;
+                    if($qtahun_akademik->num_rows() > 0) {
+                        $tahun_akademik = $qtahun_akademik->row()->id;
+                    }
+    
+                    $qkelas = $this->db->get_where('kelas',array("nama_kelas"=>trim(@$val->kelas)));
+                    $kelas = 0;
+                    if($qkelas->num_rows() > 0) {
+                        $kelas = $qkelas->row()->id;
+                    }*/
+                    $kelas = $this->input->post("kelas_id");
+                    $tahun_akademik = $this->input->post('tahun_akademik_id');
+    
+                    if($kelas != 0 && $tahun_akademik != 0) {
+                        $insertSiswaKelas = array(
+                            "siswa_id" => $dataInsertSiswaApp['siswa_id'],
+                            "kelas_id" => $kelas,
+                            "tahun_akademik_id" => $tahun_akademik,
+                            "app_id" => $this->input->post("app_id",true),
+                            "status" => "1",
+                            "created_at" => date("Y-m-d H:i:s"),
+                            "created_by" => $this->session->userdata("id")
+                        );
+                        $this->db->insert("siswa_kelas",$insertSiswaKelas);
+                    }
                 }
+
+                
         
             }
         }else {
@@ -786,6 +834,18 @@ class Kelolasiswa extends CI_Controller {
 
         echo $output;
         exit();
+    }
+
+    public function getTahunAkademik() {
+        $id = $this->input->post('id');
+        $data = $this->db->get_where('tahun_akademik',array("app_id"=>$id))->result();
+        echo json_encode($data);
+    }
+
+    public function getKelas() {
+        $id = $this->input->post('id');
+        $data = $this->db->get_where('kelas',array("app_id"=>$id))->result();
+        echo json_encode($data);
     }
 
 }

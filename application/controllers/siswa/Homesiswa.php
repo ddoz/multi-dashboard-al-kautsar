@@ -62,6 +62,7 @@ class Homesiswa extends CI_Controller {
         $this->db->where('siswa_kelas.status','1');
         $this->db->like('nama', $key);
         $this->db->or_like('nisn', $key);
+        $this->db->or_like('nomor_va', $key);
         $qdata = $this->db->get()->result();
         $data['siswa'] = $qdata;
         $data = array(

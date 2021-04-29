@@ -1,5 +1,22 @@
 <div class="container-fluid">
         <div class="fade-in">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                        <div class="c-callout c-callout-info">
+                            <div class="text-value-lg">
+                                <button class="btn btn-primary btn-xs btnTambahData"> Tambah Data</button>
+                                <button class="btn btn-warning btn-xs btnmodalFormImport text-white"> Import Data</button>
+                                <a class="btn btn-success btn-xs" href="<?=base_url()?>siswa/kelolasiswa/kenaikankelas"> Kenaikan Kelas</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <?php foreach($app as $listApp) { ?>
             <div class="col-md-12">
@@ -13,13 +30,13 @@
                             
                             <div class="row">
                             <div class="col-12">
-                                <div class="c-callout c-callout-info">
+                                <!-- <div class="c-callout c-callout-info">
                                 <div class="text-value-lg">
                                 <a href="<?=base_url()?>siswa/kelolasiswa/add/<?=$listApp->app_id?>" class="btn btn-primary btn-xs"> Tambah Data</a>
                                 <button class="btn btn-warning btn-xs btnmodalFormImport" app-id="<?=$listApp->app_id?>"> Import Data</button>
                                 <a class="btn btn-success btn-xs" href="<?=base_url()?>siswa/kelolasiswa/kenaikankelas/<?=$listApp->app_id?>"> Kenaikan Kelas</a>
                             </div>
-                                </div>
+                                </div> -->
                             </div>
                             <!-- /.col-->
                             <div class="col-12">
@@ -111,18 +128,62 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form id="formImport" action="<?=base_url()?>siswa/pengelolaansiswa/simpanimport">
+                <form id="formImport" action="<?=base_url()?>siswa/kelolasiswa/simpanimport">
                 <div class="modal-body">
-                    <input type="hidden" name="app_id" id="app_id_import_input">
+                    <div class="form-group">
+                        <label for="">Sekolah</label>
+                        <select name="app_id" id="app_id_import" required class="form-control">
+                        <option value="">Pilih Sekolah</option>
+                        <?php foreach($app as $listApp) { ?>
+                        <option value="<?=$listApp->app_id?>"><?=$listApp->app?></option>
+                        <?php }?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Tahun Akademik</label>
+                        <select name="tahun_akademik_id" id="tahun_akademik_id" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Kelas</label>
+                        <select name="kelas_id" id="kelas_id" class="form-control">
+                        </select>
+                    </div>
                     <a href="<?=base_url()?>assets/Template_import_siswa.xlsx">Download Template</a>
                     <div class="form-group">
                         <label for="">File</label>
                         <input type="file" name="file_import" id="file_import">
-                        <textarea name="data" class="form-control" readonly id="data" cols="30" rows="10"></textarea>
+                        <textarea name="data" style="display:none" class="form-control" readonly id="data" cols="30" rows="10"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalTambahData" role="dialog">
+        <div class="modal-dialog modals-default">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form method="GET" action="<?=base_url()?>siswa/kelolasiswa/add">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">Sekolah</label>
+                        <select name="app_id" id="" class="form-control">
+                        <?php foreach($app as $listApp) { ?>
+                        <option value="<?=$listApp->app_id?>"><?=$listApp->app?></option>
+                        <?php }?>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Selanjutnya</button>
                     </form>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
