@@ -88,7 +88,10 @@ $(document).ready(function() {
                 $("#formImport")[0].reset();
                 $('#modalFormImport').modal('hide');
                 $.notify("Berhasil Import Data","success");
-                $('#datatable-'+appId).DataTable().ajax.reload(null, false);
+                setTimeout(function() {
+                    location.reload();
+                },3000);
+                // $('#datatable-'+appId).DataTable().ajax.reload(null, false);
             },
             error: function(error) {
                 $('#modalFormImport').modal('hide');
