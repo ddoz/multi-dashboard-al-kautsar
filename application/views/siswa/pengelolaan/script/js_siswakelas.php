@@ -1,4 +1,5 @@
 <script type="text/javascript">
+var appId;
 $(document).ready(function(e) {
     $('#konfirmasisiswa').hide();
 });
@@ -32,10 +33,11 @@ $('#formpilihkelas').submit(function(e) {
 $("#app_id").change(function(e) {
     e.preventDefault();
     var id = $(this).val();
+    appId = id;
     if(id!='') {
         $('#tahun_akademik').empty();
         $.ajax({
-            url: '<?=base_url()?>siswa/pengelolaanta/optiondata',
+            url: '<?=base_url()?>siswa/kelolatahunakademik/optiondata',
             type: 'post',
             data: {id:id},
             success: function(response) {
@@ -62,9 +64,9 @@ $('#tahun_akademik').change(function(e) {
     if(id!='') {
         $('#kelas').empty();
         $.ajax({
-            url: '<?=base_url()?>siswa/pengelolaankelas/optiondata',
+            url: '<?=base_url()?>siswa/kelolakelas/optiondata',
             type: 'post',
-            data: {id:id},
+            data: {id:appId},
             success: function(response) {
                 $('#kelas').append("<option value=''>Pilih Data</option>");
                 if(response!=null) {
