@@ -239,6 +239,10 @@ function edit(data) {
     $("#ibu_penghasilan_input").val(data.ibu_penghasilan);
     $("#ibu_hp_input").val(data.ibu_hp);
     $("#sekolah_asal_input").val(data.sekolah_asal);
+    $("#alamat_tempat_tinggal_input").val(data.alamat_tempat_tinggal);
+    $("#tahun_masuk_input").val(data.tahun_masuk);
+    $("#nis_input").val(data.nis);
+    $("#nomor_va_input").val(data.nomor_va);
     $("#id_input").val(data.id);
     $("#form").attr("action","<?=base_url()?>siswa/kelolasiswa/ubah");
 }
@@ -273,6 +277,7 @@ function edit(data) {
                 {data: 'no_kk'},
                 {data: 'agama'},
                 {data: 'alamat'},
+                {data: 'alamat_tempat_tinggal'},
                 {data: 'rt'},
                 {data: 'rw'},
                 {data: 'dusun'},

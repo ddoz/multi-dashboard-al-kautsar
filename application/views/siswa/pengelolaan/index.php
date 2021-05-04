@@ -53,6 +53,7 @@
                                         <th>NO KK</th>
                                         <th>Agama</th>
                                         <th>Alamat</th>
+                                        <th>Tempat Tinggal Sekolah</th>
                                         <th>RT</th>
                                         <th>RW</th>
                                         <th>Dusun</th>
