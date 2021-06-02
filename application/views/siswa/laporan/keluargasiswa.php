@@ -20,7 +20,7 @@
                                             <select name="ta" required class="form-control">
                                                 <option value="">Pilih Tahun Akademik</option>
                                                 <?php foreach($ta as $th) { foreach($th as $t) { ?>
-                                                <option value="<?=$t->id?>"><?=$t->tahun_akademik ."-".$t->app_id?></option>
+                                                <option value="<?=$t->id?>"><?=$t->tahun_akademik ." - ".$t->app?></option>
                                                 <?php }}?>
                                             </select>
                                         </div>
