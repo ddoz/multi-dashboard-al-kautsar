@@ -34,7 +34,8 @@
                                 </div>
                             </div>
                             <div class="col-md-10">
-                            <div class="accordion-stn sm-res-mg-t-30">
+                                <a href="<?=base_url()?>siswa/homesiswa/downloadbiodata/<?=$siswa->id?>" target="_blank" class="btn btn-primary mb-2"><i class="fas fa-download"></i> Download Biodata</a>
+                                <div class="accordion-stn sm-res-mg-t-30">
                                     <div class="accordion" id="accordion" role="tablist">
                                         <!-- Data Diri -->
                                         <div class="card mb-0">

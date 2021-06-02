@@ -8,7 +8,6 @@ function backToPilihKelas() {
     $('#konfirmasisiswa').hide();
 }
 function toggle(source) {
-    alert('aaaa');
     $('input[type="checkbox"]' ).prop('checked', this.checked)
 }
 $('#formpilihkelas').submit(function(e) {
@@ -18,7 +17,7 @@ $('#formpilihkelas').submit(function(e) {
     $("#tablesiswa").empty();
     $.ajax({
         type:"POST",
-        url:"<?=base_url()?>siswa/pengelolaansiswakelas/kenaikankelas_konfirmasisiswa",
+        url:"<?=base_url()?>siswa/kelolasiswa/kenaikankelas_konfirmasisiswa",
         data: $(this).serialize(),
         success: function(response) {
             $("#tablesiswa").append(response);
@@ -102,7 +101,7 @@ $('#tahun_akademik').change(function(e) {
             processing: true,
             serverSide 		: true,
 			ajax:{
-				url 		: "<?=base_url()?>siswa/pengelolaansiswakelas/datatableSiswaKelas/<?=$listApp->app_id?>",
+				url 		: "<?=base_url()?>siswa/kelolasiswa/datatableSiswaKelas/<?=$listApp->app_id?>",
 				type 		: "POST"
 			},
 			columns 		:[

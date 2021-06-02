@@ -28,6 +28,8 @@
                             <!-- /.col-->
                             <div class="col-12">
                                 <!-- mulai pilih kelas -->
+                                <?=showStatusMessage()?>
+
                                 <div id="pilihkelas">
                                     <h4 class="text text-success">Pemilihan Kelas</h4>
                                     <form id="formpilihkelas">

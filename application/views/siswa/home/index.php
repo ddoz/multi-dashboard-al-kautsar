@@ -118,7 +118,7 @@
                             <form action="<?=base_url()?>siswa/homesiswa/cari" method="get">
                                 <div class="form-group">
                                     <label for="">Tahun Akademik</label>
-                                    <select name="ta" class="form-control">
+                                    <select name="ta" required class="form-control">
                                         <option value="">Pilih Tahun Akademik</option>
                                         <?php foreach($ta as $th) { foreach($th as $t) { ?>
                                         <option value="<?=$t->id?>"><?=$t->tahun_akademik?></option>
@@ -127,8 +127,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Kelas</label>
-                                    <select name="ta" class="form-control">
-                                        <option value="">Pilih Tahun Akademik</option>
+                                    <select name="kelas" required class="form-control">
+                                        <option value="">Pilih Kelas</option>
                                         <?php foreach($kelas as $th) { foreach($th as $t) { ?>
                                         <option value="<?=$t->id?>"><?=$t->nama_kelas?></option>
                                         <?php }}?>

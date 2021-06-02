@@ -52,6 +52,23 @@ class Homesiswa extends CI_Controller {
         buildPage($data);
 	}
 
+    public function downloadbiodata() {
+        $id = $this->uri->segment(4);
+        if(!intval($this->uri->segment(4))) {
+            redirect(base_url()."siswa/homesiswa");
+        }
+        $data = $this->db->get_where('siswa',array('id'=>$id));
+        if($data->num_rows() > 0) {
+            $this->load->library('pdf');
+
+            $this->pdf->setPaper('A4', 'potrait');
+            $this->pdf->filename = "laporan-petanikode.pdf";
+            $this->pdf->load_view('siswa/home/pdfbiodata', array('item'=>$data->row()));
+        }else {
+            redirect(base_url()."siswa/homesiswa");
+        }
+    }
+
     public function cari() {
         $key = $this->input->get('key');
         $data['script'] = 'siswa/home/script/js_dashboard';

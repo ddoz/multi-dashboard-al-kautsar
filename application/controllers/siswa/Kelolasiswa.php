@@ -933,7 +933,7 @@ class Kelolasiswa extends CI_Controller {
             $this->db->trans_rollback();
             $this->session->set_flashdata('status',"<div class='alert alert-danger alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Proses kenaikan kelas gagal</div>");
         }
-        redirect(base_url().'siswa/kelolasiswa');
+        redirect(base_url().'siswa/kelolasiswa/kenaikankelas');
     }
 
     public function kenaikankelas_konfirmasisiswa() {
