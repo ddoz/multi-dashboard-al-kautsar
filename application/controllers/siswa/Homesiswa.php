@@ -58,12 +58,23 @@ class Homesiswa extends CI_Controller {
             redirect(base_url()."siswa/homesiswa");
         }
         $data = $this->db->get_where('siswa',array('id'=>$id));
+
+        $this->db->from('siswa_kelas');
+        $this->db->join('app','app.id=siswa_kelas.app_id');
+        $this->db->join('tahun_akademik','tahun_akademik.id=siswa_kelas.tahun_akademik_id');
+        $siswa_kelas = $this->db->where(array('siswa_id'=>$id, 'siswa_kelas.status'=>'1'))->get();
+        $unit = '-';
+        $ta = '-';
+        if($siswa_kelas->num_rows() > 0) {
+            $unit = $siswa_kelas->row()->app;
+            $ta = $siswa_kelas->row()->tahun_akademik;
+        }
         if($data->num_rows() > 0) {
             $this->load->library('pdf');
 
             $this->pdf->setPaper('A4', 'potrait');
             $this->pdf->filename = "laporan-petanikode.pdf";
-            $this->pdf->load_view('siswa/home/pdfbiodata', array('item'=>$data->row()));
+            $this->pdf->load_view('siswa/home/pdfbiodata', array('item'=>$data->row(),'unit'=>$unit, 'ta'=>$ta));
         }else {
             redirect(base_url()."siswa/homesiswa");
         }

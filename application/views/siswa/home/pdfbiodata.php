@@ -41,7 +41,7 @@
             </td>
             <td align="center">
                 <h2>BIODATA SISWA</h2>
-                <h4>UNIT ...... TP ...... / ....</h2>
+                <h4>UNIT <?=$unit?> TP <?=$ta?></h2>
             </td>
         </tr>
         <tr>
