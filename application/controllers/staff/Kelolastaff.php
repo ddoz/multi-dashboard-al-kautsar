@@ -287,6 +287,7 @@ class Kelolastaff extends CI_Controller {
             "status_staff"	=>	$this->input->post("status_staff"),	
         );
         $message = "";
+        $fileName = "";
         if(isset($_FILES['avatar'])) {
             $config['upload_path']          = './uploads/';
             $config['allowed_types']        = 'jpg|png';
@@ -300,12 +301,12 @@ class Kelolastaff extends CI_Controller {
             }
             else
             {
-                $message = "Data berhasil diubah";
                 $data = $this->upload->data();
                 $fileName = $data['file_name'];
                 $update["foto"] = $fileName;
             }
         }
+        $message = "Data berhasil diubah";
 
         $this->db->where("id",$id);
         $this->db->update("staff_data",$update);
