@@ -73,7 +73,7 @@ class Homesiswa extends CI_Controller {
             $this->load->library('pdf');
 
             $this->pdf->setPaper('A4', 'potrait');
-            $this->pdf->filename = "laporan-petanikode.pdf";
+            $this->pdf->filename = "laporan-siswa.pdf";
             $this->pdf->load_view('siswa/home/pdfbiodata', array('item'=>$data->row(),'unit'=>$unit, 'ta'=>$ta));
         }else {
             redirect(base_url()."siswa/homesiswa");

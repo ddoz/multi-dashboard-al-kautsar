@@ -69,20 +69,26 @@ if(!function_exists('buildForm')) {
             foreach($data as $val) {
                 $buildTag .= "<div class='form-group'>";
                 $buildTag .= "<label>".$val['label']."</label>";
+                $required = "required";
+                if(array_key_exists('required',$val)) {
+                    if($val['required']==false) {
+                        $required = "";
+                    }
+                }
                 if($val['type'] == "input") {
-                    $buildTag .= "<input class='form-control' id='".$val['name']."_input' type='text' name='".$val['name']."' required>";
+                    $buildTag .= "<input class='form-control' id='".$val['name']."_input' type='text' name='".$val['name']."' $required>";
                 }
                 if($val['type'] == "textarea") {
-                    $buildTag .= "<textarea class='form-control' id='".$val['name']."_input' name='".$val['name']."' required></textarea>";
+                    $buildTag .= "<textarea class='form-control' id='".$val['name']."_input' name='".$val['name']."' $required></textarea>";
                 }
                 if($val['type'] == "datepicker") {
-                    $buildTag .= "<input class='form-control datepicker' id='".$val['name']."_input' type='text' name='".$val['name']."' required>";
+                    $buildTag .= "<input class='form-control datepicker' id='".$val['name']."_input' type='text' name='".$val['name']."' $required>";
                 }
                 if($val['type'] == "timepicker") {
-                    $buildTag .= "<input class='form-control timepicker' id='".$val['name']."_input' type='text' name='".$val['name']."' required>";
+                    $buildTag .= "<input class='form-control timepicker' id='".$val['name']."_input' type='text' name='".$val['name']."' $required>";
                 }
                 if($val['type'] == "select") {
-                    $select = "<select class='form-control' id='".$val['name']."_input' name='".$val['name']."'>";
+                    $select = "<select class='form-control' $required id='".$val['name']."_input' name='".$val['name']."'>";
                     if(array_key_exists('option',$val)) {
                         $select .= "<option value=''>Pilih</option>";
                         foreach($val['option'] as $key => $item) {
@@ -158,5 +164,18 @@ if(!function_exists('buildBreadcumb')) {
         }
         $bc .= '</ol>';
         return $bc;
+    }
+}
+
+function MasaKerja($tgl_masuk){
+    if($tgl_masuk=='0000-00-00'){
+        return 0;
+    }else{
+        $date1 = new DateTime($tgl_masuk);
+        $date2 = $date1->diff(new DateTime(date("Y-m-d")));
+        $string = $date2->y.' tahun '."\n";
+        $string .= $date2->m.' bulan '."\n";
+        $string .= $date2->d.' hari '."\n";
+        return $string;
     }
 }

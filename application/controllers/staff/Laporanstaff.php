@@ -64,4 +64,25 @@ class Laporanstaff extends CI_Controller {
         echo $this->datatables->generate();
 	}
 
+    public function download() {
+
+        $id = $this->uri->segment(4);
+        $data['unit'] = $this->Model_form->optionUnit();
+        $data['staff'] = $this->db->get_where('staff_data',array('id'=>$id))->row();
+        $data['riwayat_pendidikan'] = $this->db->get_where('staff_pendidikan',array('staff_id'=>$id))->result();
+        $data['riwayat_pelatihan'] = $this->db->get_where('staff_pelatihan',array('staff_id'=>$id))->result();
+        $data['riwayat_jabatan'] = $this->db->get_where('staff_jabatan',array('staff_id'=>$id))->result();
+        $data['riwayat_tugas'] = $this->db->get_where('staff_tugas_tambahan',array('staff_id'=>$id))->result();
+        $data['riwayat_kepangkatan'] = $this->db->get_where('staff_kepangkatan',array('staff_id'=>$id))->result();
+        $data['keluarga'] = $this->db->get_where('staff_pasangan',array('staff_id'=>$id))->result();
+        $data['anak'] = $this->db->get_where('staff_anak',array('staff_id'=>$id))->result();
+        $data['ortu'] = $this->db->get_where('staff_ortu',array('staff_id'=>$id))->result();
+        $data['dpt'] = $this->db->get_where('staff_dpt',array('staff_id'=>$id))->result();
+
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "cetak-staff.pdf";
+        $this->pdf->load_view('siswa/home/pdfbiodata', array('item'=>$data));
+    }
+
 }

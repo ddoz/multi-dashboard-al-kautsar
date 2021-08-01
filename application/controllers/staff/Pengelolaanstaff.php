@@ -202,7 +202,7 @@ class Pengelolaanstaff extends CI_Controller {
             $config['upload_path']          = './uploads/';
             $config['allowed_types']        = 'jpg|png';
             $config['max_size']             = 1024;
-            $config['file_name']            = $insert['nisn']."_avatar_".date("Ymdhis");
+            $config['file_name']            = $insert['nik']."_avatar_".date("Ymdhis");
 
             $this->load->library('upload', $config);
             if ( ! $this->upload->do_upload('avatar'))
@@ -234,6 +234,7 @@ class Pengelolaanstaff extends CI_Controller {
 
     public function ubah() {
         $id = $this->input->post("id");
+        die();
         $update = array(
             "nama" => $this->input->post("nama"),
             "nik"=>	$this->input->post("nama"),
@@ -263,7 +264,7 @@ class Pengelolaanstaff extends CI_Controller {
             $config['upload_path']          = './uploads/';
             $config['allowed_types']        = 'jpg|png';
             $config['max_size']             = 1024;
-            $config['file_name']            = $update['nisn']."_avatar_".date("Ymdhis");
+            $config['file_name']            = $update['nik']."_avatar_".date("Ymdhis");
 
             $this->load->library('upload', $config);
             if ( ! $this->upload->do_upload('avatar'))

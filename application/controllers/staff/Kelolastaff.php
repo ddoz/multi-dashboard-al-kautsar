@@ -79,6 +79,7 @@ class Kelolastaff extends CI_Controller {
             array(
 			  "type" => "input",
 			  "label" => "Masa Kerja",
+              "required" => false,
               "name" => "masa_kerja",
 			),
 			array(
@@ -89,11 +90,13 @@ class Kelolastaff extends CI_Controller {
 			array(
 			  "type" => "datepicker",
 			  "label" => "Berhenti Tanggal",
+              "required" => false,
 			  "name" => "berhenti_tanggal"
 			),
 			array(
 			  "type" => "datepicker",
 			  "label" => "Pensiun Tanggal",
+              "required" => false,
 			  "name" => "tanggal_lahir"
 			),
             array(
@@ -210,8 +213,8 @@ class Kelolastaff extends CI_Controller {
             "tanggal_masuk_kerja" =>	date('Y-m-d',strtotime($this->input->post("tanggal_masuk_kerja"))),	
             "unit"	=>	$this->input->post("unit"),	
             "masa_kerja" =>	$this->input->post("masa_kerja"),	
-            "berhenti_tanggal"	=>	date('Y-m-d',strtotime($this->input->post("berhenti_tanggal"))),	
-            "pensiun_tanggal"	=>	date('Y-m-d',strtotime($this->input->post("pensiun_tanggal"))),
+            "berhenti_tanggal"	=>	($this->input->post("berhenti_tanggal")!="")?date('Y-m-d',strtotime($this->input->post("berhenti_tanggal"))):"",	
+            "pensiun_tanggal"	=>	($this->input->post("pensiun_tanggal")!="")?date('Y-m-d',strtotime($this->input->post("pensiun_tanggal"))):"",
             "golongan_darah"=>	$this->input->post("golongan_darah"),	
             "gelar_depan"=>	$this->input->post("gelar_depan"),	
             "gelar_belakang"=>	$this->input->post("gelar_belakang"),	
@@ -251,6 +254,7 @@ class Kelolastaff extends CI_Controller {
             exit();
         }
         $this->db->trans_rollback();
+        $this->session->set_flashdata("status",$message);
         echo json_encode(array("msg"=>"Gagal Simpan Data"));
         exit();
     }
@@ -260,7 +264,7 @@ class Kelolastaff extends CI_Controller {
         $id = $this->input->post("id");
         $update = array(
             "nama" => $this->input->post("nama"),
-            "nik"=>	$this->input->post("nama"),
+            "nik"=>	$this->input->post("nik"),
             "nip_npy"=>	$this->input->post("nip_npy"),	
             "agama"=>	$this->input->post("agama"),
             "jenis_kelamin" =>	$this->input->post("jenis_kelamin"),
@@ -287,15 +291,16 @@ class Kelolastaff extends CI_Controller {
             $config['upload_path']          = './uploads/';
             $config['allowed_types']        = 'jpg|png';
             $config['max_size']             = 1024;
-            $config['file_name']            = $update['nisn']."_avatar_".date("Ymdhis");
+            $config['file_name']            = $update['nik']."_avatar_".date("Ymdhis");
 
             $this->load->library('upload', $config);
             if ( ! $this->upload->do_upload('avatar'))
             {
-                $message = "Data tersimpan tanpa gambar, silahkan gunakan menu edit. eror : " .$this->upload->display_errors();
+                $message = "Gambar gagal diupload. eror : " .$this->upload->display_errors();
             }
             else
             {
+                $message = "Data berhasil diubah";
                 $data = $this->upload->data();
                 $fileName = $data['file_name'];
                 $update["foto"] = $fileName;
@@ -304,6 +309,8 @@ class Kelolastaff extends CI_Controller {
 
         $this->db->where("id",$id);
         $this->db->update("staff_data",$update);
+
+        $this->session->set_flashdata("status",$message);
         redirect(base_url()."staff/kelolastaff/detail/".$id);
     }
 
@@ -317,6 +324,7 @@ class Kelolastaff extends CI_Controller {
             "tahun_lulus" => $this->input->post("tahun_lulus"),
         );
         $this->db->insert("staff_pendidikan",$update);
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$this->input->post('staff_id'));
     }
 
@@ -325,6 +333,7 @@ class Kelolastaff extends CI_Controller {
         $idriwayat = $this->uri->segment(5);
         $this->db->where('id',$idriwayat);
         $this->db->delete('staff_pendidikan');
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$idstaff);
     }
 
@@ -341,6 +350,7 @@ class Kelolastaff extends CI_Controller {
             "jumlah_jam" => $this->input->post("jumlah_jam")
         );
         $this->db->insert("staff_pelatihan",$update);
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$this->input->post('staff_id'));
     }
 
@@ -349,6 +359,7 @@ class Kelolastaff extends CI_Controller {
         $idriwayat = $this->uri->segment(5);
         $this->db->where('id',$idriwayat);
         $this->db->delete('staff_pelatihan');
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$idstaff);
     }
 
@@ -364,6 +375,7 @@ class Kelolastaff extends CI_Controller {
             "pejabat_pengesah" => $this->input->post("pejabat_pengesah")
         );
         $this->db->insert("staff_jabatan",$update);
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$this->input->post('staff_id'));
     }
 
@@ -372,6 +384,7 @@ class Kelolastaff extends CI_Controller {
         $idriwayat = $this->uri->segment(5);
         $this->db->where('id',$idriwayat);
         $this->db->delete('staff_jabatan');
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$idstaff);
     }
 
@@ -386,6 +399,7 @@ class Kelolastaff extends CI_Controller {
             "pejabat_pengesah" => $this->input->post("pejabat_pengesah")
         );
         $this->db->insert("staff_tugas_tambahan",$update);
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$this->input->post('staff_id'));
     }
 
@@ -394,6 +408,7 @@ class Kelolastaff extends CI_Controller {
         $idriwayat = $this->uri->segment(5);
         $this->db->where('id',$idriwayat);
         $this->db->delete('staff_tugas_tambahan');
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$idstaff);
     }
 
@@ -408,6 +423,7 @@ class Kelolastaff extends CI_Controller {
             "pejabat_pengesah" => $this->input->post("pejabat_pengesah")
         );
         $this->db->insert("staff_kepangkatan",$update);
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$this->input->post('staff_id'));
     }
 
@@ -416,6 +432,7 @@ class Kelolastaff extends CI_Controller {
         $idriwayat = $this->uri->segment(5);
         $this->db->where('id',$idriwayat);
         $this->db->delete('staff_kepangkatan');
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$idstaff);
     }
 
@@ -430,6 +447,7 @@ class Kelolastaff extends CI_Controller {
             "pekerjaan" => $this->input->post("pekerjaan")
         );
         $this->db->insert("staff_pasangan",$update);
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$this->input->post('staff_id'));
     }
 
@@ -438,6 +456,7 @@ class Kelolastaff extends CI_Controller {
         $idriwayat = $this->uri->segment(5);
         $this->db->where('id',$idriwayat);
         $this->db->delete('staff_pasangan');
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$idstaff);
     }
 
@@ -453,6 +472,7 @@ class Kelolastaff extends CI_Controller {
             "anak_ke" => $this->input->post("anak_ke")
         );
         $this->db->insert("staff_anak",$update);
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$this->input->post('staff_id'));
     }
 
@@ -461,6 +481,7 @@ class Kelolastaff extends CI_Controller {
         $idriwayat = $this->uri->segment(5);
         $this->db->where('id',$idriwayat);
         $this->db->delete('staff_anak');
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$idstaff);
     }
 
@@ -475,6 +496,7 @@ class Kelolastaff extends CI_Controller {
             "pendidikan_terakhir" => $this->input->post("pendidikan_terakhir")
         );
         $this->db->insert("staff_ortu",$update);
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$this->input->post('staff_id'));
     }
 
@@ -483,6 +505,7 @@ class Kelolastaff extends CI_Controller {
         $idriwayat = $this->uri->segment(5);
         $this->db->where('id',$idriwayat);
         $this->db->delete('staff_ortu');
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$idstaff);
     }
 
@@ -493,6 +516,7 @@ class Kelolastaff extends CI_Controller {
             "nilai" => $this->input->post("nilai")
         );
         $this->db->insert("staff_dpt",$update);
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$this->input->post('staff_id'));
     }
 
@@ -501,6 +525,7 @@ class Kelolastaff extends CI_Controller {
         $idriwayat = $this->uri->segment(5);
         $this->db->where('id',$idriwayat);
         $this->db->delete('staff_dpt');
+        $this->session->set_flashdata("status","Berhasil memproses data.");
         redirect(base_url()."staff/kelolastaff/detail/".$idstaff);
     }
 

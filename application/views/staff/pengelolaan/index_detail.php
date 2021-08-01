@@ -3,10 +3,15 @@
             <div class="row">
             
             <div class="col-md-12">
+
+                <?php if($this->session->flashdata('status')!=null) { ?>
+                    <div class="alert alert-info alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><?=$this->session->flashdata('status')?></div>
+                <?php } ?>
                 <div class="card">
                 <div class="card-header"><svg class="c-icon">
                         <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-list"></use>
-                    </svg>&nbsp;Detail Data Staff</div>
+                    </svg>&nbsp;Detail Data Staff
+                </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
@@ -26,6 +31,8 @@
                         </div>
                         <div class="tab-content">
                             <!-- IDENTITAS DIRI -->
+
+
                         <div id="home" role="tabpanel" class="tab-pane active">
                             <br>
                             <h4>IDENTITAS DIRI</h4>
@@ -145,21 +152,30 @@
                                     </select></th>
                                 </tr>
                                 <tr>
+                                    <th>Mulai Bekerja Tanggal</th>
+                                    <th>
+                                    <input type="text" value="<?=$staff->tanggal_masuk_kerja?>" name="tanggal_masuk_kerja" required class="form-control datepicker">    
+                                    </th>
+                                </tr>
+                                <tr>
                                     <th>Masa Kerja</th>
                                     <th>
-                                    <input type="text" value="<?=$staff->masa_kerja?>" name="masa_kerja" required class="form-control">    
+                                        <?php 
+                                            $masa_kerja = MasaKerja($staff->tanggal_masuk_kerja)
+                                        ?>
+                                    <input type="text" readonly value="<?=$masa_kerja?>" name="masa_kerja" required class="form-control">    
                                         </th>
                                 </tr>
                                 <tr>
                                     <th>Berhenti Tanggal</th>
                                     <th>
-                                    <input type="text" value="<?=$staff->berhenti_tanggal?>" name="berhenti_tanggal" required class="form-control datepicker">    
+                                    <input type="text" value="<?=$staff->berhenti_tanggal?>" name="berhenti_tanggal"  class="form-control datepicker">    
                                         </th>
                                 </tr>
                                 <tr>
                                     <th>Pensiun Tanggal</th>
                                     <th>
-                                    <input type="text" value="<?=$staff->pensiun_tanggal?>" name="pensiun_tanggal" required class="form-control datepicker">    
+                                    <input type="text" value="<?=$staff->pensiun_tanggal?>" name="pensiun_tanggal"  class="form-control datepicker">    
                                         </th>
                                 </tr>
                                 <tr>

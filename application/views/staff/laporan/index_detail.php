@@ -6,7 +6,14 @@
                 <div class="card">
                 <div class="card-header"><svg class="c-icon">
                         <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-search"></use>
-                    </svg>&nbsp;Detail Data Staff</div>
+                    </svg>&nbsp;Detail Data Staff
+                
+                    <div class="float-right">
+                        <button class="btn btn-primary">
+                        <i class="fa fa-download"></i>    
+                        Download</button>
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
