@@ -174,6 +174,8 @@ function edit(data) {
                 {data: 'no_hp'},
                 {data: 'nik'},
                 {data: 'jenjang_pendidikan'},
+                {data: 'tanggal_masuk_kerja'},
+                {data: 'lama_bekerja'},
                 {data: 'action', orderable:false, searchable:false},
 			],
 

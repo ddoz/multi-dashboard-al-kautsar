@@ -9,9 +9,9 @@
                     </svg>&nbsp;Detail Data Staff
                 
                     <div class="float-right">
-                        <button class="btn btn-primary">
+                        <a href="<?php echo base_url();?>staff/laporanstaff/downloaddetail/<?=$staff->id?>" class="btn btn-primary">
                         <i class="fa fa-download"></i>    
-                        Download</button>
+                        Download</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -147,7 +147,10 @@
                                 <tr>
                                     <th>Masa Kerja</th>
                                     <th>
-                                    <input readonly type="text" value="<?=$staff->masa_kerja?>" name="masa_kerja" required class="form-control">    
+                                    <?php 
+                                            $masa_kerja = MasaKerja($staff->tanggal_masuk_kerja)
+                                        ?>
+                                    <input readonly type="text" value="<?=$masa_kerja?>" name="masa_kerja" required class="form-control">    
                                         </th>
                                 </tr>
                                 <tr>

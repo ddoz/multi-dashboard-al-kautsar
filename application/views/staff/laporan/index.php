@@ -42,6 +42,8 @@
                                             <th>No HP</th>
                                             <th>NIK</th>
                                             <th>Jenjang Pendidikan</th>
+                                            <th>Mulai Bekerja Tanggal</th>
+                                            <th>Lama Bekerja</th>
                                             <th></th>
                                         </tr>
                                     </thead>

@@ -55,6 +55,14 @@ class Laporanstaff extends CI_Controller {
             }
             return 'Belum diupload';
         });
+        $this->datatables->add_column('lama_bekerja',function($row){
+            $date1 = new DateTime($row['tanggal_masuk_kerja']);
+            $date2 = $date1->diff(new DateTime(date("Y-m-d")));
+            $string = $date2->y.' tahun'."\n";
+            $string .= $date2->m.' bulan'."\n";
+            $string .= $date2->d.' hari'."\n";
+            return $string;
+        });
         $this->datatables->add_column('action',function($row){
             // $button = "<button type='button' class='btn btn-warning btn-xs' onclick='edit(".json_encode($row).")'><i class='fa fa-edit'></i></button>|";
             $button = "<a href='".base_url()."staff/laporanstaff/detailpegawai/".$row['id']."' class='btn btn-info btn-xs' ><i class='fa fa-search'></i> </a>";
@@ -64,7 +72,7 @@ class Laporanstaff extends CI_Controller {
         echo $this->datatables->generate();
 	}
 
-    public function download() {
+    public function downloaddetail() {
 
         $id = $this->uri->segment(4);
         $data['unit'] = $this->Model_form->optionUnit();
@@ -82,7 +90,7 @@ class Laporanstaff extends CI_Controller {
         $this->load->library('pdf');
         $this->pdf->setPaper('A4', 'potrait');
         $this->pdf->filename = "cetak-staff.pdf";
-        $this->pdf->load_view('siswa/home/pdfbiodata', array('item'=>$data));
+        $this->pdf->load_view('staff/laporan/pdfbiodata', $data);
     }
 
 }
