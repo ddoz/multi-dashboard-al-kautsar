@@ -29,6 +29,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nama Teknisi</th>
+                                        <th>Divisi</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -64,6 +65,14 @@
                     <h2>Form Teknisi</h2>
                     <input type="hidden" name="id" id="id_input">
                     <?=buildForm($form)?>
+                    <div class="form-group">
+                        <label for="">Divisi</label>
+                        <select name="divisi" id="divisi_input" class="form-control">
+                            <option value="">Pilih</option>
+                            <option value="BG (Bangunan)">BG (Bangunan)</option>
+                            <option value="ME (Mekanikal Elektrik)">ME (Mekanikal Elektrik)</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-default">Save changes</button>

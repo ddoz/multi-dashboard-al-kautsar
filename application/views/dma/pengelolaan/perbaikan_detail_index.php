@@ -6,7 +6,13 @@
                 <div class="card">
                 <div class="card-header"><svg class="c-icon">
                         <use xlink:href="<?=template('default')?>vendors/@coreui/icons/svg/free.svg#cil-cog"></use>
-                    </svg>&nbsp;Pengelolaan Data Layanan</div>
+                    </svg>&nbsp;Pengelolaan Data Perbaikan
+                
+                    <div class="float-right">
+                        <a href="<?=base_url()?>dma/kelolaperbaikan/spk/<?=$header->id?>" target="_blank" class="btn btn-primary" ><i class="fas fa-print"></i> SPK</a>
+                        <a href="<?=base_url()?>dma/kelolaperbaikan/bas/<?=$header->id?>" target="_blank" class="btn btn-info"><i class="fas fa-print"></i> BERITA ACARA SELESAI PEKERJAAN</a>
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
@@ -25,8 +31,12 @@
                                             <td>: <?=$header->nama_layanan?></td>
                                         </tr>
                                         <tr>
-                                            <th>Lokasi</th>
+                                            <th>Gedung</th>
                                             <td>: <?=$header->nama_gedung?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ruangan</th>
+                                            <td>: <?=$header->nama_ruangan?></td>
                                         </tr>
                                         <tr>
                                             <th>Keterangan Laporan</th>
@@ -79,6 +89,10 @@
                                                     ?>
                                                     </ol>    
                                             </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Jenis Pekerjaan</th>
+                                                <td><textarea readonly disabled style="resize: none;" id="" cols="30" rows="10"><?=$item->keterangan_proses?></textarea></td>
                                             </tr>
                                             <tr>
                                                 <th>Waktu Mulai Pengerjaan</th>

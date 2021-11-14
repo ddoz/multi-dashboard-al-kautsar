@@ -120,10 +120,25 @@ $("#formSelesai").submit(function(e) {
     })
 });
 
+$("#id_gedung_input").change(function() {
+    $("#id_ruangan_input").empty();
+    $.post( "<?=base_url()?>dma/kelolaperbaikan/lihatruangan", {id:$(this).val()}, function( data ) {
+        var d = JSON.parse( data );
+        $("#id_ruangan_input").append( "<option value=''>Pilih</option>");
+        d.forEach(element => {
+            $("#id_ruangan_input").append( "<option value='"+element.id+"'>"+element.nama_ruangan+"</option>");
+        });
+    });
+})
+
 function hapus(id){
     $("#modalHapus").modal({ backdrop: 'static', keyboard: false });
     dataId = id;
     $("#id_input_hapus").val(dataId);
+}
+
+function cetak(id) {
+    
 }
 
 function edit(data) {
@@ -157,6 +172,7 @@ function edit(data) {
                 {data: 'nama'},
                 {data: 'nama_layanan'},
                 {data: 'nama_gedung'},
+                {data: 'nama_ruangan'},
                 {data: 'keterangan_laporan'},
                 {data: 'created_at'},
                 {data: 'start_at'},

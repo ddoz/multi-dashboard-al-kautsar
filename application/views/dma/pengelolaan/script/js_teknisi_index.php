@@ -57,6 +57,7 @@ function edit(data) {
     appId = data.app_id;
     $("#modalForm").modal({ backdrop: 'static', keyboard: false });
     $("#nama_teknisi_input").val(data.nama_teknisi);
+    $("#divisi_input").val(data.divisi);
     $("#id_input").val(data.id);
     $("#form").attr("action","<?=base_url()?>dma/kelolateknisi/ubah");
 }
@@ -82,6 +83,7 @@ function edit(data) {
 			},
 			columns 		:[
                 {data: 'nama_teknisi'},
+                {data: 'divisi'},
                 {data: 'action', orderable:false, searchable:false},
 			],
 

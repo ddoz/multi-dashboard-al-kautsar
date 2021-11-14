@@ -29,6 +29,7 @@
                                         <th>Pelapor</th>
                                         <th>Layanan</th>
                                         <th>Gedung</th>
+                                        <th>Ruangan</th>
                                         <th>Keterangan</th>
                                         <th>Tanggal Lapor</th>
                                         <th>Dikerjakan Pada Tanggal</th>
@@ -61,19 +62,25 @@
         <div class="modal-dialog modals-default">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h2>Form Pelaporan</h2>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <form id="form" action="<?=base_url()?>dma/kelolaperbaikan/simpan" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <h2>Form Pelaporan</h2>
                     <input type="hidden" name="id" id="id_input">
                     <div class="form-group">
                         <label>Pilih Lokasi</label>
-                        <select class="form-control" name="id_gedung" required>
+                        <select class="form-control" name="id_gedung" id="id_gedung_input" required>
                             <option value="">Pilih</option>
                             <?php foreach($gedung as $g) { ?>
                             <option value="<?=$g->id?>"><?=$g->nama_gedung?></option>
                             <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Pilih Ruangan</label>
+                        <select class="form-control" name="id_ruangan" id="id_ruangan_input" required>
+                            <option value="">Pilih</option>
                         </select>
                     </div>
                     <div class="form-group">

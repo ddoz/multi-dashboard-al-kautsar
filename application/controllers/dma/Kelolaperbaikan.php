@@ -21,14 +21,21 @@ class Kelolaperbaikan extends CI_Controller {
 		$data['breadcumb'] = buildBreadcumb(array('App','SIDMA','Pengelolaan Perbaikan'));
         buildPage($data);
     }
+
+    function lihatruangan() {
+        $id = $this->input->post('id');
+        $data = $this->db->get_where('dma_ruangan',array('id_gedung'=>$id))->result();
+        echo json_encode($data);
+    }
     
     public function datatable(){
         $appid = $this->uri->segment(4);
         $this->load->library('datatables');
-        $this->datatables->select('dma_pelaporan.*,dma_layanan.nama_layanan,dma_gedung.nama_gedung,users.nama');
+        $this->datatables->select('dma_pelaporan.*,dma_layanan.nama_layanan,dma_gedung.nama_gedung,users.nama,dma_ruangan.nama_ruangan');
         $this->datatables->from('dma_pelaporan');
         $this->datatables->join('dma_layanan','dma_layanan.id=dma_pelaporan.id_layanan');
         $this->datatables->join('dma_gedung','dma_gedung.id=dma_pelaporan.id_gedung');
+        $this->datatables->join('dma_ruangan','dma_ruangan.id_gedung=dma_gedung.id');
         $this->datatables->join('users','users.id=dma_pelaporan.user_lapor');
         if(!isSuper()) {
             $this->datatables->where('dma_pelaporan.user_lapor',$this->session->userdata('id'));
@@ -43,9 +50,9 @@ class Kelolaperbaikan extends CI_Controller {
             return ($row['done_at']!=null)?date("d M Y H:i:s",strtotime($row['done_at'])):"-";
         });
         $this->datatables->add_column('action',function($row){
-            $button = "<a class='btn btn-info btn-xs' href='".base_url()."dma/kelolaperbaikan/detail/".$row['id']."'><i class='fa fa-search'></i></a>";
+            $button = "<a class='btn btn-info btn-xs' href='".base_url()."dma/kelolaperbaikan/detail/".$row['id']."'><i class='fa fa-search'></i> Detail</a>";
             if(isSuper()) {
-                $button .= "<button type='button' class='btn btn-danger btn-xs' onclick='hapus(".$row['id'].")'><i class='fa fa-trash'></i></button>";
+                $button .= "<button type='button' class='btn btn-danger btn-xs' onclick='hapus(".$row['id'].")'><i class='fa fa-trash'></i> Hapus</button>";
             }
             return $button;
         });
@@ -57,10 +64,11 @@ class Kelolaperbaikan extends CI_Controller {
         if(!intval($id)) {
             redirect(base_url().'dma/kelolaperbaikan');
         }
-        $this->db->select('dma_pelaporan.*,dma_layanan.nama_layanan,dma_gedung.nama_gedung,users.nama');
+        $this->db->select('dma_pelaporan.*,dma_layanan.nama_layanan,dma_gedung.nama_gedung,users.nama,dma_ruangan.nama_ruangan');
         $this->db->from('dma_pelaporan');
         $this->db->join('dma_layanan','dma_layanan.id=dma_pelaporan.id_layanan');
         $this->db->join('dma_gedung','dma_gedung.id=dma_pelaporan.id_gedung');
+        $this->db->join('dma_ruangan','dma_ruangan.id_gedung=dma_gedung.id');
         $this->db->join('users','users.id=dma_pelaporan.user_lapor');
         $this->db->where('dma_pelaporan.id',$id);
         $header = $this->db->get()->row();
@@ -97,6 +105,67 @@ class Kelolaperbaikan extends CI_Controller {
         buildPage($data);
     }
 
+    public function spk() {
+        $id = $this->uri->segment(4);
+        if(!intval($id)) {
+            redirect(base_url().'dma/kelolaperbaikan');
+        }
+
+        $this->db->select('dma_pelaporan.*,dma_layanan.nama_layanan,dma_gedung.nama_gedung,users.nama,dma_ruangan.nama_ruangan');
+        $this->db->from('dma_pelaporan');
+        $this->db->join('dma_layanan','dma_layanan.id=dma_pelaporan.id_layanan');
+        $this->db->join('dma_gedung','dma_gedung.id=dma_pelaporan.id_gedung');
+        $this->db->join('dma_ruangan','dma_ruangan.id_gedung=dma_gedung.id');
+        $this->db->join('users','users.id=dma_pelaporan.user_lapor');
+        $this->db->where('dma_pelaporan.id',$id);
+        $header = $this->db->get()->row();
+        $data['header'] = $header;
+        $this->db->select("dma_perbaikan.*");
+        $this->db->from('dma_perbaikan');
+        $this->db->where('id_laporan',$id);
+        $item = $this->db->get()->row();
+        $data['item'] = $item;
+        if($item != null) {
+            $this->db->select('dma_teknisi.*');
+            $this->db->from('dma_teknisi');
+            $this->db->join('dma_perbaikan_teknisi','dma_perbaikan_teknisi.user_teknisi=dma_teknisi.id');
+            $this->db->where('id_perbaikan',$item->id);
+            $data['list_teknisi'] = $this->db->get()->result();
+        }
+
+        $this->load->view('dma/pengelolaan/surat_perintah_kerja',$data);
+    }
+
+    public function bas(){
+        $id = $this->uri->segment(4);
+        if(!intval($id)) {
+            redirect(base_url().'dma/kelolaperbaikan');
+        }
+
+        $this->db->select('dma_pelaporan.*,dma_layanan.nama_layanan,dma_gedung.nama_gedung,users.nama,dma_ruangan.nama_ruangan');
+        $this->db->from('dma_pelaporan');
+        $this->db->join('dma_layanan','dma_layanan.id=dma_pelaporan.id_layanan');
+        $this->db->join('dma_gedung','dma_gedung.id=dma_pelaporan.id_gedung');
+        $this->db->join('dma_ruangan','dma_ruangan.id_gedung=dma_gedung.id');
+        $this->db->join('users','users.id=dma_pelaporan.user_lapor');
+        $this->db->where('dma_pelaporan.id',$id);
+        $header = $this->db->get()->row();
+        $data['header'] = $header;
+        $this->db->select("dma_perbaikan.*");
+        $this->db->from('dma_perbaikan');
+        $this->db->where('id_laporan',$id);
+        $item = $this->db->get()->row();
+        $data['item'] = $item;
+        if($item != null) {
+            $this->db->select('dma_teknisi.*');
+            $this->db->from('dma_teknisi');
+            $this->db->join('dma_perbaikan_teknisi','dma_perbaikan_teknisi.user_teknisi=dma_teknisi.id');
+            $this->db->where('id_perbaikan',$item->id);
+            $data['list_teknisi'] = $this->db->get()->result();
+        }
+        $this->load->view('dma/pengelolaan/berita_acara',$data);
+    }
+
     public function selesai() {
 
         $explodId = explode(",",$this->input->post("id"));
@@ -111,7 +180,7 @@ class Kelolaperbaikan extends CI_Controller {
         $this->db->update('dma_pelaporan',$update);
 
         $updatePerbaikan = array(
-            "keterangan_proses" => $this->input->post('keterangan_proses')
+            "keterangan_hasil" => $this->input->post('keterangan_proses')
         );
 
         if(isset($_FILES['file'])) {
@@ -173,6 +242,7 @@ class Kelolaperbaikan extends CI_Controller {
             "keterangan_laporan" => $this->input->post("keterangan_laporan"),
             "id_layanan" => $this->input->post('id_layanan'),
             "id_gedung" => $this->input->post('id_gedung'),
+            "id_ruangan" => $this->input->post('id_ruangan'),
             "created_at" => date("Y-m-d H:i:s")
         );
 

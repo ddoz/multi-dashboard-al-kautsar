@@ -29,6 +29,11 @@ class Kelolabarang extends CI_Controller {
 			),
 			array(
 			  "type" => "input",
+			  "label" => "Satuan Barang (isi dengan - jika tidak ada)",
+			  "name" => "satuan"
+			),
+			array(
+			  "type" => "input",
 			  "label" => "Nomor Barang (isi dengan - jika tidak ada)",
 			  "name" => "nomor_barang"
 			),
@@ -48,10 +53,35 @@ class Kelolabarang extends CI_Controller {
         $this->load->library('datatables');
         $this->datatables->select('*');
         $this->datatables->from('dma_barang');
+
+        $this->datatables->add_column('barang_masuk',function($row) {
+            $d = $this->db->order_by('id','desc')->limit(1)->get_where('dma_barang_masuk',array('id_barang'=>$row['id']));
+            if($d->num_rows() > 0) {
+                return $d->row()->jumlah_masuk . " ". $row['satuan'];
+            }else {
+                return $row['stok_barang']. " ". $row['satuan'];
+            }
+        });
+
+        $this->datatables->add_column('stok_barang',function($row) {
+            
+                return $row['stok_barang']. " ". $row['satuan'];
+        });
+
+        $this->datatables->add_column('barang_keluar',function($row) {
+            $d = $this->db->order_by('id','desc')->limit(1)->get_where('dma_perbaikan_barang',array('id_barang'=>$row['id']));
+            if($d->num_rows() > 0) {
+                return $d->row()->jumlah. " ". $row['satuan'];
+            }else {
+                return "0". " ". $row['satuan'];
+            }
+        });
+
         $this->datatables->add_column('action',function($row){
                 if(isSuper()) {
-                $button = "<button type='button' class='btn btn-warning btn-sm' onclick='edit(".json_encode($row).")'><i class='fa fa-edit'></i></button>";
-                $button .= "<button type='button' class='btn btn-danger btn-sm btnHapus' onclick='hapus(".$row['id'].")'><i class='fa fa-trash'></i></button>";
+                $button = "<button type='button' class='btn btn-warning btn-sm' onclick='edit(".json_encode($row).")'><i class='fa fa-edit'></i> Ubah</button>";
+                $button .= "<button type='button' class='btn btn-info btn-sm' onclick='transaksimasuk(".$row['id'].")'><i class='fa fa-chevron-down'></i> Transaksi Masuk</button>";
+                $button .= "<button type='button' class='btn btn-danger btn-sm btnHapus' onclick='hapus(".$row['id'].")'><i class='fa fa-trash'></i> Hapus</button>";
                 return $button;
                 }
             });
@@ -85,12 +115,41 @@ class Kelolabarang extends CI_Controller {
         exit();
     }
 
+    public function updatestok() {
+
+        $insert = array(
+            "id_barang" => $this->input->post("id"),
+            "jumlah_masuk" => $this->input->post("jumlah_masuk")
+        );
+
+        $message = "Data tersimpan";
+
+        $this->db->trans_begin();
+
+        $barang = $this->db->get_where('dma_barang',array('id'=>$this->input->post('id')))->row();
+
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('dma_barang',array('stok_barang'=>$barang->stok_barang + $this->input->post('jumlah_masuk')));
+
+        $simpan = $this->db->insert("dma_barang_masuk",$insert);
+
+        if($this->db->trans_status()!==FALSE) {
+            $this->db->trans_commit();
+            echo json_encode(array("msg"=>$message));
+            exit();
+        }
+        $this->db->trans_rollback();
+        echo json_encode(array("msg"=>"Gagal Simpan Data"));
+        exit();
+    }
+
     public function ubah() {
         $id = $this->input->post("id");
         $update = array(
             "nama_barang" => $this->input->post("nama_barang"),
             "merk_barang" => $this->input->post("merk_barang"),
             "nomor_barang" => $this->input->post("nomor_barang"),
+            "satuan" => $this->input->post("satuan"),
             "stok_barang"	 => $this->input->post("stok_barang")
         );
         $message = "";

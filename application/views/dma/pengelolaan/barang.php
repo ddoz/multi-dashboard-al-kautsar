@@ -19,7 +19,10 @@
                                     <tr>
                                         <th>Nama Barang</th>
                                         <th>Merk Barang</th>
+                                        <th>Satuan</th>
                                         <th>Nomor Barang</th>
+                                        <th>Barang Masuk (Transaksi terakhir)</th>
+                                        <th>Barang Keluar (Transaksi terakhir)</th>
                                         <th>Stok Barang</th>
                                         <th></th>
                                     </tr>

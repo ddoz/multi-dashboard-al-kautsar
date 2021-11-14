@@ -26,6 +26,24 @@ $(document).ready(function() {
             }
         })
     })
+    $("#formTransaksi").submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: $("#formTransaksi").attr("action"),
+            type: "POST",
+            data: $(this).serialize(),
+            success: function(response) {
+                $("#formTransaksi")[0].reset();
+                $('#modalTransaksi').modal('hide');
+                $.notify("Berhasil Update Stok Data","success");
+                $('#datatable').DataTable().ajax.reload(null, false);
+            },
+            error: function(error) {
+                $('#modalTransaksi').modal('hide');
+                $.notify("Gagal Update Stok Data, silahkan coba kembali","error");
+            }
+        })
+    })
     $("#form").submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -53,6 +71,12 @@ function hapus(id){
     $("#id_input_hapus").val(dataId);
 }
 
+function transaksimasuk(id){
+    $("#modalTransaksi").modal({ backdrop: 'static', keyboard: false });
+    dataId = id;
+    $("#id_input_transaksi").val(dataId);
+}
+
 function edit(data) {
     appId = data.app_id;
     $("#modalForm").modal({ backdrop: 'static', keyboard: false });
@@ -60,6 +84,7 @@ function edit(data) {
     $("#merk_barang_input").val(data.merk_barang);
     $("#nomor_barang_input").val(data.nomor_barang);
     $("#stok_barang_input").val(data.stok_barang);
+    $("#satuan_input").val(data.satuan);
     $("#id_input").val(data.id);
     $("#form").attr("action","<?=base_url()?>dma/kelolabarang/ubah");
 }
@@ -84,9 +109,12 @@ function edit(data) {
 				type 		: "POST"
 			},
 			columns 		:[
+                {data: 'nomor_barang'},
                 {data: 'nama_barang'},
                 {data: 'merk_barang'},
-                {data: 'nomor_barang'},
+                {data: 'satuan'},
+                {data: 'barang_masuk'},
+                {data: 'barang_keluar'},
                 {data: 'stok_barang'},
                 {data: 'action', orderable:false, searchable:false},
 			],

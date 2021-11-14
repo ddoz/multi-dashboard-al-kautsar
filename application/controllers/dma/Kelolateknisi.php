@@ -46,7 +46,8 @@ class Kelolateknisi extends CI_Controller {
     public function simpan() {
 
         $insert = array(
-            "nama_teknisi" => $this->input->post("nama_teknisi")
+            "nama_teknisi" => $this->input->post("nama_teknisi"),
+            "divisi" => $this->input->post("divisi"),
         );
 
         $fileName = "";
@@ -69,7 +70,8 @@ class Kelolateknisi extends CI_Controller {
     public function ubah() {
         $id = $this->input->post("id");
         $update = array(
-            "nama_teknisi" => $this->input->post("nama_teknisi")
+            "nama_teknisi" => $this->input->post("nama_teknisi"),
+            "divisi" => $this->input->post("divisi"),
         );
         $message = "";
         
