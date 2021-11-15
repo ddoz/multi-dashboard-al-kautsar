@@ -185,14 +185,14 @@ class Kelolaperbaikan extends CI_Controller {
 
         // if(isset($_FILES['file'])) {
             $config['upload_path']          = './uploads/dma/';
-            $config['allowed_types']        = 'jpg|png';
+            $config['allowed_types']        = 'jpg|png|jpeg';
             $config['max_size']             = 1024;
             $config['file_name']            = $this->input->post('id')."_selesai_".date("Ymdhis");
 
             $this->load->library('upload', $config);
             if ( ! $this->upload->do_upload('file'))
             {
-                $message = "Data tersimpan tanpa gambar, silahkan gunakan menu edit. eror : " .$this->upload->display_errors();
+                $message = "Data gagal disimpan.  eror : " .$this->upload->display_errors();
                 echo json_encode(array("msg"=>$message));
                 exit(); 
             }
@@ -255,14 +255,14 @@ class Kelolaperbaikan extends CI_Controller {
 
         // if(isset($_FILES['gambar_laporan'])) {
             $config['upload_path']          = './uploads/dma/';
-            $config['allowed_types']        = 'jpg|png';
+            $config['allowed_types']        = 'jpg|png|jpeg';
             $config['max_size']             = 1024;
             $config['file_name']            = $this->input->post('id')."_laporan_".date("Ymdhis");
 
             $this->load->library('upload', $config);
             if ( ! $this->upload->do_upload('gambar_laporan'))
             {
-                $message = "Data tersimpan tanpa gambar, eror : " .$this->upload->display_errors();
+                $message = "Data gagal disimpan.  eror : " .$this->upload->display_errors();
                 echo json_encode(array("msg"=>$message));
                 exit(); 
             }
