@@ -51,7 +51,7 @@ class Laporandma extends CI_Controller {
             "12" => "Desember",
         );
         $data['tabel'] = $hasil;
-        $data['bulan'] = $arr_bulan['bulan'];
+        $data['bulan'] = $arr_bulan[$bulan];
         $data['tahun'] = $tahun;
         $this->load->view('dma/laporan/lihat',$data);
 
