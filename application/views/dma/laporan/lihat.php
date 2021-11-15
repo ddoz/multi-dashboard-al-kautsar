@@ -62,8 +62,8 @@
                     <td></td>
                     <td><?=$rp->nama_gedung."/".$rp->nama_ruangan?></td>
                     <td><?=$rp->keterangan_proses?></td>
-                    <td>1</td>
-                    <td>2</td>
+                    <td><?=getTeknisi($rp->id_perbaikan,'1')?></td>
+                    <td><?=getTeknisi($rp->id_perbaikan,'2')?></td>
                     <td><?=date('d-m-Y',strtotime($rp->start_at))?></td>
                     <td><?=date('H:i:s',strtotime($rp->start_at))?></td>
                     <td><?=date('d-m-Y',strtotime($rp->done_at))?></td>

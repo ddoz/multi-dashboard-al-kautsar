@@ -127,6 +127,21 @@ if(!function_exists('buildPage')) {
     }
 }
 
+
+if(!function_exists('getTeknisi')) {
+    function getTeknisi($id,$posisi) {
+        $ci =& get_instance();
+        $ci->db->from('dma_teknisi');
+        $ci->db->join('dma_perbaikan_teknisi','dma_perbaikan_teknisi.user_teknisi=dma_teknisi.id');
+        $teknisi = $ci->db->where(array('id_perbaikan'=>$id))->get()->result();
+        if($posisi=='1') {
+            return @$teknisi[0]->nama_teknisi;
+        }else {
+            return @$teknisi[1]->nama_teknisi;
+        }
+    }
+}
+
 if(!function_exists('getRiwayat')) {
     function getRiwayat($id) {
         $ci =& get_instance();

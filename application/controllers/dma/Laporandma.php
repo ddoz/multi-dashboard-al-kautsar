@@ -27,7 +27,7 @@ class Laporandma extends CI_Controller {
         $bulan = $this->input->post('bulan');
         $tahun = $this->input->post('tahun');
 
-        $this->db->select("dma_pelaporan.id,dma_pelaporan.start_at,dma_pelaporan.done_at,dma_perbaikan.keterangan_hasil,dma_perbaikan.keterangan_proses,dma_pelaporan.created_at,users.nama,dma_gedung.nama_gedung,dma_ruangan.nama_ruangan");
+        $this->db->select("dma_pelaporan.id,dma_perbaikan.id as id_perbaikan,dma_pelaporan.start_at,dma_pelaporan.done_at,dma_perbaikan.keterangan_hasil,dma_perbaikan.keterangan_proses,dma_pelaporan.created_at,users.nama,dma_gedung.nama_gedung,dma_ruangan.nama_ruangan");
         $this->db->from('dma_pelaporan');
         $this->db->join('dma_gedung','dma_gedung.id=dma_pelaporan.id_gedung');
         $this->db->join('dma_ruangan','dma_ruangan.id_gedung=dma_gedung.id');
