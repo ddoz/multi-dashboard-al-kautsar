@@ -1,8 +1,28 @@
 
-<h3>LAPORAN PERBAIKAN SARANA DIVISI MAINTENANCE YAYASAN AL KAUTSAR BANDAR LAMPUNG BULAN AGUSTUS 2021</h3>
+<h3>LAPORAN PERBAIKAN SARANA DIVISI MAINTENANCE YAYASAN AL KAUTSAR BANDAR LAMPUNG BULAN <?=$bulan?> <?=$tahun?></h3>
 <div class="table-responsive">
     <table class="table table-bordered display nowrap" id="datatable_laporan">
+
         <thead>
+            <tr>
+                <th>LAPORAN PERBAIKAN SARANA DIVISI MAINTENANCE YAYASAN AL KAUTSAR BANDAR LAMPUNG BULAN <?=$bulan?> <?=$tahun?></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            
+        </thead>
+        <tbody>
             <tr>
                 <th>No</th>
                 <th>Tanggal</th>
@@ -19,8 +39,6 @@
                 <th></th>
                 <th></th>
             </tr>
-        </thead>
-        <tbody>
             <tr>
                 <td></td>
                 <td></td>
