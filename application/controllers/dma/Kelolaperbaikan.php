@@ -193,6 +193,8 @@ class Kelolaperbaikan extends CI_Controller {
             if ( ! $this->upload->do_upload('file'))
             {
                 $message = "Data tersimpan tanpa gambar, silahkan gunakan menu edit. eror : " .$this->upload->display_errors();
+                echo json_encode(array("msg"=>$message));
+                exit(); 
             }
             else
             {
@@ -261,6 +263,8 @@ class Kelolaperbaikan extends CI_Controller {
             if ( ! $this->upload->do_upload('gambar_laporan'))
             {
                 $message = "Data tersimpan tanpa gambar, eror : " .$this->upload->display_errors();
+                echo json_encode(array("msg"=>$message));
+                exit(); 
             }
             else
             {
