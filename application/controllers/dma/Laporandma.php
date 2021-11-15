@@ -23,6 +23,24 @@ class Laporandma extends CI_Controller {
         buildPage($data);
     }
 
+    public function lihat() {
+        $bulan = $this->input->post('bulan');
+        $tahun = $this->input->post('tahun');
+
+        $this->db->select("dma_pelaporan.id,dma_pelaporan.start_at,dma_pelaporan.done_at,dma_perbaikan.keterangan_hasil,dma_perbaikan.keterangan_proses,dma_pelaporan.created_at,users.nama,dma_gedung.nama_gedung,dma_ruangan.nama_ruangan");
+        $this->db->from('dma_pelaporan');
+        $this->db->join('dma_gedung','dma_gedung.id=dma_pelaporan.id_gedung');
+        $this->db->join('dma_ruangan','dma_ruangan.id_gedung=dma_gedung.id');
+        $this->db->join('dma_perbaikan','dma_perbaikan.id_laporan=dma_pelaporan.id');
+        $this->db->join('users','users.id=dma_pelaporan.user_lapor');
+        $this->db->where('MONTH(dma_pelaporan.created_at)',$bulan);
+        $this->db->where('YEAR(dma_pelaporan.created_at)',$tahun);
+        $hasil = $this->db->get()->result();
+        $data['tabel'] = $hasil;
+        $this->load->view('dma/laporan/lihat',$data);
+
+    }
+
     public function perbaikan()
 	{
         $data['content'] = 'dma/laporan/perbaikan';

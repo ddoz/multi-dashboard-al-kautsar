@@ -10,7 +10,9 @@
                 
                     <div class="float-right">
                         <a href="<?=base_url()?>dma/kelolaperbaikan/spk/<?=$header->id?>" target="_blank" class="btn btn-primary" ><i class="fas fa-print"></i> SPK</a>
+                        <?php if($header->status_laporan=='2') { ?>
                         <a href="<?=base_url()?>dma/kelolaperbaikan/bas/<?=$header->id?>" target="_blank" class="btn btn-info"><i class="fas fa-print"></i> BERITA ACARA SELESAI PEKERJAAN</a>
+                        <?php }?>
                     </div>
                 </div>
                 <div class="card-body">
@@ -197,7 +199,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form id="formSelesai" action="<?=base_url()?>dma/pengelolaanperbaikan/selesai" enctype="multipart/form-data">
+                <form id="formSelesai" action="<?=base_url()?>dma/kelolaperbaikan/selesai" enctype="multipart/form-data">
                 <div class="modal-body">
                     <h2>Form Penyelesaian Laporan</h2>
                     <input type="hidden" name="id" id="id_input">

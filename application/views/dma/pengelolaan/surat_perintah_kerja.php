@@ -70,7 +70,9 @@
         </tr>
         <tr>
             <td style="border: 1px solid black;"><center><?=@$list_teknisi[0]->divisi?></center></td>
-            <td colspan="2" style="border-right: 1px solid black;text-align:center">SEDANG DIKERJAKAN</td>
+            <td colspan="2" style="border-right: 1px solid black;text-align:center">
+                <?php if($header->status_laporan=="1") { echo "SEDANG DIKERJAKAN"; }else if($header->status_laporan=="2") { echo "SELESAI";}?>
+            </td>
         </tr>
         <tr>
             <td style="border: 1px solid black;"><center>TENAGA KERJA</center></td>
@@ -79,40 +81,40 @@
         <?php foreach($list_teknisi as $tk) { ?>
         <tr>
             <td>- <?=$tk->nama_teknisi; ?></td>
-            <td colspan="2"></td>
+            <td colspan="2" style="border-left:1px solid black;"></td>
         </tr>
         <?php }?>
         <tr>
             <td></td>
-            <td colspan="2"></td>
+            <td colspan="2" style="border-left:1px solid black;" colspan="2"></td>
         </tr>
         <tr>
             <td></td>
-            <td colspan="2"><center>MENGETAHUI</center></td>
+            <td colspan="2" style="border-left:1px solid black;border-bottom:1px solid black;"><center>MENGETAHUI</center></td>
         </tr>
         <tr>
             <td></td>
-            <td colspan="2"><center>ADMIN,</center></td>
+            <td colspan="2" style="border-left:1px solid black;"><center>ADMIN,</center></td>
         </tr>
         <tr>
             <td></td>
-            <td colspan="2">&nbsp;</td>
+            <td colspan="2" style="border-left:1px solid black;">&nbsp;</td>
         </tr>
         <tr>
             <td></td>
-            <td colspan="2">&nbsp;</td>
+            <td colspan="2" style="border-left:1px solid black;">&nbsp;</td>
         </tr>
         <tr>
             <td></td>
-            <td colspan="2">&nbsp;</td>
+            <td colspan="2" style="border-left:1px solid black;">&nbsp;</td>
         </tr>
         <tr>
             <td></td>
-            <td colspan="2">&nbsp;</td>
+            <td colspan="2" style="border-left:1px solid black;">&nbsp;</td>
         </tr>
         <tr>
             <td></td>
-            <td><center>RAFICO</center></td>
+            <td style="border-left:1px solid black;"><center>RAFICO</center></td>
             <td><center>FITRIA AGUSTINA</center></td>
         </tr>
     </table>
