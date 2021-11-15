@@ -183,7 +183,7 @@ class Kelolaperbaikan extends CI_Controller {
             "keterangan_hasil" => $this->input->post('keterangan_proses')
         );
 
-        if(isset($_FILES['file'])) {
+        // if(isset($_FILES['file'])) {
             $config['upload_path']          = './uploads/dma/';
             $config['allowed_types']        = 'jpg|png';
             $config['max_size']             = 1024;
@@ -200,7 +200,7 @@ class Kelolaperbaikan extends CI_Controller {
                 $fileName = $data['file_name'];
                 $updatePerbaikan["hasil_foto"] = $fileName;
             }
-        }
+        // }
 
         $this->db->where('id',$explodId[1]);
         $this->db->update('dma_perbaikan',$updatePerbaikan);
@@ -251,7 +251,7 @@ class Kelolaperbaikan extends CI_Controller {
 
         $this->db->trans_begin();
 
-        if(isset($_FILES['gambar_laporan'])) {
+        // if(isset($_FILES['gambar_laporan'])) {
             $config['upload_path']          = './uploads/dma/';
             $config['allowed_types']        = 'jpg|png';
             $config['max_size']             = 1024;
@@ -268,7 +268,7 @@ class Kelolaperbaikan extends CI_Controller {
                 $fileName = $data['file_name'];
                 $insert["gambar_laporan"] = $fileName;
             }
-        }
+        // }
 
         $simpan = $this->db->insert("dma_pelaporan",$insert);
 
